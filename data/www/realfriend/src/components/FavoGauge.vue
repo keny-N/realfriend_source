@@ -4,10 +4,10 @@
     <ul v-for="n of 4">
       <!--favoの値によって表示する画像を判断する -->
       <li v-show="favoGaugeData>=n">
-        <img src="../assets/ハートのマーク.png">
+        <img src="../assets/満ハートのマーク.png">
       </li>
       <li v-show="favoGaugeData<n">
-        <img src="../assets/ハートのマーク2.png">
+        <img src="../assets/空ハートのマーク.png">
       </li>
     </ul>
 
