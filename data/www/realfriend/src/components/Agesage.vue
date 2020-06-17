@@ -1,17 +1,18 @@
 <template>
   <div class="agesage">
     <!--lamdba側から送られてくる好感判定で判断する。 -->
-    <img v-show="point==1" src="../assets/143eab27e07514ea.svg">
-    <img v-show="point==0" src="../assets/logo.png">
-    <img v-show="point==-1" src="../assets/realogo.png">
+    <!--ここに張っている画像はテスト用 -->
+    <img v-show="agesageData==1" src="../assets/favo_plus_test.svg">
+    <img v-show="agesageData==0" src="../assets/logo.png">
+    <img v-show="agesageData==-1" src="../assets/realogo.png">
   </div>
 </template>
 
 <script>
     export default {
-        name: "agesage",
+        name: "Agesage",
       props:{
-        point:{
+        agesageData:{
           type:Number
         }
       }

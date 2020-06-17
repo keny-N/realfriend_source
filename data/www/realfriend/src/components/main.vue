@@ -1,16 +1,16 @@
 <template>
     <div class="main">
-        <hdr></hdr>
+        <GameHeader></GameHeader>
         <img src="../assets/realogo.png">
         <h1>メイン画面</h1>
     </div>
 </template>
 
 <script>
-    import hdr from '@/components/hdr'
+    import GameHeader from '@/components/GameHeader'
     export default {
         name: "Main",
-        components: { hdr }
+        components: { GameHeader }
     };
 </script>
 

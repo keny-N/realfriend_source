@@ -1,5 +1,5 @@
 <template>
-    <div class="hdr">
+    <div class="gameheader">
         <ul>
             <li>
                 <router-link to="/">メイン</router-link>
@@ -13,7 +13,7 @@
 
 <script>
     export default {
-        name: "hdr"
+        name: "GameHeader"
     }
 </script>
 
