@@ -33,7 +33,7 @@
                 localStream: null,
                 mediaRecorder: null,
                 timer: null,
-                // image: null,
+                image: null,
                 // player: this.$refs.player.src,
                 postUrl: 'https://6ou7h94f7f.execute-api.ap-northeast-1.amazonaws.com/realfriend_api/realfriend/emotionjudgment'
                 // audioData: [],
@@ -53,7 +53,7 @@
             faceApi() {
                 //faceApiに顔データを送信
                 this.axios.post(this.postUrl, {
-                    images: String(this.capture)
+                    images: String(this.image)
                 }).then(function (response) {
                     console.log(response)
                 }).catch(function (error) {
@@ -66,10 +66,10 @@
                 this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480)
                 this.captures.push(this.canvas.toDataURL("image/jpeg").substr(23))
                 console.log(this.captures)
-                // this.image = this.canvas.toDataURL("image/jpeg")
+                this.image = this.canvas.toDataURL("image/jpeg")
                 // console.log(this.image)
                 // console.log("aaa")
-                // this.image = this.image.substr(23)
+                this.image = this.image.substr(23)
                 // console.log(this.image)
             },
             recStart() {
