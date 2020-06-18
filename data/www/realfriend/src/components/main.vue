@@ -10,7 +10,7 @@
     import GameHeader from '@/components/GameHeader'
     export default {
         name: "Main",
-        components: { GameHeader }
+        components: { GameHeader },
     };
 </script>
 
