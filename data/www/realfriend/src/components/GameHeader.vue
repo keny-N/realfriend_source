@@ -1,13 +1,7 @@
 <template>
     <div class="gameheader">
-        <ul>
-            <li>
-                <router-link to="/">メイン</router-link>
-            </li>
-            <li>
-                <router-link to="/game">ゲーム</router-link>
-            </li>
-        </ul>
+        <router-link to="/"><button>メイン</button></router-link>
+        <router-link to="/game"><button>ゲーム</button></router-link>
     </div>
 </template>
 
