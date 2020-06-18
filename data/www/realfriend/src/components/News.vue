@@ -1,6 +1,10 @@
 <template>
   <div>
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> origin/master
   </div>
 </template>
 
