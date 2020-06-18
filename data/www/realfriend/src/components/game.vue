@@ -2,17 +2,17 @@
   <div class="game">
     <hdr></hdr>
     <h1>ゲーム画面</h1>
-    <camera></camera>
+    <Camera></Camera>
   </div>
 </template>
 
 <script>
     import hdr from '@/components/hdr'
-    import camera from '@/components/camera'
+    import Camera from '@/components/Camera'
 
     export default {
         name: "Game",
-        components: {hdr, camera}
+        components: {hdr, Camera}
     };
 </script>
 
