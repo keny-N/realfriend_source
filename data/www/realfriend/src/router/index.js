@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Main from '@/components/Main'
 import GameBody from "@/components/GameBody";
-import Display from "../components/Display";
+import StatusMsg from "../components/StatusMsg";
 
 Vue.use(Router)
 
@@ -25,9 +25,9 @@ export default new Router({
       component: Main
     },
     {
-      path:'/dis',
-      name:Display,
-      component: Display
+      path:'/Status',
+      name:StatusMsg,
+      component: StatusMsg
     }
   ]
 })

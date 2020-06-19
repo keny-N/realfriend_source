@@ -1,6 +1,6 @@
 <template>
 
-  <div class="dis">
+  <div class="Status">
 
     <table>
       <tr>
@@ -27,7 +27,7 @@
 
 <script>
   export default {
-    name: 'favoriteDisplay',
+    name: 'StatusMsg',
 
     data() {
       return {
@@ -55,12 +55,12 @@
           this.storage = "好感度に変化はありませんでした"
         }
 
-        this.favoriteDisplay(); /* 表示を更新させる関数を呼びます */
+        this.StatusMsg(); /* 表示を更新させる関数を呼びます */
         /* 将来的に今の好感度の表示処理などのために一応分離しておきました */
 
       },
 
-      favoriteDisplay: function () { /* メッセージを一つずつ上にあげ最後に新しいデータを挿入する機能です */
+      StatusMsg: function () { /* メッセージを一つずつ上にあげ最後に新しいデータを挿入する機能です */
         this.msg1 = this.msg2
         this.msg2 = this.msg3
         this.msg3 = this.msg4
