@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Main from '@/components/Main'
 import GameBody from "@/components/GameBody";
-import StatusMsg from "../components/StatusMsg";
 
 Vue.use(Router)
 
@@ -24,10 +23,5 @@ export default new Router({
       name: 'Main',
       component: Main
     },
-    {
-      path:'/Status',
-      name:StatusMsg,
-      component: StatusMsg
-    }
   ]
 })
