@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name:'StatusScrollList',
+    name:'StatusMsg2',
     data(){
       return{
         statuslist:[],
@@ -27,10 +27,10 @@
       dataReceive: function (/*favoriteFlg*/) {                     /* データを受け取ってメッセージを登録する機能です */
         let random = Math.round(Math.random() * 3);              /* 受け取りができないので単体テスト用の乱数生成です */
         let receiveData = random　                                 　/*  本来はここにfavoriteFlgを受け取り挿入します */
-        let now = new Date();
-        let Hour = ("0"+now.getHours()).slice(-2);
-        let min = ("0"+now.getMinutes()).slice(-2);
-        let time = Hour + ":" + min + "       　　　　";
+        let now = new Date();                                       /*時刻を表示する処理です*/
+        let hour = ("0"+now.getHours()).slice(-2);                  /*時刻を表示する処理です*/
+        let min = ("0"+now.getMinutes()).slice(-2);                 /*時刻を表示する処理です*/
+        let time = hour + ":" + min + "       　　　　";              /*時刻を表示する処理です*/
 
         /* receiveData > 0 && receiveData <= 0.5 のように細かく処理を書くことになると思う */
         if (receiveData === 1) {
@@ -41,11 +41,17 @@
           this.storage = time +"好感度に変化はありませんでした"
         }
 
-        this.statuslist.unshift({
-          Msg:this.storage
+        this.statuslist.push({
+          Msg:this.storage            /*リストの最後に最新の好感度情報を追加する処理です*/
         })
-
       },
+
+    },
+    updated() {
+      /*スクロールの位置を一番下に下げる処理です*/
+      let element = document.getElementById("status");
+      element.scrollTop = element.scrollHeight;
+      return(element)
     }
   }
 
@@ -53,10 +59,12 @@
 
 <style scoped>
   #status{
+    /*場所に関してです*/
     width: 60%;
     position: absolute;
     left :20%;
     bottom: 10%;
+    /*スクロールに関してだとおもいます*/
     height: 200px;
     overflow: hidden;
     overflow-y:scroll;
@@ -65,6 +73,7 @@
     background: #f83ce3;
   }
   #textmsg{
+    /*文字の下の下線です*/
     width:350px;
     border-bottom: solid  1px #87CEFA;
   }
