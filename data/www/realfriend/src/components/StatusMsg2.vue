@@ -60,6 +60,7 @@
     height: 200px;
     overflow: hidden;
     overflow-y:scroll;
+    overflow-x:scroll;
     text-align: left;
     background: #f83ce3;
   }
