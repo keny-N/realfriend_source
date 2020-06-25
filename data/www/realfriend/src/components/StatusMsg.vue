@@ -1,98 +1,80 @@
 <template>
-
-  <div class="Status">
-
-    <table>
-      <tr>
-        <td class="odd">{{ msg1 }}</td>
-      </tr>
-      <tr>
-        <td class="even">{{ msg2 }}</td>
-      </tr>
-      <tr>
-        <td class="odd">{{ msg3 }}</td>
-      </tr>
-      <tr>
-        <td class="even">{{ msg4 }}</td>
-      </tr>
-    </table>
-
-    <!-- このボタンは撮影ボタン等の開始させる処理に置き換えられると思います　-->
-    <button v-on:click="dataReceive">おして</button>
-    　
+  <div>
+    <div id = "status">
+      <ul v-for=" list in statuslist">
+        <div id = textmsg>
+          {{list.Msg}}
+        </div>
+      </ul>
+    </div>
+    <div id = "button">
+      <button v-on:click="dataReceive">おして</button>
+    </div>
   </div>
 
 </template>
 
-
 <script>
   export default {
-    name: 'StatusMsg',
-
-    data() {
-      return {
-
-        msg1: "１つ目の通知",
-        msg2: "２つ目の通知",
-        msg3: "３つ目の通知",
-        msg4: "４つ目の通知",
-        storage: "一時的な保存場所だよ"
-
+    name:'StatusMsg2',
+    data(){
+      return{
+        statuslist:[],
+        storage:"0",
       }
     },
-
-    methods: {
+    methods:{
       dataReceive: function (/*favoriteFlg*/) {                     /* データを受け取ってメッセージを登録する機能です */
         let random = Math.round(Math.random() * 3);              /* 受け取りができないので単体テスト用の乱数生成です */
         let receiveData = random　                                 　/*  本来はここにfavoriteFlgを受け取り挿入します */
+        let now = new Date();                                       /*時刻を表示する処理です*/
+        let hour = ("0"+now.getHours()).slice(-2);                  /*時刻を表示する処理です*/
+        let min = ("0"+now.getMinutes()).slice(-2);                 /*時刻を表示する処理です*/
+        let time = hour + ":" + min + "       　　　　";              /*時刻を表示する処理です*/
 
         /* receiveData > 0 && receiveData <= 0.5 のように細かく処理を書くことになると思う */
         if (receiveData === 1) {
-          this.storage = "好感度が下がりました"
+          this.storage = time +"好感度が下がりました　　　"
         } else if (receiveData === 3) {
-          this.storage = "好感度が上がりました"
+          this.storage = time +"好感度が上がりました　　　"
         } else {
-          this.storage = "好感度に変化はありませんでした"
+          this.storage = time +"好感度に変化はありませんでした"
         }
 
-        this.StatusMsg(); /* 表示を更新させる関数を呼びます */
-        /* 将来的に今の好感度の表示処理などのために一応分離しておきました */
-
+        this.statuslist.push({
+          Msg:this.storage            /*リストの最後に最新の好感度情報を追加する処理です*/
+        })
       },
 
-      StatusMsg: function () { /* メッセージを一つずつ上にあげ最後に新しいデータを挿入する機能です */
-        this.msg1 = this.msg2
-        this.msg2 = this.msg3
-        this.msg3 = this.msg4
-        this.msg4 = this.storage
-
-      }
-
+    },
+    updated() {
+      /*スクロールの位置を一番下に下げる処理です*/
+      let element = document.getElementById("status");
+      element.scrollTop = element.scrollHeight;
+      return(element)
     }
-
   }
+
 </script>
 
-
 <style scoped>
-
-  table {
-    /*どの環境からでも位置を調整するためにabsolute + % です*/
-    width: 100%;
+  #status{
+    /*場所に関してです*/
+    width: 60%;
     position: absolute;
+    left :20%;
     bottom: 10%;
+    /*スクロールに関してだとおもいます*/
+    height: 200px;
+    overflow: hidden;
+    overflow-y:scroll;
+    overflow-x:scroll;
+    text-align: left;
+    background: #f83ce3;
   }
-
-  /* カメラ映像の上にあるので見やすくするために背景色　＋　文字白です */
-  td.odd {
-    font-weight: normal;
-    color: #ffffff;
-    background-color: #696969;
-  }
-
-  td.even {
-    font-weight: normal;
-    color: #ffffff;
-    background-color: #a9a9a9;
+  #textmsg{
+    /*文字の下の下線です*/
+    width:350px;
+    border-bottom: solid  1px #87CEFA;
   }
 </style>
