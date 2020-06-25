@@ -2,7 +2,8 @@
   <div class="gamebody">
     <GameHeader></GameHeader>
     <h1>ゲーム画面</h1>
-    <camera></camera>
+    <p>{{fromFaceapiMsg}}</p>
+    <camera @updateMsg="updateFaceapiMsg"></camera>
     <input type="number" v-model="favoGaugeData">
     <input type="number" v-model="agesageData">
     <!-- input v-modelで宣言した値を入れている-->
@@ -28,7 +29,13 @@
         data() {
             return {
                 favoGaugeData: 0,
-                agesageData: 0
+                agesageData: 0,
+                fromFaceapiMsg: "あ"
+            }
+        },
+        methods: {
+            updateFaceapiMsg(msg) {
+                this.fromFaceapiMsg = msg
             }
         }
     };
