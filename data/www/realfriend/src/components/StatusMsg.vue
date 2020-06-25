@@ -1,64 +1,69 @@
 <template>
   <div>
-    <div id="status">
-      <ul v-for=" list in statuslist">
-        <div id=textmsg>
-          {{list.Msg}}
+    <div id = "statusmsg">
+      <ul v-for=" list in statusList">
+        <div id = textmsg>
+           {{list.Msg}}
         </div>
       </ul>
-    </div>
-    <div id="button">
-      <button v-on:click="dataReceive">おして</button>
     </div>
   </div>
 
 </template>
 
 <script>
-    export default {
-        name: 'StatusMsg2',
-        data() {
-            return {
-                statuslist: [],
-                storage: "0",
-            }
-        },
-        methods: {
-            dataReceive: function (/*favoriteFlg*/) {                     /* データを受け取ってメッセージを登録する機能です */
-                let random = Math.round(Math.random() * 3);              /* 受け取りができないので単体テスト用の乱数生成です */
-                let receiveData = random　                                 　/*  本来はここにfavoriteFlgを受け取り挿入します */
-                let now = new Date();                                       /*時刻を表示する処理です*/
-                let hour = ("0" + now.getHours()).slice(-2);                  /*時刻を表示する処理です*/
-                let min = ("0" + now.getMinutes()).slice(-2);                 /*時刻を表示する処理です*/
-                let time = hour + ":" + min + "       　　　　";              /*時刻を表示する処理です*/
+  export default {
+    name:'StatusMsg',
+    props:{
+      receiveMsg:{
+        type:Number,
+        default:999
+      }
+    },
+    data(){
+      return{
+        statusList:[],
+        storage:"0",
+      }
+    },
+    methods:{
+      statusMsgAdd:function() {                                     /* データを受け取ってメッセージを登録する機能です */
+        let now = new Date();                                       /*時刻を表示する処理です*/
+        let hour = ("0"+now.getHours()).slice(-2);                  /*時刻を表示する処理です*/
+        let min = ("0"+now.getMinutes()).slice(-2);                 /*時刻を表示する処理です*/
+        let time = hour + ":" + min + "       　　　　";              /*時刻を表示する処理です*/
 
-                /* receiveData > 0 && receiveData <= 0.5 のように細かく処理を書くことになると思う */
-                if (receiveData === 1) {
-                    this.storage = time + "好感度が下がりました　　　"
-                } else if (receiveData === 3) {
-                    this.storage = time + "好感度が上がりました　　　"
-                } else {
-                    this.storage = time + "好感度に変化はありませんでした"
-                }
-
-                this.statuslist.push({
-                    Msg: this.storage            /*リストの最後に最新の好感度情報を追加する処理です*/
-                })
-            },
-
-        },
-        updated() {
-            /*スクロールの位置を一番下に下げる処理です*/
-            let element = document.getElementById("status");
-            element.scrollTop = element.scrollHeight;
-            return (element)
+        /*0.5から-0.5の範囲で帰って来る際に好感度判定をします。*/
+        if (this.receiveMsg > 0.5 || this.receiveMsg < -0.5) {
+          this.storage = time + "エラーです"
         }
-    }
+        else if (this.receiveMsg < 0) {
+          this.storage = time +"好感度が下がりました"
+        } else if (this.receiveMsg > 0) {
+          this.storage = time +"好感度が上がりました"
+        } else {
+          this.storage = time +"好感度に変化はありませんでした"
+        }
+
+        this.statusList.push({
+          Msg:this.storage            /*リストの最後に最新の好感度情報を追加する処理です*/
+        })
+      },
+
+    },
+    updated() {
+      /*スクロールの位置を一番下に下げる処理です*/
+      let element = document.getElementById("statusmsg");
+      element.scrollTop = element.scrollHeight;
+      return(element)
+    },
+
+  }
 
 </script>
 
 <style scoped>
-  #status {
+  #statusmsg {
     /*場所に関してです*/
     margin-left: 20%;
     margin-right: 20%;

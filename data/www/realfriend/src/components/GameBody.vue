@@ -2,13 +2,13 @@
   <div class="gamebody">
     <GameHeader></GameHeader>
     <h1>ゲーム画面</h1>
+    <p>{{fromFaceapiMsg}}</p>
     <camera @updateMsg="updateFaceapiMsg"></camera>
-    <StatusMsg></StatusMsg>
     <input type="number" v-model="favoGaugeData">
     <input type="number" v-model="agesageData">
     <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
-
+    <StatusMsg ref="statusMsg" :receiveMsg = "fromFaceapiMsg"></StatusMsg>
   </div>
 </template>
 
@@ -17,7 +17,7 @@
     import GameFooter from "@/components/GameFooter"
     import FavoGauge from "@/components/FavoGauge";
     import Camera from "@/components/Camera";
-    import StatusMsg from "@/components/StatusMsg";
+    import StatusMsg from "@/components/StatusMsg"
 
     export default {
         name: "GameBody",
@@ -26,19 +26,20 @@
             GameFooter: GameFooter,
             FavoGauge: FavoGauge,
             Camera: Camera,
-            StatusMsg: StatusMsg
+            StatusMsg:StatusMsg,
         },
         data() {
             return {
                 favoGaugeData: 0,
                 agesageData: 0,
-                fromFaceapiMsg: "あ"
+                fromFaceapiMsg: 0.1
             }
         },
         methods: {
             updateFaceapiMsg(msg) {
                 this.fromFaceapiMsg = msg
-            }
+                this.$refs.statusMsg.statusMsgAdd();
+            },
         }
     };
 </script>
