@@ -1,14 +1,11 @@
 <template>
   <div>
-    <div id="status">
+    <div id="status" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
       <ul v-for=" list in statuslist">
         <div id=textmsg>
           {{list.Msg}}
         </div>
       </ul>
-    </div>
-    <div id="button">
-      <button v-on:click="dataReceive">おして</button>
     </div>
   </div>
 
@@ -21,6 +18,7 @@
             return {
                 statuslist: [],
                 storage: "0",
+                backgroundImageSrc: require("@/assets/status_back.png")
             }
         },
         methods: {
@@ -58,22 +56,28 @@
 </script>
 
 <style scoped>
+  ul{
+    padding-left:0px;
+  }
   #status {
     /*場所に関してです*/
-    margin-left: 20%;
-    margin-right: 20%;
     /*スクロールに関してだとおもいます*/
-    height: 200px;
+    height: 190px;
     overflow: hidden;
     overflow-y: scroll;
     overflow-x: scroll;
-    background: #f83ce3;
     background-origin: content-box;
+    background: no-repeat;
+    width: 100%;
+    background-size: 100% 100%;;
   }
 
   #textmsg {
     /*文字の下の下線です*/
-    width: 350px;
-    border-bottom: solid 1px #87CEFA;
+    width: 90%;
+    border-bottom: solid 1px #ffffff;
+    color: white;
+    margin: auto;
+    text-align: left;
   }
 </style>

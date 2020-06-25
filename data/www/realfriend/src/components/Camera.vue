@@ -3,7 +3,7 @@
     <!--    <button v-on:click="faceApi">POST送信</button>-->
     <!--    <button v-on:click="empath">empath送信</button>-->
     <div>
-      <video ref="video" id="video" width="500" height="500" autoplay muted></video>
+      <video ref="video" id="video" width="500" height="500" autoplay muted class="camerasize"></video>
       <canvas ref="canvas" id="canvas" width="500" height="500"></canvas>
       <div>
         <button v-on:click="recStart">Start</button>
@@ -143,5 +143,8 @@
   li {
     display: inline;
     padding: 5px;
+  }
+  .camerasize{
+    width: 100%;
   }
 </style>

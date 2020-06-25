@@ -1,9 +1,7 @@
 <template>
-  <div class="main">
+  <div class="main" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
-    <img src="../assets/realogo.png">
-    <h1>メイン画面</h1>
-    <FriendList></FriendList>
+    <FriendList class="listposition"></FriendList>
     <News></News>
   </div>
 </template>
@@ -16,9 +14,23 @@
     export default {
         name: "Main",
         components: {GameHeader, News,FriendList},
+      data () {
+        return {
+          backgroundImageSrc: require("@/assets/main_back.jpg")
+        }
+      }
     };
 </script>
 
 <style scoped>
+  .main{
+    background: no-repeat center;
+    background-size: cover;
+    height: 100vh;
+  }
+  .listposition{
+    margin: 50vh auto 0;
+    transform: translateY(-50%);
+  }
 
 </style>

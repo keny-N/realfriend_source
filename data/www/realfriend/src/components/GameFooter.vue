@@ -1,8 +1,8 @@
 <template>
-    <div class="gamefooter">
+    <footer class="gamefooter" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
       <FavoGauge :favo-gauge-data="favoGaugeData"></FavoGauge>
       <Agesage :agesage-data="agesageData"></Agesage>
-    </div>
+    </footer>
 </template>
 
 <script>
@@ -18,7 +18,8 @@
       data() {
         return {
           favoGaugeData: 0,
-          agesageData: 0
+          agesageData: 0,
+          backgroundImageSrc: require("@/assets/renga.jpeg")
         }
       },
       props:{
@@ -33,6 +34,9 @@
 </script>
 
 <style scoped>
+  .gamefooter{
+    width: ;
+  }
 
 
 </style>

@@ -1,14 +1,10 @@
 <template>
   <div class="gamebody">
     <GameHeader></GameHeader>
-    <h1>ゲーム画面</h1>
     <camera @updateMsg="updateFaceapiMsg"></camera>
     <StatusMsg></StatusMsg>
-    <input type="number" v-model="favoGaugeData">
-    <input type="number" v-model="agesageData">
     <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
-
   </div>
 </template>
 
@@ -44,5 +40,7 @@
 </script>
 
 <style scoped>
+  .gamebody{
+  }
 
 </style>

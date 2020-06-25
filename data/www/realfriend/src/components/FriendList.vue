@@ -2,12 +2,12 @@
     <div>
       <ul>
         <!--itemsの件数文回している-->
-        <li v-for="item in items">
-          <img class="friendimg" :src=item.img>
+        <li v-for="item in items"  class="rounded border border-dark">
+          <img class="friendimg rounded" :src=item.img>
           <div>
           {{ item.name }}
           <router-link to="/game">
-            <button type="button" class="btn btn-primary btn-sm">攻略</button>
+            <button type="button" class="btn btn-primary btn-sm botan">攻略</button>
           </router-link>
           </div>
           <div>
@@ -15,10 +15,11 @@
           </div>
         </li>
       </ul>
-      <!--itemsが増えた際にリストに追加させているかのテスト用 何をのせるのか不明のためとりあえずの項目名-->
+      <!--itemsが増えた際にリストに追加させているかのテスト用 何をのせるのか不明のためとりあえずの項目名
       名前: <input v-model="addName"><br />
       住所: <input v-model="addJusyo"><br />
       <button v-on:click="add">add</button><br />
+      -->
     </div>
 </template>
 
@@ -47,19 +48,29 @@
 <style scoped>
   ul{
     list-style: none;
+    padding-left:0px;
+
   }
   /*上下の間隔と背景に影をつけている。*/
   li{
-    background: #f6f6f6;
+    background: white;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
     padding: 10px 20px;
-    margin-bottom: 10px;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 70%;
+    max-width: 600px;
   }
   .friendimg{
     float: left;
     /*リストでの背景に入らないため画像サイズを調整している。項目が増えると変更する必要あり*/
     max-width: 55px; /* 最大幅 */
-    width: 15%;
+    max-height: 48px;
+    width: 30%;
+    object-fit: cover;
+  }
+  .botan{
+    float:right;
   }
 
 </style>
