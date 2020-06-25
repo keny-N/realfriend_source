@@ -26,6 +26,7 @@
   .main{
     background: no-repeat center;
     background-size: cover;
+    /*mainのサイズをちょうど画面と同じにする。*/
     height: 100vh;
   }
   .listposition{

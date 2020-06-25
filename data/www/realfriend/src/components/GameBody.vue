@@ -1,8 +1,10 @@
 <template>
-  <div class="gamebody">
+  <!--本来であればgamefooterで処理されるべきだが、div内にコンポーネントされているためfooterとして認識されていない
+      文字などでなく画像のためfavogaugeのulが高さを認識しない。
+      そのためコンポーネントとして呼び出しているGameBody内で画像を設定している。-->
+  <div class="gamebody" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
     <camera @updateMsg="updateFaceapiMsg"></camera>
-    <StatusMsg></StatusMsg>
     <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
   </div>
@@ -28,7 +30,8 @@
             return {
                 favoGaugeData: 0,
                 agesageData: 0,
-                fromFaceapiMsg: "あ"
+                fromFaceapiMsg: "あ",
+                backgroundImageSrc: require("@/assets/game_footer.jpg")
             }
         },
         methods: {
@@ -41,6 +44,9 @@
 
 <style scoped>
   .gamebody{
+    /*gamebodyのサイズをちょうど画面と同じにする。*/
+    height:100vh;
+    background-size: cover;
   }
 
 </style>

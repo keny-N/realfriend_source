@@ -10,8 +10,6 @@
         <img src="../assets/空ハートのマーク.png">
       </li>
     </ul>
-
-
   </div>
 
 </template>

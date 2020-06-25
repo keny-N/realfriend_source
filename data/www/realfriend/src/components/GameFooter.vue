@@ -1,5 +1,10 @@
 <template>
-    <footer class="gamefooter" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
+    <footer>
+      <!--本来であれば下のバックグラウンドが処理されるべきだが、div内にコンポーネントされているためfooterとして認識されていない
+      文字などでなく画像のためfavogaugeのulが高さを認識しない。
+      そのため次にコンポーネントを呼び出しているGameBody内で画像を設定している。
+      <div class="gamefooter" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
+      -->
       <FavoGauge :favo-gauge-data="favoGaugeData"></FavoGauge>
       <Agesage :agesage-data="agesageData"></Agesage>
     </footer>
@@ -19,7 +24,7 @@
         return {
           favoGaugeData: 0,
           agesageData: 0,
-          backgroundImageSrc: require("@/assets/renga.jpeg")
+          backgroundImageSrc: require("@/assets/game_footer.jpg")
         }
       },
       props:{
@@ -34,9 +39,10 @@
 </script>
 
 <style scoped>
-  .gamefooter{
-    width: ;
-  }
 
+  /*本来であれば下のバックグラウンドが処理されるべきだが、div内にコンポーネントされているためfooterとして認識されていない */
+  .gamefooter{
+    background-size: cover;
+  }
 
 </style>
