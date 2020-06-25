@@ -65,10 +65,8 @@
 <style scoped>
   #statusmsg {
     /*場所に関してです*/
-    width: 60%;
-    position: absolute;
-    left :20%;
-    bottom: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
     /*スクロールに関してだとおもいます*/
     height: 200px;
     overflow: hidden;

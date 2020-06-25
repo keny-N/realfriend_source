@@ -9,7 +9,6 @@
     <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
     <StatusMsg ref="statusMsg" :receiveMsg = "fromFaceapiMsg"></StatusMsg>
-    <button v-on:click="testA">oo</button>
   </div>
 </template>
 
@@ -41,9 +40,6 @@
                 this.fromFaceapiMsg = msg
                 this.$refs.statusMsg.statusMsgAdd();
             },
-            testA(){
-              this.$refs.statusMsg.statusMsgAdd();
-          }
         }
     };
 </script>
