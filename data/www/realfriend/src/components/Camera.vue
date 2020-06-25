@@ -1,22 +1,14 @@
 <template>
   <div class="camera">
-    <h2>カメラ機能テスト</h2>
-    <button v-on:click="faceApi">POST送信</button>
+    <!--    <button v-on:click="faceApi">POST送信</button>-->
+    <!--    <button v-on:click="empath">empath送信</button>-->
     <div>
       <video ref="video" id="video" width="500" height="500" autoplay muted></video>
       <canvas ref="canvas" id="canvas" width="500" height="500"></canvas>
       <div>
         <button v-on:click="recStart">Start</button>
+        <button v-on:click="send">sendMsg</button>
       </div>
-      <div>
-        <button color="info" id="snap" v-on:click="capture">シーン切り取り</button>
-      </div>
-      <!--      <ul>-->
-      <!--        <li class="capture" v-for="c in captures" v-bind:key="c.d">-->
-      <!--          <img v-bind:src="c" height="50">-->
-      <!--        </li>-->
-      <!--      </ul>-->
-      <!--      <audio id="player" controls></audio>-->
     </div>
   </div>
 </template>
@@ -28,12 +20,13 @@
             return {
                 video: {},
                 canvas: {},
-                captures: [],   //画像を保存しておく
-                // chunks: [],
+                chunks: [],
                 localStream: null,
                 mediaRecorder: null,
                 timer: null,
-                image: null,
+                image: null,  //画像を保存しておく場所
+                audio: null,
+                msg: 'うんち',
                 // player: this.$refs.player.src,
                 postUrl: 'https://6ou7h94f7f.execute-api.ap-northeast-1.amazonaws.com/realfriend_api/realfriend/emotionjudgment'
                 // audioData: [],
@@ -50,27 +43,44 @@
             this.localStream.getTracks().forEach(track => track.stop())
         },
         methods: {
+            send() {
+                this.$emit('updateMsg', this.msg)
+            },
             faceApi() {
                 //faceApiに顔データを送信
+                console.log('POST送信します')
                 this.axios.post(this.postUrl, {
                     images: String(this.image)
                 }).then(function (response) {
                     console.log(response)
+                    return response
                 }).catch(function (error) {
                     console.log(error)
                 })
             },
+            // empath(wav) {
+            //     console.log("empath起動")
+            //     this.axios.post('https://23gjh3gnd7.execute-api.ap-northeast-1.amazonaws.com/empath/mastuo_lamda_test', {
+            //         wav: this.audio
+            //     }).then(function (response) {
+            //         console.log((response))
+            //     }).catch(function (error) {
+            //         console.log(error)
+            //     })
+            //
+            // },
             capture() {
                 //カメラが写っている範囲を指定し、その領域を画像として切り取る
                 this.canvas = this.$refs.canvas
                 this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480)
-                this.captures.push(this.canvas.toDataURL("image/jpeg").substr(23))
-                console.log(this.captures)
                 this.image = this.canvas.toDataURL("image/jpeg")
-                // console.log(this.image)
-                // console.log("aaa")
                 this.image = this.image.substr(23)
-                // console.log(this.image)
+                console.log(this.image)
+                //faceapiの返り値をmsgに代入
+                this.msg = this.faceApi()
+                console.log(this.msg)
+                //親コンポーネント(GameBodyのupdateMSGを実行する)
+                this.$emit('updateMsg', "うんち")
             },
             recStart() {
                 //カメラマイクをONにし、録音を始める
@@ -84,9 +94,8 @@
                         this.localStream = stream
                         this.mediaRecorder = new MediaRecorder(stream)
                         this.mediaRecorder.start()
-
-                        //１秒間隔で画像を切り取る
-                        // this.timer = setInterval(this.capture, 1000)
+                        // １秒間隔で画像を切り取る
+                        this.timer = setInterval(this.capture, 2000)
                         //１０秒後に録音を停止する
                         setTimeout(this.recStop, 10000)
                     })
@@ -94,15 +103,20 @@
                     console.log("getUserMedia not support")
                 }
             },
+
             recStop() {
                 //画像を切り取る処理を停止させる
                 clearInterval(this.timer)
                 //カメラマイクをOFFにし、音声データを取得する
                 this.mediaRecorder.stop()
-                this.mediaRecorder.ondataavailable = function (e) {
-                    // this.chunks.push(e.data)
-                }
-                console.log(this.chunks)
+                // this.mediaRecorder.addEventListener('dataavailable', e => {
+                //
+                //     this.chunks.push(e.data)
+                //     this.$refs.player.src = URL.createObjectURL(e.data)
+                //     this.$refs.download.href = URL.createObjectURL(e.data)
+                //     this.$refs.download.download = 'matuo.wav'
+                // })
+
                 // this.mediaRecorder.ondataavailable = function (e) {
                 //     document.getElementById('player').src = URL.createObjectURL(e.data);
                 // }
