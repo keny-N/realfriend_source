@@ -56,7 +56,6 @@
       let element = document.getElementById("status");
       element.scrollTop = element.scrollHeight;
       return(element)
-      console.log(this.receiveMsg)
     },
 
   }
@@ -64,23 +63,22 @@
 </script>
 
 <style scoped>
-  #status{
+  #status {
     /*場所に関してです*/
-    width: 60%;
-    position: absolute;
-    left :20%;
-    bottom: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
     /*スクロールに関してだとおもいます*/
     height: 200px;
     overflow: hidden;
-    overflow-y:scroll;
-    overflow-x:scroll;
-    text-align: left;
+    overflow-y: scroll;
+    overflow-x: scroll;
     background: #f83ce3;
+    background-origin: content-box;
   }
-  #textmsg{
+
+  #textmsg {
     /*文字の下の下線です*/
-    width:350px;
-    border-bottom: solid  1px #87CEFA;
+    width: 350px;
+    border-bottom: solid 1px #87CEFA;
   }
 </style>
