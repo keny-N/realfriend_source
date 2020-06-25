@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id = "status">
+    <div id = "statusmsg">
       <ul v-for=" list in statusList">
         <div id = textmsg>
            {{list.Msg}}
@@ -53,7 +53,7 @@
     },
     updated() {
       /*スクロールの位置を一番下に下げる処理です*/
-      let element = document.getElementById("status");
+      let element = document.getElementById("statusmsg");
       element.scrollTop = element.scrollHeight;
       return(element)
     },
@@ -63,10 +63,12 @@
 </script>
 
 <style scoped>
-  #status {
+  #statusmsg {
     /*場所に関してです*/
-    margin-left: 20%;
-    margin-right: 20%;
+    width: 60%;
+    position: absolute;
+    left :20%;
+    bottom: 10%;
     /*スクロールに関してだとおもいます*/
     height: 200px;
     overflow: hidden;
