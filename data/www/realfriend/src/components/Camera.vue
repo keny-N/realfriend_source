@@ -7,7 +7,6 @@
       <canvas ref="canvas" id="canvas" width="500" height="500"></canvas>
       <div>
         <button v-on:click="recStart">Start</button>
-        <button v-on:click="send">sendMsg</button>
       </div>
     </div>
   </div>
@@ -26,9 +25,9 @@
                 timer: null,
                 image: null,  //画像を保存しておく場所
                 audio: null,
-                msg: 'うんち',
+                msg: '',
                 // player: this.$refs.player.src,
-                postUrl: 'https://6ou7h94f7f.execute-api.ap-northeast-1.amazonaws.com/realfriend_api/realfriend/emotionjudgment'
+                postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend_api/realfriend/emotionjudgement'
                 // audioData: [],
                 // localMediaStream: null,
                 // localScriptProcessor: null
@@ -43,19 +42,22 @@
             this.localStream.getTracks().forEach(track => track.stop())
         },
         methods: {
-            send() {
-                this.$emit('updateMsg', this.msg)
-            },
             faceApi() {
+                var me = this
                 //faceApiに顔データを送信
                 console.log('POST送信します')
                 this.axios.post(this.postUrl, {
                     images: String(this.image)
                 }).then(function (response) {
-                    console.log(response)
-                    return response
+                    if (response.data.error == 0) {
+                        console.log(response)
+                        me.msg = response.data.result
+                    } else {
+                        me.msg = "エラー"
+                    }
                 }).catch(function (error) {
                     console.log(error)
+                    me.msg = "エラー"
                 })
             },
             // empath(wav) {
@@ -77,10 +79,10 @@
                 this.image = this.image.substr(23)
                 console.log(this.image)
                 //faceapiの返り値をmsgに代入
-                this.msg = this.faceApi()
+                this.faceApi()
                 console.log(this.msg)
                 //親コンポーネント(GameBodyのupdateMSGを実行する)
-                this.$emit('updateMsg', "うんち")
+                this.$emit('updateMsg', this.msg)
             },
             recStart() {
                 //カメラマイクをONにし、録音を始める
@@ -95,7 +97,7 @@
                         this.mediaRecorder = new MediaRecorder(stream)
                         this.mediaRecorder.start()
                         // １秒間隔で画像を切り取る
-                        this.timer = setInterval(this.capture, 2000)
+                        this.timer = setInterval(this.capture, 5000)
                         //１０秒後に録音を停止する
                         setTimeout(this.recStop, 10000)
                     })
