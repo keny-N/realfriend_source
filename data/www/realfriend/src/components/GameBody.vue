@@ -8,7 +8,7 @@
     <input type="number" v-model="agesageData">
     <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
-    <StatusMsg :receiveMsg = "fromFaceapiMsg"></StatusMsg>
+    <StatusMsg ref="Statusmsg" :receiveMsg = "fromFaceapiMsg"></StatusMsg>
   </div>
 </template>
 
@@ -32,13 +32,14 @@
             return {
                 favoGaugeData: 0,
                 agesageData: 0,
-                fromFaceapiMsg: -0.5
+                fromFaceapiMsg: 0.1
             }
         },
         methods: {
             updateFaceapiMsg(msg) {
                 this.fromFaceapiMsg = msg
-            }
+                this.$refs.Statusmsg.statusMsgAdd();
+            },
         }
     };
 </script>
