@@ -5,7 +5,7 @@
   <div class="gamebody" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
     <camera @updateMsg="updateFaceapiMsg"></camera>
-    <!-- input v-modelで宣言した値を入れている-->
+    <StatusMsg class="statusposition"></StatusMsg>
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
   </div>
 </template>
@@ -16,10 +16,12 @@
     import FavoGauge from "@/components/FavoGauge";
     import Camera from "@/components/Camera";
     import StatusMsg from "@/components/StatusMsg";
+    import StatusMsg2 from "./StatusMsg";
 
     export default {
         name: "GameBody",
         components: {
+          StatusMsg2,
             GameHeader: GameHeader,
             GameFooter: GameFooter,
             FavoGauge: FavoGauge,
@@ -47,6 +49,10 @@
     /*gamebodyのサイズをちょうど画面と同じにする。*/
     height:100vh;
     background-size: cover;
+    position: relative;
+  }
+  .statusposition{
+    position: absolute; top:350px; left:0px;width: 100%;
   }
 
 </style>

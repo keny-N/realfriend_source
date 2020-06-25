@@ -5,7 +5,6 @@
     <div>
       <video ref="video" id="video" width="500" height="500" autoplay muted class="camerasize"></video>
       <canvas ref="canvas" id="canvas" width="500" height="500"></canvas>
-      <StatusMsg class="statusposition"></StatusMsg>
       <div>
         <button v-on:click="recStart">Start</button>
       </div>
@@ -14,12 +13,8 @@
 </template>
 
 <script>
-  import StatusMsg from "@/components/StatusMsg.vue";
     export default {
         name: "camera",
-      components:{
-        StatusMsg:StatusMsg,
-      },
         data() {
             return {
                 video: {},
@@ -152,10 +147,5 @@
   .camerasize{
     width: 100%;
   }
-  .camera{
-    position: relative;
-  }
-  .statusposition{
-    position: absolute; top:310px; left:0px;width: 100%;
-  }
+
 </style>
