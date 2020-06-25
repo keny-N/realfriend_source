@@ -4,8 +4,10 @@
       そのためコンポーネントとして呼び出しているGameBody内で画像を設定している。-->
   <div class="gamebody" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
+    <p>{{fromFaceapiMsg}}</p>
     <camera @updateMsg="updateFaceapiMsg"></camera>
-    <StatusMsg class="statusposition"></StatusMsg>
+    <StatusMsg ref="statusMsg" :receiveMsg="fromFaceapiMsg" class="statusposition"></StatusMsg>
+    <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
   </div>
 </template>
@@ -15,30 +17,29 @@
     import GameFooter from "@/components/GameFooter"
     import FavoGauge from "@/components/FavoGauge";
     import Camera from "@/components/Camera";
-    import StatusMsg from "@/components/StatusMsg";
-    import StatusMsg2 from "./StatusMsg";
+    import StatusMsg from "@/components/StatusMsg"
 
     export default {
         name: "GameBody",
         components: {
-          StatusMsg2,
             GameHeader: GameHeader,
             GameFooter: GameFooter,
             FavoGauge: FavoGauge,
             Camera: Camera,
-            StatusMsg: StatusMsg
+            StatusMsg: StatusMsg,
         },
         data() {
             return {
                 favoGaugeData: 0,
                 agesageData: 0,
-                fromFaceapiMsg: "あ",
+                fromFaceapiMsg: 0,
                 backgroundImageSrc: require("@/assets/game_footer.jpg")
             }
         },
         methods: {
             updateFaceapiMsg(msg) {
                 this.fromFaceapiMsg = msg
+                this.$refs.statusMsg.statusMsgAdd();
             }
         }
     };
