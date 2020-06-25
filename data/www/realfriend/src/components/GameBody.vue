@@ -4,11 +4,11 @@
     <h1>ゲーム画面</h1>
     <p>{{fromFaceapiMsg}}</p>
     <camera @updateMsg="updateFaceapiMsg"></camera>
+    <StatusMsg ref="statusMsg" :receiveMsg="fromFaceapiMsg"></StatusMsg>
     <input type="number" v-model="favoGaugeData">
     <input type="number" v-model="agesageData">
     <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
-    <StatusMsg ref="statusMsg" :receiveMsg = "fromFaceapiMsg"></StatusMsg>
   </div>
 </template>
 
@@ -26,20 +26,20 @@
             GameFooter: GameFooter,
             FavoGauge: FavoGauge,
             Camera: Camera,
-            StatusMsg:StatusMsg,
+            StatusMsg: StatusMsg,
         },
         data() {
             return {
                 favoGaugeData: 0,
                 agesageData: 0,
-                fromFaceapiMsg: 0.1
+                fromFaceapiMsg: 0
             }
         },
         methods: {
             updateFaceapiMsg(msg) {
                 this.fromFaceapiMsg = msg
                 this.$refs.statusMsg.statusMsgAdd();
-            },
+            }
         }
     };
 </script>
