@@ -8,7 +8,7 @@
     <input type="number" v-model="agesageData">
     <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
-
+    <StatusMsg :receiveMsg = "fromFaceapiMsg"></StatusMsg>
   </div>
 </template>
 
@@ -17,6 +17,7 @@
     import GameFooter from "@/components/GameFooter"
     import FavoGauge from "@/components/FavoGauge";
     import Camera from "@/components/Camera";
+    import StatusMsg from "@/components/StatusMsg"
 
     export default {
         name: "GameBody",
@@ -24,13 +25,14 @@
             GameHeader: GameHeader,
             GameFooter: GameFooter,
             FavoGauge: FavoGauge,
-            Camera: Camera
+            Camera: Camera,
+            StatusMsg:StatusMsg,
         },
         data() {
             return {
                 favoGaugeData: 0,
                 agesageData: 0,
-                fromFaceapiMsg: "あ"
+                fromFaceapiMsg: -0.5
             }
         },
         methods: {
