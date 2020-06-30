@@ -82,5 +82,7 @@
     color: white;
     margin: auto;
     text-align: left;
+    margin-top:1em;
+    font-size: 100%;
   }
 </style>

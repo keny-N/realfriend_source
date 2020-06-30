@@ -8,7 +8,7 @@
     <camera @updateMsg="updateFaceapiMsg"></camera>
     <StatusMsg ref="statusMsg" :receiveMsg="fromFaceapiMsg" class="statusposition"></StatusMsg>
     <!-- input v-modelで宣言した値を入れている-->
-    <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="agesageData"></GameFooter>
+    <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="fromFaceapiMsg"></GameFooter>
   </div>
 </template>
 
