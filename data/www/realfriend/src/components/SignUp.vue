@@ -45,13 +45,14 @@
         this.userpass = document.getElementById("userPassword").value
 
         /*正規表現パターン*/
-        let paternid = '\w+{1,7}'
+        let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
+        let paternpass = new RegExp(/^([a-zA-Z0-9]{1,30})$/)
 
         if (this.username == '') {
           this.resultuser = "ユーザ名が空です"
-          if (this.userid == '' /*&& true == this.userid.match(paternid)*/) {
+          if (false == paternid.test(this.userid)) {
             this.resultid = "ユーザidが空"
-            if (this.userpass == '') {
+            if (false == paternpass.test(this.userpass) ){
               this.resultpass = "ユーザpassが空です"
             }
           }else{
@@ -60,14 +61,14 @@
             }
           }
         } else {
-          if (this.userid == '' /*&& true == this.userid.match(paternid)*/) {
+          if (false == paternid.test(this.userid)) {
             this.resultid = "ユーザidが空"
-            if (this.userpass == '') {
+            if (false == paternpass.test(this.userpass)) {
               this.resultpass = "ユーザpassが空"
             }
 
           }else{
-            if (this.userpass == '') {
+            if (false == paternpass.test(this.userpass)) {
               this.resultpass = "ユーザpassが空"
             }else{
               this.message = 'ok'
