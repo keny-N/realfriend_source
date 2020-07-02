@@ -8,7 +8,7 @@
     <p>
       <input type="text" id="userId" value="" placeholder="ユーザID"></p>
     <p>
-      <input type="text" id="userPassword" value="" placeholder="パスワード"></p>
+      <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
     <h1>{{message}}</h1>
     <h2>{{resultuser}}</h2>
     <h2>{{resultid}}</h2>
@@ -33,6 +33,9 @@
     },
     methods: {
       dataConfirmation: function () {
+
+        const crypto = require('crypto')
+
         /*msg初期化*/
         this.message=''
         this.resultuser = ''
@@ -71,7 +74,7 @@
             if (false == paternpass.test(this.userpass)) {
               this.resultpass = "ユーザpassが空"
             }else{
-              this.message = 'ok'
+              this.message = crypto.createHash('sha256').update(this.userpass).digest('hex')
             }
           }
         }
