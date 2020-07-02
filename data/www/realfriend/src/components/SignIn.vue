@@ -38,17 +38,18 @@
         this.userpass = document.getElementById("userPassword").value
 
         /*正規表現パターン*/
-        let paternid = '\w+{1,7}'
+        let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
+        let paternpass = new RegExp(/^([a-zA-Z0-9]{1,30})$/)
 
-        if (this.userid == '' /*&& true == this.userid.match(paternid)*/) {
-          this.resultid = "ユーザidが空"
-          if (this.userpass == '') {
-            this.resultpass = "ユーザpassが空"
+        if (false == paternid.test(this.userid)) {
+          this.resultid = "ユーザidが不正"
+          if (false == paternpass.test(this.userpass)) {
+            this.resultpass = "ユーザpassが不正"
           }
 
         } else {
-          if (this.userpass == '') {
-            this.resultpass = "ユーザpassが空"
+          if (false == paternpass.test(this.userpass)) {
+            this.resultpass = "ユーザpassが不正"
           } else {
             this.message = 'ok'
           }
