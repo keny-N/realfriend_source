@@ -53,11 +53,11 @@
                         console.log(response)
                         me.msg = response.data.result
                     } else {
-                        me.msg = "エラー"
+                        me.msg = "then_error"
                     }
                 }).catch(function (error) {
                     console.log(error)
-                    me.msg = "エラー"
+                    me.msg = "catch_error"
                 })
             },
             // empath(wav) {
