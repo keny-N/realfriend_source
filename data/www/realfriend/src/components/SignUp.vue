@@ -4,10 +4,13 @@
     <button v-on:click="dataConfirmation">登録</button>
     <button v-on:click="deleteData">取り消し</button>
     <p>
-      <input type="text" id="userName" value="" placeholder="ユーザネーム"></p>
+      <msg1>ユーザー名を入力してください</msg1><msg2>※必須</msg2><br>
+      <input type="text" id="userName" value="" placeholder="ユーザ名"></p>
     <p>
+      <msg1>ユーザー名を入力してください</msg1><msg2>※必須</msg2><br>
       <input type="text" id="userId" value="" placeholder="ユーザID"></p>
     <p>
+      <msg1>ユーザー名を入力してください</msg1><msg2>※必須</msg2><br>
       <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
     <h1>{{message}}</h1>
     <h2>{{resultuser}}</h2>
@@ -52,27 +55,27 @@
         let paternpass = new RegExp(/^([a-zA-Z0-9]{1,30})$/)
 
         if (this.username == '') {
-          this.resultuser = "ユーザ名が空です"
+          this.resultuser = "ユーザ名が不正です"
           if (false == paternid.test(this.userid)) {
-            this.resultid = "ユーザidが空"
+            this.resultid = "ユーザidが不正です"
             if (false == paternpass.test(this.userpass) ){
-              this.resultpass = "ユーザpassが空です"
+              this.resultpass = "ユーザpassが不正です"
             }
           }else{
             if (this.userpass == '') {
-              this.resultpass = "ユーザpassが空"
+              this.resultpass = "ユーザpassが不正です"
             }
           }
         } else {
           if (false == paternid.test(this.userid)) {
-            this.resultid = "ユーザidが空"
+            this.resultid = "ユーザidが不正です"
             if (false == paternpass.test(this.userpass)) {
-              this.resultpass = "ユーザpassが空"
+              this.resultpass = "ユーザpassが不正です"
             }
 
           }else{
             if (false == paternpass.test(this.userpass)) {
-              this.resultpass = "ユーザpassが空"
+              this.resultpass = "ユーザpassが不正です"
             }else{
               this.message = crypto.createHash('sha256').update(this.userpass).digest('hex')
             }
@@ -103,6 +106,9 @@
 
 <style scoped>
   h2{
+    color: red;
+  }
+  msg2{
     color: red;
   }
 </style>
