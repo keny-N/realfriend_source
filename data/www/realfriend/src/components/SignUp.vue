@@ -4,13 +4,19 @@
     <button v-on:click="dataConfirmation">登録</button>
     <button v-on:click="deleteData">取り消し</button>
     <p>
-      <msg1>ユーザー名を入力してください</msg1><msg2>※必須</msg2><br>
+      <msg1>ユーザー名を入力してください</msg1>
+      <msg2>※必須</msg2>
+      <br>
       <input type="text" id="userName" value="" placeholder="ユーザ名"></p>
     <p>
-      <msg1>ユーザー名を入力してください</msg1><msg2>※必須</msg2><br>
+      <msg1>ユーザー名を入力してください</msg1>
+      <msg2>※必須</msg2>
+      <br>
       <input type="text" id="userId" value="" placeholder="ユーザID"></p>
     <p>
-      <msg1>ユーザー名を入力してください</msg1><msg2>※必須</msg2><br>
+      <msg1>ユーザー名を入力してください</msg1>
+      <msg2>※必須</msg2>
+      <br>
       <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
     <h1>{{message}}</h1>
     <h2>{{resultuser}}</h2>
@@ -25,10 +31,10 @@
     data() {
       return {
         message: '入力してください',
-        postUrl: 'aaa',
-        resultuser:'',
-        resultid:'',
-        resultpass:'',
+        apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend',
+        resultuser: '',
+        resultid: '',
+        resultpass: '',
         username: null,
         userid: null,
         userpass: null,
@@ -37,13 +43,11 @@
     methods: {
       dataConfirmation: function () {
 
-        const crypto = require('crypto')
-
         /*msg初期化*/
-        this.message=''
+        this.message = ''
         this.resultuser = ''
-        this.resultid =''
-        this.resultpass=''
+        this.resultid = ''
+        this.resultpass = ''
 
         /*テキストボックスから受け取り*/
         this.username = document.getElementById("userName").value
@@ -56,37 +60,61 @@
 
         if (this.username == '') {
           this.resultuser = "ユーザ名が不正です"
-          if (false == paternid.test(this.userid)) {
+          if (this.userid == '' /*false == paternid.test(this.userid)*/) {
             this.resultid = "ユーザidが不正です"
-            if (false == paternpass.test(this.userpass) ){
+            if (this.userpass == '' /*false == paternpass.test(this.userpass)*/) {
               this.resultpass = "ユーザpassが不正です"
             }
-          }else{
-            if (this.userpass == '') {
+          } else {
+            if (this.userpass == '' /*false == paternpass.test(this.userpass)*/) {
               this.resultpass = "ユーザpassが不正です"
             }
           }
         } else {
-          if (false == paternid.test(this.userid)) {
+          if (this.userid == '' /*false == paternid.test(this.userid)*/) {
             this.resultid = "ユーザidが不正です"
-            if (false == paternpass.test(this.userpass)) {
+            if (this.userpass == '' /*false == paternpass.test(this.userpass)*/) {
               this.resultpass = "ユーザpassが不正です"
             }
 
-          }else{
-            if (false == paternpass.test(this.userpass)) {
+          } else {
+            if (this.userpass == '' /*false == paternpass.test(this.userpass)*/) {
               this.resultpass = "ユーザpassが不正です"
-            }else{
-              this.message = crypto.createHash('sha256').update(this.userpass).digest('hex')
+            } else {
+              this.userAdd()
             }
           }
         }
       },
+      userAdd() {
+        let me = this
+        this.axios.post(this.apiUrl, {
+          user_id: String(this.userid),
+          user_name: String(this.username),
+          user_pass: String(this.userpass)
+        }).then(function (response) {
+          if (response.data.isSuccess == true) {
+            console.log(response)
+            // me.upLoad()
+          } else {
+            console.log(response)
+            me.msg = response.data.error
+          }
+        }).catch(function (error) {
+          console.log()
+          console.log(error)
+        })
+      },
+      /*データ受け渡ししたいけど。。。*/
+      upLoad() {
+        this.$router.push({path: '/'})
+        //this.$router.replace({ path: '/a', props: { id: this.userid }})
+      },
       deleteData: function () {
-        document.getElementById("userName").value =''
-        document.getElementById("userId").value =''
+        document.getElementById("userName").value = ''
+        document.getElementById("userId").value = ''
         document.getElementById("userPassword").value = ''
-        this.message =  '入力してください'
+        this.message = '入力してください'
 
       },
       pushData: function () {
@@ -105,10 +133,11 @@
 </script>
 
 <style scoped>
-  h2{
+  h2 {
     color: red;
   }
-  msg2{
+
+  msg2 {
     color: red;
   }
 </style>
