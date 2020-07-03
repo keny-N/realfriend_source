@@ -23,6 +23,7 @@
         resultpass:'',
         userid: null,
         userpass: null,
+        apiUrl:'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login'
       }
     },
     methods: {
@@ -73,6 +74,22 @@
 
 
       },
+      signinApi(){
+        this.axios.post(this.apiUrl, {
+          id:String(this.userid),
+          password:String(this.userpass)
+        }).then(function (response) {
+          if (response.data.error == 0) {
+            console.log(response)
+            me.msg = response.data.result
+          } else {
+            me.msg = "エラー"
+          }
+        }).catch(function (error) {
+          console.log(error)
+          me.msg = "エラー"
+        })
+      }
     },
     updated() {
 
