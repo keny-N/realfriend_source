@@ -1,50 +1,69 @@
 <template>
   <div>
-    <h2>{{resultid}}</h2>
-    <h2>{{resultpass}}</h2>
-    <p>
-      <input type="text" id="userId" value="" placeholder="ユーザID"></p>
-    <p>
-      <input type="text" id="userPassword" value="" placeholder="パスワード"></p>
-    <button v-on:click="dataConfirmation">サインイン</button>
-    <button v-on:click="deleteData">取り消し</button>
-    <h1>{{msg}}</h1>
-
-
-    <div id="list">
-      <ul v-for=" list in getApiArray">
-        <div id=textmsg>
-          {{list.Msg}}
-        </div>
-      </ul>
+    <div v-if="accountaad == true">
+      <!-- アカウント登録の時-->
+      <SignUp @change="logInPage"></SignUp>
     </div>
+    <!-- ログインの時　-->
+    <div v-if="accountaad == false">
+      <h1>{{changmsg}}</h1> <!-- 成功メッセージ　-->
+      <p>
+      <msg1>ユーザーIDを入力してください</msg1>
+      <msg2>※必須</msg2>
+      <br>
+        <input type="text" id="userId" value="" placeholder="ユーザID"></p>
+      <h2>{{resultid}}</h2>
+      <p>
+        <msg1>パスワードを入力してください</msg1>
+        <msg2>※必須</msg2>
+        <br>
+        <input type="text" id="userPassword" value="" placeholder="パスワード"></p>
+      <h2>{{resultpass}}</h2>
+
+      <button v-on:click="dataCheck">サインイン</button>
+      <button v-on:click="dataDelete">取り消し</button>
+      <button v-on:click="addAccountPage">アカウント新規登録</button>
+    </div>
+
+    <!-- 配列受け取り確認よう
+        <div id="list">
+          <ul v-for=" list in getApiArray">
+            <div id=textmsg>
+              {{list.Msg}}
+            </div>
+          </ul>
+        </div>
+        -->
   </div>
 
 
 </template>
 
 <script>
+  import SignUp from "./SignUp";
+
   export default {
     name: "LogIn",
+    components: {SignUp},
     data() {
       return {
-        msg: '入力してください',
-        resultid: '', /*エラーコメント表示用*/
-        resultpass: '',　/*エラーコメント表示用*/
-        userid: null,
-        userpass: null,
+        changemsg: '',      /*登録成功メッセージ表示用*/
+        resultid: '',       /*エラーコメント表示用*/
+        resultpass: '',     /*エラーコメント表示用*/
+        userid: null,       /*ユーザID受け取り用*/
+        userpass: null,     /*ユーザパス受け取り用*/
+        accountaad: false,  /*画面切り替えよう*/
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
     methods: {
-      dataConfirmation: function () {
-
+      dataCheck: function () {
         /*初期化*/
-        this.msg = ''
         this.resultuser = ''
         this.resultid = ''
         this.resultpass = ''
-        this.getApiArray = []
+        this.changmsg = ''
+        //this.getApiArray = []
 
         /*テキストボックスから受け取り*/
         this.userid = document.getElementById("userId").value
@@ -71,7 +90,7 @@
         }
 
       },
-      deleteData: function () {
+      dataDelete: function () {
         document.getElementById("userId").value = ''
         document.getElementById("userPassword").value = ''
         this.message = '入力してください'
@@ -79,30 +98,41 @@
       },
       login() {
         let me = this
+
         this.axios.post(this.apiUrl, {
           user_id: String(this.userid),
           user_pass: String(this.userpass)
         }).then(function (response) {
           if (response.data.isSuccess == true) {
-            console.log(response)
-            for (let getcount = 0; getcount < response.data.friends.length; getcount++) {
-              me.getApiArray.push({Msg: response.data.friends[getcount]})
-            }
+            //console.log(response)
+            // for (let getcount = 0; getcount < response.data.friends.length; getcount++) {
+            //   me.getApiArray.push({Msg: response.data.friends[getcount]})
+            // }
             me.upLoad()
           } else {
-            console.log(response)
-            me.msg = response.data.error
+            console.log(response.data.error)
           }
         }).catch(function (error) {
-          console.log()
           console.log(error)
         })
       },
+
       /*データ受け渡ししたいけど。。。*/
       upLoad() {
+        /*今はルーティングでメイン画面*/
         this.$router.push({path: '/'})
         //this.$router.replace({ path: '/a', props: { id: this.userid }})
+      },
+      /*画面切り替え　SignUpから触る*/
+      logInPage(msg) {
+        this.accountaad = false
+        this.changmsg = msg
+      },
+      /*画面切り替え　LogInから触る*/
+      addAccountPage() {
+        this.accountaad = true
       }
+
     },
     updated() {
 
@@ -112,6 +142,9 @@
 
 <style scoped>
   h2 {
+    color: red;
+  }
+  msg2 {
     color: red;
   }
 </style>
