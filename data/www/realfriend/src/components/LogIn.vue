@@ -25,6 +25,7 @@
       <button v-on:click="addAccountPage">アカウント新規登録</button>
     </div>
 
+
     <!-- 配列受け取り確認よう
         <div id="list">
           <ul v-for=" list in getApiArray">
@@ -40,11 +41,15 @@
 </template>
 
 <script>
-  import SignUp from "./SignUp";
+  import SignUp from "@/components/SignUp";
+  import DataRecive from "@/components/DataRecive"
 
   export default {
     name: "LogIn",
-    components: {SignUp},
+    components: {
+      SignUp:SignUp,
+      DataRecive:DataRecive,
+    },
     data() {
       return {
         changemsg: '',      /*登録成功メッセージ表示用*/
@@ -53,6 +58,7 @@
         userid: null,       /*ユーザID受け取り用*/
         userpass: null,     /*ユーザパス受け取り用*/
         accountaad: false,  /*画面切り替えよう*/
+        getApiArray:[],
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
@@ -63,7 +69,7 @@
         this.resultid = ''
         this.resultpass = ''
         this.changmsg = ''
-        //this.getApiArray = []
+        this.getApiArray = []
 
         /*テキストボックスから受け取り*/
         this.userid = document.getElementById("userId").value
@@ -104,10 +110,9 @@
           user_pass: String(this.userpass)
         }).then(function (response) {
           if (response.data.isSuccess == true) {
-            //console.log(response)
-            // for (let getcount = 0; getcount < response.data.friends.length; getcount++) {
-            //   me.getApiArray.push({Msg: response.data.friends[getcount]})
-            // }
+            for (let getcount = 0; getcount < response.data.friends.length; getcount++) {
+              me.getApiArray.push({Msg: response.data.friends[getcount]})
+            }
             me.upLoad()
           } else {
             console.log(response.data.error)
@@ -120,7 +125,7 @@
       /*データ受け渡ししたいけど。。。*/
       upLoad() {
         /*今はルーティングでメイン画面*/
-        this.$router.push({path: '/'})
+        this.$emit('changeuser', {id:this.userid , ary:this.getApiArray})
         //this.$router.replace({ path: '/a', props: { id: this.userid }})
       },
       /*画面切り替え　SignUpから触る*/
