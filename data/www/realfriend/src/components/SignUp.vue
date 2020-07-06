@@ -1,39 +1,80 @@
 <template>
   <div>
-    <button v-on:click="dataConfirmation">登録</button>
-    <button v-on:click="upLoad">取り消し</button>
-    <h1>{{message}}</h1>
-    <p>
-      <msg1>ユーザー名を入力してください</msg1>
-      <msg2>※必須</msg2>
-      <br>
-      <input type="text" id="userName" value="" placeholder="ユーザ名">
-    </p>
-    <h2>{{resultid}}</h2>
-    <p>
-      <msg1>ユーザーIDを入力してください</msg1>
-      <msg2>※必須</msg2>
-      <br>
-      <input type="text" id="userId" value="" placeholder="ユーザID"></p>
-    <h2>{{resultid}}</h2>
-    <p>
-      <msg1>パスワードを入力してください</msg1>
-      <msg2>※必須</msg2>
-      <br>
-      <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
-    <h2>{{resultpass}}</h2>
+    <!--    <SignUpModal @close="closeModal" v-if="modal">-->
+    <!--      <p>-->
+    <!--        <msg1>ユーザー名を入力してください</msg1>-->
+    <!--        <msg2>※必須</msg2>-->
+    <!--        <br>-->
+    <!--        <input type="text" id="userName" value="" placeholder="ユーザ名">-->
+    <!--      </p>-->
+    <!--      <h2>{{resultid}}</h2>-->
+    <!--      <p>-->
+    <!--        <msg1>ユーザーIDを入力してください</msg1>-->
+    <!--        <msg2>※必須</msg2>-->
+    <!--        <br>-->
+    <!--        <input type="text" id="userId" value="" placeholder="ユーザID"></p>-->
+    <!--      <h2>{{resultid}}</h2>-->
+    <!--      <p>-->
+    <!--        <msg1>パスワードを入力してください</msg1>-->
+    <!--        <msg2>※必須</msg2>-->
+    <!--        <br>-->
+    <!--        <input type="password" id="userPassword" value="" placeholder="パスワード"></p>-->
+    <!--      <h2>{{resultpass}}</h2>-->
 
+    <!--      <button v-on:click="dataConfirmation">登録</button>-->
+    <!--      <br>-->
+    <!--      <button v-on:click="dataDelete">取り消し</button>-->
+    <!--      <h1>{{message}}</h1>-->
 
+    <!--      <a v-on:click="back" id="link">ゲーム画面に戻る</a>-->
+    <!--    </SignUpModal>-->
 
-    <a v-on:click="back" id = "link">ゲーム画面に戻る</a>
+    <div class="example-modal-window">
+      <!-- コンポーネント MyModal -->
+      <SignUpModal @close="closeModal" v-if="modal">
+        <!-- default スロットコンテンツ -->
+        <p>
+          <msg1>ユーザー名を入力してください</msg1>
+          <msg2>※必須</msg2>
+          <br>
+          <input type="text" id="userName" value="" placeholder="ユーザ名">
+        </p>
+        <h2>{{resultid}}</h2>
+        <p>
+          <msg1>ユーザーIDを入力してください</msg1>
+          <msg2>※必須</msg2>
+          <br>
+          <input type="text" id="userId" value="" placeholder="ユーザID"></p>
+        <h2>{{resultid}}</h2>
+        <p>
+          <msg1>パスワードを入力してください</msg1>
+          <msg2>※必須</msg2>
+          <br>
+          <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
+        <h2>{{resultpass}}</h2>
+        <!-- /default -->
+        <!-- footer スロットコンテンツ -->
+        <template slot="footer">
+          <button v-on:click="dataConfirmation">登録</button>
+          <br>
+          <button v-on:click="dataDelete">取り消し</button>
+          <h1>{{message}}</h1>
+
+          <a v-on:click="back" id="link">ゲーム画面に戻る</a>
+        </template>
+        <!-- /footer -->
+      </SignUpModal>
+    </div>
 
   </div>
 
 </template>
 
 <script>
+  import SignUpModal from '@/components/SignUpModal';
   export default {
     name: "SignUp",
+    components: { SignUpModal },
     data() {
       return {
         message: '必要情報を入力してください',
@@ -43,7 +84,9 @@
         username: null,       /*受け取り用*/
         userid: null,         /*受け取り用*/
         userpass: null,       /*受け取り用*/
+        modal: false,
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
+        //apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login'
       }
     },
     methods: {
@@ -93,27 +136,25 @@
           }
         }
       },
-      /*あぴ*/
+      /*API*/
       userAdd() {
         let me = this
         this.axios.post(this.apiUrl, {
-          user_id: String(this.userid),
           user_name: String(this.username),
-          user_pass: String(this.userpass)
+          user_id: String(this.userid),
+          user_pass: String(this.userpass),
         }).then(function (response) {
-          if (response.data.isSuccess == true) {
-            console.log(response)
+          if (response.data.isSuccess) {
             me.upLoad()
           } else {
-            console.log(response)
             me.msg = response.data.error
           }
         }).catch(function (error) {
           console.log(error)
         })
       },
-      /*データ受け渡ししたいけど。。。*/
       upLoad() {
+        alert('登録が完了しました!続けてログインしてください')
         this.$emit('change', '登録が完了しました')
       },
       back() {
@@ -124,9 +165,17 @@
         document.getElementById("userName").value = ''
         document.getElementById("userId").value = ''
         document.getElementById("userPassword").value = ''
-        this.message = '入力してください'
+        this.message = '必要情報を入力してください'
 
       },
+      openModal() {
+        this.modal = true
+        console.log(this.modal)
+      },
+      closeModal() {
+        this.modal = false
+      },
+
     },
     updated() {
 
@@ -142,9 +191,9 @@
   msg2 {
     color: red;
   }
-  #link{
+
+  #link {
     color: blue;
     text-decoration: underline
   }
 </style>
-

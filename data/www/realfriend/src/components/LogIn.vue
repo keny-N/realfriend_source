@@ -1,29 +1,25 @@
 <template>
   <div>
-    <div v-if="accountaad == true">
-      <!-- アカウント登録の時-->
-      <SignUp @change="logInPage"></SignUp>
-    </div>
+    <!-- アカウント登録の時-->
+    <SignUp ref="signup" @change="logInPage"></SignUp>
     <!-- ログインの時　-->
-    <div v-if="accountaad == false">
-      <h1>{{changmsg}}</h1> <!-- 成功メッセージ　-->
-      <p>
+    <h1>{{changmsg}}</h1> <!-- 成功メッセージ　-->
+    <p>
       <msg1>ユーザーIDを入力してください</msg1>
       <msg2>※必須</msg2>
       <br>
-        <input type="text" id="userId" value="" placeholder="ユーザID"></p>
-      <h2>{{resultid}}</h2>
-      <p>
-        <msg1>パスワードを入力してください</msg1>
-        <msg2>※必須</msg2>
-        <br>
-        <input type="text" id="userPassword" value="" placeholder="パスワード"></p>
-      <h2>{{resultpass}}</h2>
+      <input type="text" id="userId" value="" placeholder="ユーザID"></p>
+    <h2>{{resultid}}</h2>
+    <p>
+      <msg1>パスワードを入力してください</msg1>
+      <msg2>※必須</msg2>
+      <br>
+      <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
+    <h2>{{resultpass}}</h2>
 
-      <button v-on:click="dataCheck">サインイン</button>
-      <button v-on:click="dataDelete">取り消し</button>
-      <button v-on:click="addAccountPage">アカウント新規登録</button>
-    </div>
+    <button v-on:click="dataCheck">サインイン</button>
+    <button v-on:click="dataDelete">取り消し</button>
+    <button v-on:click="addAccountPage">アカウント新規登録</button>
 
 
     <!-- 配列受け取り確認よう
@@ -42,13 +38,11 @@
 
 <script>
   import SignUp from "@/components/SignUp";
-  import DataRecive from "@/components/DataRecive"
 
   export default {
     name: "LogIn",
     components: {
       SignUp:SignUp,
-      DataRecive:DataRecive,
     },
     data() {
       return {
@@ -107,12 +101,13 @@
 
         this.axios.post(this.apiUrl, {
           user_id: String(this.userid),
-          user_pass: String(this.userpass)
+          user_pass: String(this.userpass),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
             for (let getcount = 0; getcount < response.data.friends.length; getcount++) {
               me.getApiArray.push({Msg: response.data.friends[getcount]})
             }
+            console.log(response)
             me.upLoad()
           } else {
             console.log(response.data.error)
@@ -135,6 +130,7 @@
       },
       /*画面切り替え　LogInから触る*/
       addAccountPage() {
+        this.$refs.signup.openModal()
         this.accountaad = true
       }
 
