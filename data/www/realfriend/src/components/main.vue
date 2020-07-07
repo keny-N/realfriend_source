@@ -7,19 +7,19 @@
 </template>
 
 <script>
-    import GameHeader from '@/components/GameHeader'
-    import News from "@/components/News";
-    import FriendList from "@/components/FriendList";
+  import GameHeader from '@/components/GameHeader'
+  import News from "@/components/News";
+  import FriendList from "@/components/FriendList";
 
-    export default {
-        name: "Main",
-        components: {GameHeader, News,FriendList},
-      data () {
-        return {
-          backgroundImageSrc: require("@/assets/main_back.jpg")
-        }
+  export default {
+    name: "Main",
+    components: {GameHeader, News,FriendList},
+    data () {
+      return {
+        backgroundImageSrc: require("@/assets/main_back.jpg")
       }
-    };
+    }
+  };
 </script>
 
 <style scoped>
