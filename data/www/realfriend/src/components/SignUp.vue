@@ -1,38 +1,9 @@
 <template>
-  <div>
-    <!--    <SignUpModal @close="closeModal" v-if="modal">-->
-    <!--      <p>-->
-    <!--        <msg1>ユーザー名を入力してください</msg1>-->
-    <!--        <msg2>※必須</msg2>-->
-    <!--        <br>-->
-    <!--        <input type="text" id="userName" value="" placeholder="ユーザ名">-->
-    <!--      </p>-->
-    <!--      <h2>{{resultid}}</h2>-->
-    <!--      <p>-->
-    <!--        <msg1>ユーザーIDを入力してください</msg1>-->
-    <!--        <msg2>※必須</msg2>-->
-    <!--        <br>-->
-    <!--        <input type="text" id="userId" value="" placeholder="ユーザID"></p>-->
-    <!--      <h2>{{resultid}}</h2>-->
-    <!--      <p>-->
-    <!--        <msg1>パスワードを入力してください</msg1>-->
-    <!--        <msg2>※必須</msg2>-->
-    <!--        <br>-->
-    <!--        <input type="password" id="userPassword" value="" placeholder="パスワード"></p>-->
-    <!--      <h2>{{resultpass}}</h2>-->
-
-    <!--      <button v-on:click="dataConfirmation">登録</button>-->
-    <!--      <br>-->
-    <!--      <button v-on:click="dataDelete">取り消し</button>-->
-    <!--      <h1>{{message}}</h1>-->
-
-    <!--      <a v-on:click="back" id="link">ゲーム画面に戻る</a>-->
-    <!--    </SignUpModal>-->
-
-    <div class="example-modal-window">
-      <!-- コンポーネント MyModal -->
-      <SignUpModal @close="closeModal" v-if="modal">
-        <!-- default スロットコンテンツ -->
+  <div class="example-modal-window">
+    <!-- コンポーネント MyModal -->
+    <SignUpModal @close="closeModal" v-if="modal">
+      <!-- default スロットコンテンツ -->
+      <div v-if="success == false">
         <p>
           <msg1>ユーザー名を入力してください</msg1>
           <msg2>※必須</msg2>
@@ -52,29 +23,37 @@
           <br>
           <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
         <h2>{{resultpass}}</h2>
-        <!-- /default -->
-        <!-- footer スロットコンテンツ -->
-        <template slot="footer">
+        <h1>{{message}}</h1>
+      </div>
+      <div v-if="success">
+        <p>登録が完了しました！再度ログインしてください</p>
+      </div>
+      <!-- /default -->
+      <!-- footer スロットコンテンツ -->
+      <template slot="footer">
+        <div v-if="success == false">
           <button v-on:click="dataConfirmation">登録</button>
-          <br>
           <button v-on:click="dataDelete">取り消し</button>
-          <h1>{{message}}</h1>
+        </div>
+        <div v-if="success">
+          <button v-on:click="close">閉じる</button>
+        </div>
+      </template>
+      <!-- /footer -->
 
-          <a v-on:click="back" id="link">ゲーム画面に戻る</a>
-        </template>
-        <!-- /footer -->
-      </SignUpModal>
-    </div>
-
+    </SignUpModal>
   </div>
 
 </template>
 
 <script>
   import SignUpModal from '@/components/SignUpModal';
+
   export default {
     name: "SignUp",
-    components: { SignUpModal },
+    components: {
+      SignUpModal: SignUpModal
+    },
     data() {
       return {
         message: '必要情報を入力してください',
@@ -84,14 +63,13 @@
         username: null,       /*受け取り用*/
         userid: null,         /*受け取り用*/
         userpass: null,       /*受け取り用*/
-        modal: false,
+        modal: false,         /*モーダル展開*/
+        success: false,       /*登録用or登録完了切り替え*/
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
-        //apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login'
       }
     },
     methods: {
       dataConfirmation: function () {
-
         /*msg初期化*/
         this.message = ''
         this.resultuser = ''
@@ -145,7 +123,7 @@
           user_pass: String(this.userpass),
         }).then(function (response) {
           if (response.data.isSuccess) {
-            me.upLoad()
+            me.success = true
           } else {
             me.msg = response.data.error
           }
@@ -153,33 +131,24 @@
           console.log(error)
         })
       },
-      upLoad() {
-        alert('登録が完了しました!続けてログインしてください')
-        this.$emit('change', '登録が完了しました')
-      },
-      back() {
-        this.$emit('change', '')
-      },
+
       /*データクリア用*/
       dataDelete: function () {
         document.getElementById("userName").value = ''
         document.getElementById("userId").value = ''
         document.getElementById("userPassword").value = ''
         this.message = '必要情報を入力してください'
-
       },
+
       openModal() {
         this.modal = true
-        console.log(this.modal)
       },
+
       closeModal() {
         this.modal = false
       },
-
     },
-    updated() {
 
-    }
   }
 </script>
 
@@ -192,7 +161,7 @@
     color: red;
   }
 
-  #link {
+  .link {
     color: blue;
     text-decoration: underline
   }

@@ -19,18 +19,9 @@
 
     <button v-on:click="dataCheck">サインイン</button>
     <button v-on:click="dataDelete">取り消し</button>
+    <br>
     <button v-on:click="addAccountPage">アカウント新規登録</button>
 
-
-    <!-- 配列受け取り確認よう
-        <div id="list">
-          <ul v-for=" list in getApiArray">
-            <div id=textmsg>
-              {{list.Msg}}
-            </div>
-          </ul>
-        </div>
-        -->
   </div>
 
 
@@ -46,13 +37,11 @@
     },
     data() {
       return {
-        changemsg: '',      /*登録成功メッセージ表示用*/
         resultid: '',       /*エラーコメント表示用*/
         resultpass: '',     /*エラーコメント表示用*/
         userid: null,       /*ユーザID受け取り用*/
         userpass: null,     /*ユーザパス受け取り用*/
-        accountaad: false,  /*画面切り替えよう*/
-        getApiArray:[],
+        getApiArray:[],     /*配列受け取り用*/
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
@@ -117,27 +106,16 @@
         })
       },
 
-      /*データ受け渡ししたいけど。。。*/
       upLoad() {
-        /*今はルーティングでメイン画面*/
-        this.$emit('changeuser', {id:this.userid , ary:this.getApiArray})
-        //this.$router.replace({ path: '/a', props: { id: this.userid }})
+        this.$router.replace({ path: '/', query: { id: this.userid ,array:this.getApiArray }})
       },
-      /*画面切り替え　SignUpから触る*/
-      logInPage(msg) {
-        this.accountaad = false
-        this.changmsg = msg
-      },
-      /*画面切り替え　LogInから触る*/
+      /*SignUpのモーダルを開く*/
       addAccountPage() {
         this.$refs.signup.openModal()
         this.accountaad = true
       }
 
     },
-    updated() {
-
-    }
   }
 </script>
 
