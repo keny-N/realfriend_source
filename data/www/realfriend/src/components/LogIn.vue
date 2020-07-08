@@ -110,7 +110,7 @@
       },
 
       upLoad() {
-        this.$router.replace({path: '/', query: {id: this.userid, array: this.getApiArray}})
+        this.$router.replace({path: '/', query: {id: this.userid}})
       },
       /*SignUpのモーダルを開く*/
       addAccountPage() {
