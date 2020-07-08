@@ -43,7 +43,6 @@
         resultpass: '',     /*エラーコメント表示用*/
         userid: '',       /*ユーザID受け取り用*/
         userpass: null,     /*ユーザパス受け取り用*/
-        getApiArray: [],     /*配列受け取り用*/
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
@@ -54,7 +53,6 @@
         this.resultid = ''
         this.resultpass = ''
         this.changmsg = ''
-        this.getApiArray = []
 
         /*受け取り*/
         this.userid = this.$refs.userThisId.value
@@ -97,9 +95,6 @@
           user_pass: String(this.userpass),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
-            for (let getcount = 0; getcount < response.data.friends.length; getcount++) {
-              me.getApiArray.push({Msg: response.data.friends[getcount]})
-            }
             me.upLoad()
           } else {
             console.log(response.data.error)
