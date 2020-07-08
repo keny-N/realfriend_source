@@ -85,6 +85,8 @@
       dataDelete: function () {
         this.$refs.userThisId.value = ''
         this.$refs.userThisPass.value = ''
+        this.resultid = ''
+        this.resultpass = ''
         this.message = '入力してください'
 
       },

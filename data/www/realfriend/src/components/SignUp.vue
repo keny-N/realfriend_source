@@ -24,12 +24,11 @@
             <msg2>※必須</msg2>
             <br>
             <input type="password" ref="userThisPass" value="" placeholder="パスワード" required="required"></p>
-
+          <h2>{{resultpass}}</h2>
           <button v-on:click="dataConfirmation">登録</button>
           <button v-on:click="dataDelete">取り消し</button>
 
         </form>
-        <h2>{{resultpass}}</h2>
         <h1>{{message}}</h1>
       </div>
       <div v-if="success">
@@ -137,6 +136,9 @@
         this.$refs.userThisName.value = ''
         this.$refs.userThisId.value = ''
         this.$refs.userThisPass.value = ''
+        this.resultuser = ''
+        this.resultid = ''
+        this.resultpass = ''
         this.message = '必要情報を入力してください'
       },
 
@@ -146,7 +148,7 @@
 
       closeModal() {
         this.modal = false
-        this.success =false
+        this.success = false
       },
     },
 
