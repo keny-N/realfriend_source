@@ -2,13 +2,13 @@
   <div class="main" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
     <FriendList class="listposition"></FriendList>
-    <News></News>
+    <News class="news"></News>
   </div>
 </template>
 
 <script>
   import GameHeader from '@/components/GameHeader'
-  import News from "@/components/News";
+  import News from "@/components/NewsButton";
   import FriendList from "@/components/FriendList";
 
   export default {
@@ -33,5 +33,8 @@
     margin: 50vh auto 0;
     transform: translateY(-50%);
   }
+  /*.news{*/
+
+  /*}*/
 
 </style>

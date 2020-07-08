@@ -1,12 +1,10 @@
 <template>
-  <div>
-
-  </div>
+  <h1>クソでかフォントくん</h1>
 </template>
 
 <script>
     export default {
-        name: "News.vue"
+        name: "NewsBody"
     }
 </script>
 
