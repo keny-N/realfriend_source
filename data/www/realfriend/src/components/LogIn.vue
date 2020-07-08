@@ -4,21 +4,23 @@
     <SignUp ref="signup" @change="logInPage"></SignUp>
     <!-- ログインの時　-->
     <h1>{{changmsg}}</h1> <!-- 成功メッセージ　-->
-    <p>
-      <msg1>ユーザーIDを入力してください</msg1>
-      <msg2>※必須</msg2>
-      <br>
-      <input type="text" id="userId" value="" placeholder="ユーザID"></p>
-    <h2>{{resultid}}</h2>
-    <p>
-      <msg1>パスワードを入力してください</msg1>
-      <msg2>※必須</msg2>
-      <br>
-      <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
-    <h2>{{resultpass}}</h2>
+    <form>
+      <p>
+        <msg1>ユーザーIDを入力してください</msg1>
+        <msg2>※必須</msg2>
+        <br>
+        <input type="text" ref="userThisId" value="" placeholder="ユーザID" required="required"></p>
+      <h2>{{resultid}}</h2>
+      <p>
+        <msg1>パスワードを入力してください</msg1>
+        <msg2>※必須</msg2>
+        <br>
+        <input type="password" ref="userThisPass" value="" placeholder="パスワード" required="required"></p>
+      <h2>{{resultpass}}</h2>
 
-    <button v-on:click="dataCheck">サインイン</button>
-    <button v-on:click="dataDelete">取り消し</button>
+      <button v-on:click="dataCheck">サインイン</button>
+      <button v-on:click="dataDelete">取り消し</button>
+    </form>
     <br>
     <button v-on:click="addAccountPage">アカウント新規登録</button>
 
@@ -33,15 +35,15 @@
   export default {
     name: "LogIn",
     components: {
-      SignUp:SignUp,
+      SignUp: SignUp,
     },
     data() {
       return {
         resultid: '',       /*エラーコメント表示用*/
         resultpass: '',     /*エラーコメント表示用*/
-        userid: null,       /*ユーザID受け取り用*/
+        userid: '',       /*ユーザID受け取り用*/
         userpass: null,     /*ユーザパス受け取り用*/
-        getApiArray:[],     /*配列受け取り用*/
+        getApiArray: [],     /*配列受け取り用*/
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
@@ -54,9 +56,10 @@
         this.changmsg = ''
         this.getApiArray = []
 
-        /*テキストボックスから受け取り*/
-        this.userid = document.getElementById("userId").value
-        this.userpass = document.getElementById("userPassword").value
+        /*受け取り*/
+        this.userid = this.$refs.userThisId.value
+        this.userpass = this.$refs.userThisPass.value
+
 
         /*正規表現パターン
         let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
@@ -80,14 +83,13 @@
 
       },
       dataDelete: function () {
-        document.getElementById("userId").value = ''
-        document.getElementById("userPassword").value = ''
+        this.$refs.userThisId.value = ''
+        this.$refs.userThisPass.value = ''
         this.message = '入力してください'
 
       },
       login() {
         let me = this
-
         this.axios.post(this.apiUrl, {
           user_id: String(this.userid),
           user_pass: String(this.userpass),
@@ -96,7 +98,6 @@
             for (let getcount = 0; getcount < response.data.friends.length; getcount++) {
               me.getApiArray.push({Msg: response.data.friends[getcount]})
             }
-            console.log(response)
             me.upLoad()
           } else {
             console.log(response.data.error)
@@ -107,7 +108,7 @@
       },
 
       upLoad() {
-        this.$router.replace({ path: '/', query: { id: this.userid ,array:this.getApiArray }})
+        this.$router.replace({path: '/', query: {id: this.userid, array: this.getApiArray}})
       },
       /*SignUpのモーダルを開く*/
       addAccountPage() {
@@ -123,7 +124,9 @@
   h2 {
     color: red;
   }
+
   msg2 {
     color: red;
   }
 </style>
+

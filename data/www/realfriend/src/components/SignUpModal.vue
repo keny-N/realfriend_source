@@ -5,11 +5,6 @@
         <div class="modal-content">
           <slot/>
         </div>
-        <footer class="modal-footer">
-          <slot name="footer">
-            <button @click="$emit('close')">Close</button>
-          </slot>
-        </footer>
       </div>
     </div>
   </transition>
@@ -47,17 +42,11 @@
     overflow: hidden;
   }
 
-  .modal-footer {
-    background: #ccc;
-    padding: 10px;
-    text-align: right;
-  }
-
   .modal-window {
     transition: opacity 0.4s, transform 0.4s;
   }
 
-  modal-enter{
+  modal-enter {
     opacity: 0;
   }
 
