@@ -12,7 +12,7 @@
 
             <input type="text" ref="userThisName" value="" placeholder="ユーザ名" required="required">
           </p>
-          <h2>{{resultid}}</h2>
+          <h2>{{resultuser}}</h2>
           <p>
             <msg1>ユーザーIDを入力してください</msg1>
             <msg2>※必須</msg2>
