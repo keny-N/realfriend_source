@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{message}}
     <!-- アカウント登録の時-->
     <SignUp ref="signup" @change="logInPage"></SignUp>
     <!-- ログインの時　-->
@@ -43,6 +44,7 @@
         resultpass: '',     /*エラーコメント表示用*/
         userid: '',       /*ユーザID受け取り用*/
         userpass: null,     /*ユーザパス受け取り用*/
+        message:'',
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
@@ -53,6 +55,7 @@
         this.resultid = ''
         this.resultpass = ''
         this.changmsg = ''
+        this.message='',
 
         /*受け取り*/
         this.userid = this.$refs.userThisId.value
@@ -97,6 +100,7 @@
           if (response.data.isSuccess == true) {
             me.upLoad()
           } else {
+            me.message = response.data.error
             console.log(response.data.error)
           }
         }).catch(function (error) {
