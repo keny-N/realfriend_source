@@ -100,7 +100,7 @@
           if (response.data.isSuccess == true) {
             me.upLoad()
           } else {
-            me.message = response.data.error
+            me.message = 'IDもしくはパスワードが間違っています'
             console.log(response.data.error)
           }
         }).catch(function (error) {
