@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import GameHeader from '@/components/GameHeader'
+  import GameHeader from '@/components/GameHeader';
   import News from "@/components/NewsButton";
   import FriendList from "@/components/FriendList";
 
