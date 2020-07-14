@@ -27,7 +27,7 @@
                 audio: null,
                 msg: '',
                 // player: this.$refs.player.src,
-                postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend_api/realfriend/emotionjudgement'
+                postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/emotionjudgement'
                 // audioData: [],
                 // localMediaStream: null,
                 // localScriptProcessor: null
