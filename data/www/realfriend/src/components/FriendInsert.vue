@@ -1,18 +1,18 @@
 <template>
 <div class="friendinsert">
   <button v-on:click="openModal">フレンド登録</button>
-  <div id="overlay" v-show="showContent">
-    <div id="content">
+  <div class="overlay" v-show="showContent">
+    <div class="content">
       <h4>フレンド登録</h4>
       <div class="card-body">
         <div>
-          <img :src="imageData" v-if="imageData">
+          <img v-on:src="imageData" v-if="imageData">
         </div>
         <h4 class="card-title">画像を選んでください。</h4>
-        <input type="file" accept="image/*" @change="onFileChange($event)" v-model="friendimg">
+        <input type="file" accept="image/*" @change="onImgRegister($event)" v-model="friendImg">
       </div>
-      <div>フレンド名前：<input v-model="friendname"></div>
-      <button class="float-left" v-on:click="insertFrined">登録</button>
+      <div>フレンド名前：<input v-model="friendName"></div>
+      <button class="float-left" v-on:click="registerFrined">登録</button>
       <button class="float-right" v-on:click="closeModal">取り消し</button>
     </div>
   </div>
@@ -25,10 +25,9 @@
         name: "FriendInsert",
       data(){
         return{
-          valicheck:null,//入力値が正しいかの判断
           showContent: false, //モーダルを非表示している
           imageData: '',//画像
-          friendname:'',//フレンドの名前
+          friendName:'',//フレンドの名前
           postUrl:'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one'//フレンド登録URL
         }
       },
@@ -39,27 +38,25 @@
         closeModal: function(){
           this.showContent = false
         },
-        onFileChange(e) {
-          const files = e.target.files;
+        onImgRegister(e) {
+          const files = e.target.files
 
           if (files.length > 0) {
 
-            const file = files[0];
-            const reader = new FileReader();
+            const file = files[0]
+            const reader = new FileReader()
             reader.onload = (e) => {
-
-              this.imageData = e.target.result;
-
-            };
-            reader.readAsDataURL(file);
+              this.imageData = e.target.result
+            }
+            reader.readAsDataURL(file)
           }
         },
-        insertFrined() {
-          if(this.friendname.length>20 || this.friendname.length<1){
+        registerFrined() {
+          if(this.friendName.length>20 || this.friendName.length<1){
             //２０文字以内かつ一文字以上でない時に実行される。
           }
 
-          var name=this.friendname
+          let name=this.friendName
           //faceApiに顔データを送信
           console.log('put送信します')
           this.axios.post(this.postUrl, {
@@ -85,7 +82,7 @@
 </script>
 
 <style scoped>
-  #overlay{
+  .overlay{
     /*　要素を重ねた時の順番　*/
     z-index:1;
 
@@ -103,7 +100,7 @@
     justify-content: center;
 
   }
-  #content{
+  .content{
     z-index:2;
     width:50%;
     padding: 1em;
