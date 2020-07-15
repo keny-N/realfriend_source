@@ -2,7 +2,7 @@
   <div>
     {{message}}
     <!-- アカウント登録の時-->
-    <SignUp ref="signup" @change="logInPage"></SignUp>
+    <SignUp ref="signup"></SignUp>
     <!-- ログインの時　-->
     <h1>{{changmsg}}</h1> <!-- 成功メッセージ　-->
     <form>
@@ -10,17 +10,16 @@
         <msg1>ユーザーIDを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
-        <input type="text" ref="userThisId" value="" placeholder="ユーザID" required="required"></p>
+        <input type="text" ref="userThisId" placeholder="ユーザID" required="required"></p>
       <h2>{{resultid}}</h2>
       <p>
         <msg1>パスワードを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
-        <input type="password" ref="userThisPass" value="" placeholder="パスワード" required="required"></p>
+        <input type="password" ref="userThisPass" placeholder="パスワード" required="required"></p>
       <h2>{{resultpass}}</h2>
 
       <button v-on:click="dataCheck">サインイン</button>
-      <button v-on:click="dataDelete">取り消し</button>
     </form>
     <br>
     <button v-on:click="addAccountPage">アカウント新規登録</button>
@@ -31,7 +30,7 @@
 </template>
 
 <script>
-  import SignUp from "@/components/SignUp";
+  import SignUp from "@/components/SignUp"
 
   export default {
     name: "LogIn",
@@ -83,14 +82,6 @@
         }
 
       },
-      dataDelete: function () {
-        this.$refs.userThisId.value = ''
-        this.$refs.userThisPass.value = ''
-        this.resultid = ''
-        this.resultpass = ''
-        this.message = '入力してください'
-
-      },
       login() {
         let me = this
         this.axios.post(this.apiUrl, {
@@ -98,23 +89,21 @@
           user_pass: String(this.userpass),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
-            me.upLoad()
+            me.loginSuccess()
           } else {
             me.message = 'IDもしくはパスワードが間違っています'
-            console.log(response.data.error)
           }
         }).catch(function (error) {
           console.log(error)
         })
       },
 
-      upLoad() {
+      loginSuccess() {
         this.$router.replace({path: '/', query: {id: this.userid}})
       },
       /*SignUpのモーダルを開く*/
       addAccountPage() {
-        this.$refs.signup.openModal()
-        this.accountaad = true
+        this.$refs.signup.openSignUpModal()
       }
 
     },
@@ -123,11 +112,11 @@
 
 <style scoped>
   h2 {
-    color: red;
+    color: red
   }
 
   msg2 {
-    color: red;
+    color: red
   }
 </style>
 

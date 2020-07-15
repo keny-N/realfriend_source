@@ -1,7 +1,7 @@
 <template>
   <div class="example-modal-window">
     <!-- コンポーネント MyModal -->
-    <SignUpModal @close="closeModal" v-if="modal">
+    <SignUpModal @close="closeSignUpModal" v-if="modal">
       <!-- default スロットコンテンツ -->
       <div v-if="success == false">
         <form>
@@ -33,7 +33,7 @@
       </div>
       <div v-if="success">
         <p>登録が完了しました！再度ログインしてください</p>
-        <button v-on:click="closeModal">閉じる</button>
+        <button v-on:click="closeSignUpModal">閉じる</button>
       </div>
       <!-- /default -->
       <!-- footer スロットコンテンツ -->
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import SignUpModal from '@/components/SignUpModal';
+  import SignUpModal from '@/components/SignUpModal'
 
   export default {
     name: "SignUp",
@@ -142,11 +142,11 @@
         this.message = '必要情報を入力してください'
       },
 
-      openModal() {
+      openSignUpModal() {
         this.modal = true
       },
 
-      closeModal() {
+      closeSignUpModal() {
         this.modal = false
         this.success = false
       },
