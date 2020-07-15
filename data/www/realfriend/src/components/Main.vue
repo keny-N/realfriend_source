@@ -11,17 +11,15 @@
   import GameHeader from '@/components/GameHeader'
   import News from "@/components/News"
   import FriendList from "@/components/FriendList"
-  import FriendInsert from "@/components/FriendInsert"
-
-
+  import FriendInsert from "@/components/FriendInsert";
   export default {
     name: "Main",
-    components: {GameHeader, News, FriendList, FriendInsert},
+    components: {GameHeader, News, FriendList,FriendInsert},
     data() {
       return {
-        backgroundImageSrc: require("@/assets/main_back.jpg"),
+        backgroundImageSrc: require("@/assets/main_back.jpg")
       }
-    },
+    }
   }
 </script>
 
