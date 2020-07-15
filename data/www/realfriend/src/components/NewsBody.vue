@@ -7,19 +7,10 @@
 <!--    <p v-if="choosingNewsFlag">{{ choosingNewsId }}</p>-->
 <!--    <button @click="releaseNews">初期化</button>-->
 
-    <div class="p-modal" :class="{'is-open': choosingNewsFlag}">
-<!--        {{choosingNewsText}}-->
-      <p>こんにちは</p>
+    <div v-if="choosingNewsFlag">
     </div>
 
-<!--    <NewsModal v-if="choosingNewsFlag" :news-data="newsData.id(choosingNewsId)" @releaseNews="releaseNews" >-->
-<!--     &lt;!&ndash; default スロットコンテンツ &ndash;&gt;-->
-<!--      <p v-for="news in newsData" :news="newsData.id" v-if="news === choosingNewsId">-->
-<!--        {{ news.title }}-->
-<!--      <p>-->
-<!--      <div><input v-model="message"></div>-->
 
-<!--    </NewsModal>-->
   </div>
 
 </template>
@@ -66,33 +57,10 @@
     margin: 0 auto;
   }
 
-  .overflow-auto {
-    width: 100%;
-    height: 30vh;
-    margin: auto auto;
-    overflow-x: visible;
-  }
 
   ul, li {
     width: 100%;
   }
 
-  .p-modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow-y: auto;
-  visibility: hidden;
-  opacity: 0;
-  z-index: -1;
 
-  }
-
-  .p-modal.is-open{
-    visibility: visible;
-    opacity: 1;
-    z-index: 100;
-}
 </style>
