@@ -12,7 +12,6 @@
   import News from "@/components/News"
   import FriendList from "@/components/FriendList"
   import FriendInsert from "@/components/FriendInsert";
-
   export default {
     name: "Main",
     components: {GameHeader, News, FriendList,FriendInsert},
@@ -36,5 +35,4 @@
     margin: 50vh auto 0;
     transform: translateY(-50%);
   }
-
 </style>
