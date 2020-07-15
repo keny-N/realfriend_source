@@ -1,5 +1,6 @@
 <template>
   <div class="news-body">
+
     <h1>ニュース画面</h1>
     <ol>
       <ListMT v-for="news in newsData" :news="newsData.id" :news-data="news" @selectNews="selectNews"></ListMT>
@@ -7,12 +8,21 @@
 <!--    <p v-if="choosingNewsFlag">{{ choosingNewsId }}</p>-->
 <!--    <button @click="releaseNews">初期化</button>-->
 
-    <div v-if="choosingNewsFlag">
-    </div>
-
+    <transition name="fade"><!-- transitionは不要なら外してOK -->
+      <div v-if="choosingNewsFlag">
+        <div class="modal" v-on:click.self="choosingNewsFlag=false">
+        <NewsModal>
+          <button type="button" class="close" v-on:click="choosingNewsFlag=false"></button>
+          <template v-slot:body>
+            <p>aaa</p>
+          </template>
+        </NewsModal>
+        </div>
+        <div class="modal-backdrop show"></div>
+      </div>
+    </transition>
 
   </div>
-
 </template>
 
 <script>
@@ -46,7 +56,7 @@
         this.choosingNewsId= 0
         this.choosingNewsFlag = false
       }
-    }
+    },
   }
 </script>
 
@@ -62,5 +72,16 @@
     width: 100%;
   }
 
+/* 表示/非表示はvueで制御するので最初から表示状態にする */
+ .modal {
+  display: block;
+}
 
+/* vueのtransitionを使わないなら不要 */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .15s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>
