@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# pushを禁止するブランチ
+readonly MASTER='master'
+readonly DEVELOP='develop'
+
+while read local_ref local_sha1 remote_ref remote_sha1
+do
+  if [[ "${remote_ref##refs/heads/}" = $MASTER ]]; then
+    echo -e "push先間違ってますよ"
+    exit 1
+  fi
+  if [[ "${remote_ref##refs/heads/}" =~ $DEVELOP ]]; then
+    echo -e "push先間違ってますよ"
+    exit 1
+  fi
+done
