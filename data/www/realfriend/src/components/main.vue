@@ -8,33 +8,32 @@
 </template>
 
 <script>
-    import GameHeader from '@/components/GameHeader'
-    import News from "@/components/News";
-    import FriendList from "@/components/FriendList";
-    import FriendInsert from "@/components/FriendInsert";
+  import GameHeader from '@/components/GameHeader'
+  import News from "@/components/News"
+  import FriendList from "@/components/FriendList"
+  import FriendInsert from "@/components/FriendInsert"
 
 
-    export default {
-        name: "Main",
-        components: {GameHeader, News,FriendList,FriendInsert},
-      data () {
-        return {
-          backgroundImageSrc: require("@/assets/main_back.jpg"),
-        }
-      },
-      methods:{
-      },
-    }
+  export default {
+    name: "Main",
+    components: {GameHeader, News, FriendList, FriendInsert},
+    data() {
+      return {
+        backgroundImageSrc: require("@/assets/main_back.jpg"),
+      }
+    },
+  }
 </script>
 
 <style scoped>
-  .main{
+  .main {
     background: no-repeat center;
     background-size: cover;
     /*mainのサイズをちょうど画面と同じにする。*/
     height: 100vh;
   }
-  .listposition{
+
+  .listposition {
     margin: 50vh auto 0;
     transform: translateY(-50%);
   }
