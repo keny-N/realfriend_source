@@ -10,11 +10,14 @@
 
     <transition name="fade"><!-- transitionは不要なら外してOK -->
       <div v-if="choosingNewsFlag">
-        <div class="modal" v-on:click.self="choosingNewsFlag=false">
+        <div class="modal" @click="choosingNewsFlag=false">
         <NewsModal>
-          <button type="button" class="close" v-on:click="choosingNewsFlag=false"></button>
+          <button type="button" class="close" @click="choosingNewsFlag=false"></button>
           <template v-slot:body>
             <p>aaa</p>
+          </template>
+          <template v-slot:exit-button>
+            <button type="button" class="btn btn-primary" @click="choosingNewsFlag=false">フッターのボタンなど</button>
           </template>
         </NewsModal>
         </div>
