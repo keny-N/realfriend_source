@@ -13,9 +13,9 @@
       }
     },
     methods: {
-      newsClick: function(){
+      newsClick: function () {
         this.$emit("selectNews", this.NewsData.id, this.NewsData.title, this.NewsData.body)
-        console.log(this.NewsData)
+        // console.log(this.NewsData)
       }
     }
   }
