@@ -12,12 +12,15 @@
       <div v-if="choosingNewsFlag">
         <div class="modal" @click="choosingNewsFlag=false">
         <NewsModal>
-          <button type="button" class="close" @click="choosingNewsFlag=false"></button>
+          <template v-slot:header>
+            <h4 class="modal-title">{{choosingNewsTitle}}</h4>
+            <button type="button" class="close" @click="choosingNewsFlag=false"></button>
+          </template>
           <template v-slot:body>
-            <p>aaa</p>
+            <p>{{choosingNewsBody}}</p>
           </template>
           <template v-slot:exit-button>
-            <button type="button" class="btn btn-primary" @click="choosingNewsFlag=false">フッターのボタンなど</button>
+            <button type="button" class="btn btn-primary" @click="choosingNewsFlag=false">確認</button>
           </template>
         </NewsModal>
         </div>
@@ -38,26 +41,30 @@
     data() {
       return {
         newsData: [
-           {id:1,title: "観測停止のピンチから一転　岩手の電波望遠鏡、運用続く"},
-           {id:2,title: "観測停止のピンチから一転　岩手の電波望遠鏡、運用続く"}
+           {id:1,title: "観測停止のピンチから一転　岩手の電波望遠鏡、運用続く",body: "難しい"},
+           {id:2,title: "観測停止のピンチから一転　岩手の電波望遠鏡、運用続く",body: "簡単"}
         ],
         choosingNewsId:0,
         choosingNewsFlag:false,
-        // choosingNewsText : this.newsData.title.filter(x => this.newsData.id === this.choosingNewsId)
+        choosingNewsTitle: "",
+        choosingNewsBody: "",
       }
     },
 
     methods:{
-      selectNews: function(Id) {
+      selectNews: function(Id,Title,Body) {
         // console.log(Id)
         this.choosingNewsId = Id
         this.choosingNewsFlag = true
-        // console.log(this.choosingNewsText)
+        this.choosingNewsTitle = Title
+        this.choosingNewsBody = Body
       },
 
       releaseNews: function () {
         this.choosingNewsId= 0
         this.choosingNewsFlag = false
+        this.choosingNewsTitle= ""
+        this.choosingNewsBody = ""
       }
     },
   }

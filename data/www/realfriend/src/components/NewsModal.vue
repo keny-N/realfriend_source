@@ -2,8 +2,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">タイトルタイトル</h4>
-        <slot/>
+        <slot name="header">
+          <h4 class="modal-title">タイトルタイトル</h4>
+        </slot>
       </div>
       <div class="modal-body">
         <slot name="body"></slot>
