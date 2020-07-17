@@ -1,21 +1,19 @@
 <template>
   <div>
-    <div v-if="succsesflg == false">
-      <UserChangeCheck @succses="userChangeSuccses"></UserChangeCheck>
-    </div>
-    <div v-if="succsesflg == true">
+    <!--    <UserChangeCheck ref="changecheck" @succses="userChangeSuccses"></UserChangeCheck>-->
+    <div>
       <h2>{{changemessage}}</h2>
 
       <p>
         <msg1>ユーザーID：</msg1>
-        {{getUserId}}
+        {{userid}}
         <br>
       </p>
       <br>
 
       <p>
         <msg1>ユーザー名：</msg1>
-        {{getUserName}}
+        {{username}}
         <button v-on:click="nameFlagchange">変更</button>
         <br>
       </p>
@@ -25,7 +23,6 @@
           <button v-on:click="updateUserNameApi">送信</button>
         </form>
       </div>
-
 
       <br>
       <p>
@@ -44,6 +41,9 @@
           <button v-on:click="updateUserPassApi">送信</button>
         </form>
       </div>
+
+      <button v-on:click="backMainVue">戻る</button>
+      <button v-on:click="deleteUser">アカウントを削除する</button>
     </div>
   </div>
 </template>
@@ -59,19 +59,15 @@
     },
     data() {
       return {
-        resultid: '',       /*エラーコメント表示用*/
-        resultpass: '',     /*エラーコメント表示用*/
         userid: '',       /*ユーザID受け取り用*/
         useroldpass: null,     /*ユーザパス受け取り用*/
         usernewpass: null,
         changemessage: '',
         username: '',
-        getUserName: null,
         nameflg: false,
-        idflg: false,
+        // idflg: false,
         passflg: false,
-        modal: false,
-        succsesflg: false,
+        succsesflg: true,
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
         Url: '',
       }
@@ -79,11 +75,11 @@
     methods: {
 
       getUserApi() {
-        // this.$refs.userUpdata.openModal()
         let me = this
         this.axios.get(this.Url, {}).then(function (response) {
           if (response.data.isSuccess == true) {
-            me.getUserName = response.data.user[1]
+            me.username = response.data.user[1]
+            console.log(response)
           } else {
             console.log(response.data.error)
           }
@@ -96,7 +92,7 @@
         let me = this
         this.username = this.$refs.userThisName.value
         this.axios.put(this.Url, {
-          user_id: String(this.getUserId),
+          user_id: String(this.userid),
           user_name: String(this.username),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
@@ -114,29 +110,7 @@
         })
 
       },
-      // updateUserIdApi() {
-      //   let me = this
-      //   this.userid = this.$refs.userThisId.value
-      //   this.axios.put(this.Url, {
-      //     user_id: String(this.userid),
-      //     user_name: String(this.getUserName),
-      //   }).then(function (response) {
-      //     if (response.data.isSuccess == true) {
-      //       me.getUserId = me.userid
-      //       me.idflg = false
-      //       console.log(response)
-      //       me.Url = me.apiUrl + '/' + me.getUserId
-      //       me.replaceUrl()
-      //     } else {
-      //       console.log(response.data.error)
-      //       me.changemessage = '登録に失敗しました'
-      //     }
-      //   }).catch(function (error) {
-      //     console.log(error)
-      //     me.changemessage = '登録に失敗しました'
-      //   })
-      //
-      // },
+
       updateUserPassApi() {
         let me = this
         if (this.$refs.oldThisPass.value == this.$refs.newThisPass.value) {
@@ -144,13 +118,13 @@
         } else if (this.$refs.newThisPass.value == this.$refs.checkThisPass.value) {
           me.useroldpass = this.$refs.oldThisPass.value
           me.usernewpass = this.$refs.newThisPass.value
-          me.Url = me.apiUrl + '/' + me.getUserId + '/pass'
+          me.Url = me.apiUrl + '/' + me.userid + '/pass'
           this.axios.put(this.Url, {
             old_pass: String(me.useroldpass),
             new_pass: String(me.usernewpass),
           }).then(function (response) {
             if (response.data.isSuccess == true) {
-              me.Url = me.apiUrl + '/' + me.getUserId
+              me.Url = me.apiUrl + '/' + me.userid
               me.passflg = false
               me.changemessage = '成功！'
             } else {
@@ -162,6 +136,29 @@
         }
       },
 
+      deleteUser() {
+        let me = this
+        this.axios.delete(this.Url, {
+          user_id: String(this.userid),
+        }).then(function (response) {
+          if (response.data.isSuccess == true) {
+            alert('削除に成功しました')
+            me.$router.push({path: '/Login'})
+            console.log(response)
+          } else {
+            console.log(response.data.error)
+            me.changemessage = '登録に失敗しました'
+          }
+        }).catch(function (error) {
+          console.log(error)
+          me.changemessage = '登録に失敗しました'
+        })
+
+      },
+      openChangeCheck() {
+        this.$refs.changecheck.openSignUpModal()
+      },
+
       nameFlagchange() {
         if (this.nameflg) {
           this.nameflg = false
@@ -169,13 +166,6 @@
           this.nameflg = true
         }
       },
-      // idFlagchange() {
-      //   if (this.idflg) {
-      //     this.idflg = false
-      //   } else {
-      //     this.idflg = true
-      //   }
-      // },
       passFlagchange() {
         if (this.passflg) {
           this.passflg = false
@@ -183,32 +173,19 @@
           this.passflg = true
         }
       },
-
-      openModal() {
-        this.modal = true
+      backMainVue() {
+        this.$router.replace({path: '/', query: {id: this.userid}})
       },
-
-      closeModal() {
-        this.modal = false
-        this.success = false
-      },
-      replaceUrl() {
-        console.log(this.getUserId)
-        this.$router.replace({path: '/u', query: {id: this.userid}})
-        this.changemessage = '成功！'
-      },
-      userUpdataPage() {
-        console.log('b')
-      },
-      userChangeSuccses() {
-        this.succsesflg = true
-        console.log(this.succsesflg)
-      }
-    },
+      // userChangeSuccses() {
+      //   this.succsesflg = true
+      //   console.log(this.succsesflg)
+      // }
+    }
+    ,
     created() {
-      this.getUserId = window.location.href.slice(window.location.href.indexOf('=') + 1)
-      this.Url = this.apiUrl + '/' + this.getUserId
-      // this.$refs.userUpdata.openModal()
+      this.userid = window.location.href.slice(window.location.href.indexOf('=') + 1)
+      this.Url = this.apiUrl + '/' + this.userid
+      this.succsesflg = false
       this.getUserApi()
     }
   }
