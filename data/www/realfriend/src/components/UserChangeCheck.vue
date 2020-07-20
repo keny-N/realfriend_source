@@ -1,10 +1,11 @@
 <template>
   <transition name="modal" appear>
-    <div class="modal-overlay" v-if="modal" @click.self="closeSignUpModal">
+    <div class="modal-overlay" v-if="modal">
       <div class="modal-window">
         <div class="modal-content">
           <slot/>
           <div>
+            <h1>認証ページです</h1>
             {{userid}}
             <form>
               <p>
@@ -28,7 +29,7 @@
       return {
         userid: '',
         userpass: '',
-        modal:false,
+        modal: false,
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
@@ -41,23 +42,19 @@
           user_pass: String(this.userpass),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
-            console.log('a')
             me.modal = false
             me.$emit('succses')
-          } else {
-            console.log('b')
-            me.message = 'IDもしくはパスワードが間違っています'
           }
         }).catch(function (error) {
           console.log('c')
           console.log(error)
         })
       },
-      openSignUpModal() {
+      openUserChangeModal() {
         this.modal = true
       },
 
-      closeSignUpModal() {
+      closeUserChangeModal() {
         this.modal = false
         this.success = false
       },

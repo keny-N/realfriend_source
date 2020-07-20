@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Main from '@/components/Main'
 import GameBody from "@/components/GameBody"
 import LogIn from "@/components/LogIn"
+import UserProfile from "@/components/UserProfile"
 
 Vue.use(Router)
 
@@ -29,5 +30,10 @@ export default new Router({
       name: 'LogIn',
       component: LogIn
     },
+    {
+      path:'/user',
+      name:'UserProfile',
+      component:UserProfile
+    }
   ]
 })

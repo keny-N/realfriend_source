@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--    <UserChangeCheck ref="changecheck" @succses="userChangeSuccses"></UserChangeCheck>-->
+    <UserChangeCheck ref="UserChangeCheck" @succses="userChangeSuccses"></UserChangeCheck>
     <div>
       <h2>{{changemessage}}</h2>
 
@@ -17,7 +17,7 @@
         <button v-on:click="nameFlagchange">変更</button>
         <br>
       </p>
-      <div v-if="nameflg">
+      <div v-if="nameflg == true && succsesflg == true">
         <form>
           <input type="text" ref="userThisName" value="" required="required">
           <button v-on:click="updateUserNameApi">送信</button>
@@ -30,7 +30,7 @@
         <button v-on:click="passFlagchange">変更</button>
         <br>
       </p>
-      <div v-if="passflg">
+      <div v-if="passflg == true && succsesflg == true">
         <form>
           元のパスワードを入力してください：
           <input type="password" ref="oldThisPass" value="" required="required"><br>
@@ -64,10 +64,9 @@
         usernewpass: null,
         changemessage: '',
         username: '',
+        succsesflg: false,
         nameflg: false,
-        // idflg: false,
         passflg: false,
-        succsesflg: true,
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
         Url: '',
       }
@@ -79,7 +78,7 @@
         this.axios.get(this.Url, {}).then(function (response) {
           if (response.data.isSuccess == true) {
             me.username = response.data.user[1]
-            console.log(response)
+            me.openUserChangeCheck()
           } else {
             console.log(response.data.error)
           }
@@ -114,7 +113,7 @@
       updateUserPassApi() {
         let me = this
         if (this.$refs.oldThisPass.value == this.$refs.newThisPass.value) {
-          me.message = '同じパスワードが指定されています'
+          me.changemessage = '同じパスワードが指定されています'
         } else if (this.$refs.newThisPass.value == this.$refs.checkThisPass.value) {
           me.useroldpass = this.$refs.oldThisPass.value
           me.usernewpass = this.$refs.newThisPass.value
@@ -128,7 +127,7 @@
               me.passflg = false
               me.changemessage = '成功！'
             } else {
-              me.changemessage = '失敗。。。'
+              me.changemessage = '失敗'
             }
           }).catch(function (error) {
             console.log(error)
@@ -155,10 +154,6 @@
         })
 
       },
-      openChangeCheck() {
-        this.$refs.changecheck.openSignUpModal()
-      },
-
       nameFlagchange() {
         if (this.nameflg) {
           this.nameflg = false
@@ -176,16 +171,17 @@
       backMainVue() {
         this.$router.replace({path: '/', query: {id: this.userid}})
       },
-      // userChangeSuccses() {
-      //   this.succsesflg = true
-      //   console.log(this.succsesflg)
-      // }
+      userChangeSuccses() {
+        this.succsesflg = true
+      },
+      openUserChangeCheck() {
+        this.$refs.UserChangeCheck.openUserChangeModal()
+      }
     }
     ,
     created() {
       this.userid = window.location.href.slice(window.location.href.indexOf('=') + 1)
       this.Url = this.apiUrl + '/' + this.userid
-      this.succsesflg = false
       this.getUserApi()
     }
   }
