@@ -77,7 +77,7 @@
             this.showContent = true
           })
           //メイン画面を更新する処理
-          //this.$router.go({path: this.$router.currentRoute.path, force: true})
+          this.$router.go({path: this.$router.currentRoute.path, force: true})
           console.log('以下')
         }
       },
