@@ -1,5 +1,5 @@
 <template>
-  <div class="friendedit" @click="openModal">
+  <div class="friendedit">
     <button v-on:click="openModal">フレンド変更</button>
     <div class="overlay" v-show="showContent">
       <div class="content">

@@ -3,8 +3,6 @@
     <ul>
       <!--itemsの件数文回している-->
       <li v-for="friend in friends" class="rounded border border-dark" >
-        <FriendEdit v-bind:friend-id=friend[0] v-bind:image-data=friend[3] v-bind:friend-name=friend[2]>
-        </FriendEdit>
         <img class="friendimg rounded" :src=friend[3]>
         <div>
           {{ friend[2]}}
@@ -16,6 +14,7 @@
           好感度：{{friend[4]}}
           <!--ボタンが押された時にfriendIdを送っている。きっと消える-->
           <FriendDelete v-bind:friend-id=friend[0] v-bind:friend-img=friend[3] v-bind:friend-name=friend[2]></FriendDelete>
+          <FriendEdit v-bind:friend-id=friend[0] v-bind:image-data=friend[3] v-bind:friend-name=friend[2]></FriendEdit>
         </div>
       </li>
     </ul>
