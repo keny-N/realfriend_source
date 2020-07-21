@@ -1,6 +1,6 @@
 <template>
   <transition name="modal" appear>
-    <div class="modal-overlay" v-if="modal">
+    <div class="modal-overlay" v-if="modal" @click.self="closeUserChangeModal">
       <div class="modal-window">
         <div class="modal-content">
           <slot/>
@@ -15,6 +15,7 @@
               </p>
               <button v-on:click="changeCheck">ok</button>
             </form>
+            {{errMsg}}
           </div>
         </div>
       </div>
@@ -30,6 +31,7 @@
         userid: '',
         userpass: '',
         modal: false,
+        errMsg:'',
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
@@ -44,9 +46,10 @@
           if (response.data.isSuccess == true) {
             me.modal = false
             me.$emit('succses')
+          }else{
+            me.errMsg = 'IDもしくはパスワードが間違っています'
           }
         }).catch(function (error) {
-          console.log('c')
           console.log(error)
         })
       },
