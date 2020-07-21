@@ -2,7 +2,9 @@
   <div class="friendinsert">
     <ul>
       <!--itemsの件数文回している-->
-      <li v-for="friend in friends" class="rounded border border-dark">
+      <li v-for="friend in friends" class="rounded border border-dark" >
+        <FriendEdit v-bind:friend-id=friend[0] v-bind:image-data=friend[3] v-bind:friend-name=friend[2]>
+        </FriendEdit>
         <img class="friendimg rounded" :src=friend[3]>
         <div>
           {{ friend[2]}}
@@ -13,7 +15,7 @@
         <div>
           好感度：{{friend[4]}}
           <!--ボタンが押された時にfriendIdを送っている。きっと消える-->
-          <button v-on:click="deleteFriend(friend[0])">さくじょおおおお</button>
+          <FriendDelete v-bind:friend-id=friend[0] v-bind:friend-img=friend[3] v-bind:friend-name=friend[2]></FriendDelete>
         </div>
       </li>
     </ul>
@@ -26,8 +28,12 @@
 </template>
 
 <script>
+  import FriendEdit from "@/components/FriendEdit"
+  import FriendDelete from "@/components/FriendDelete";
+
   export default {
     name: "FriendList",
+    components:　{FriendEdit,FriendDelete},
     data: function () {
       return {
         //getUrlでは適当なユーザーのフレンドを一覧として取得するためのURL、ログインとの連携を試していないのでユーザーID１を固定している
