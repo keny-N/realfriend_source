@@ -11,8 +11,9 @@
       </p>
       <br>
 
-      <UserChangeName ref="userchangename" @getuser="getUserApi" @open="openUserChangeCheck" :user_name="username"  :api_url="Url"></UserChangeName>
-      <UserChangePass ref="userchangepass" @open="openUserChangeCheck"  :api_url="Url"></UserChangePass>
+      <UserChangeName ref="userchangename" @getuser="getUserApi" @open="openUserChangeCheck" :user_name="username"
+                      :api_url="Url"></UserChangeName>
+      <UserChangePass ref="userchangepass" @open="openUserChangeCheck" :api_url="Url"></UserChangePass>
 
 
       <button v-on:click="backMainVue">戻る</button>
@@ -30,8 +31,8 @@
   export default {
     name: "UserProfile",
     components: {
-      UserChangePass:UserChangePass,
-      UserChangeName:UserChangeName,
+      UserChangePass: UserChangePass,
+      UserChangeName: UserChangeName,
       UserChangeCheck: UserChangeCheck
     },
     data() {
@@ -63,21 +64,24 @@
 
       deleteUser() {
         let me = this
-        this.axios.delete(this.Url, {
-          user_id: String(this.userid),
-        }).then(function (response) {
-          if (response.data.isSuccess == true) {
-            alert('削除に成功しました')
-            me.$router.push({path: '/Login'})
-            console.log(response)
-          } else {
-            console.log(response.data.error)
+        this.openUserChangeCheck()
+        if (this.succsesflg) {
+          this.axios.delete(this.Url, {
+            user_id: String(this.userid),
+          }).then(function (response) {
+            if (response.data.isSuccess == true) {
+              alert('削除に成功しました')
+              me.$router.push({path: '/Login'})
+              console.log(response)
+            } else {
+              console.log(response.data.error)
+              me.changemessage = '登録に失敗しました'
+            }
+          }).catch(function (error) {
+            console.log(error)
             me.changemessage = '登録に失敗しました'
-          }
-        }).catch(function (error) {
-          console.log(error)
-          me.changemessage = '登録に失敗しました'
-        })
+          })
+        }
 
       },
       backMainVue() {
@@ -85,10 +89,10 @@
       },
       userChangeSuccses() {
         this.succsesflg = true
-        if(this.$refs.userchangename.nameflg){
+        if (this.$refs.userchangename.nameflg) {
           this.$refs.userchangename.succses_flg = true
           this.$refs.userchangename.updateUserNameApi()
-        }else if(this.$refs.userchangepass.passflg){
+        } else if (this.$refs.userchangepass.passflg) {
           this.$refs.userchangepass.succses_flg = true
           this.$refs.userchangepass.updateUserPassApi()
         }
