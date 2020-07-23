@@ -2,18 +2,18 @@
   <div class="main" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
     <FriendList class="listposition"></FriendList>
-    <News class="news"></News>
+    <Log class="Log"></Log>
   </div>
 </template>
 
 <script>
   import GameHeader from '@/components/GameHeader';
-  import News from "@/components/NewsButton";
+  import Log from "@/components/LogDisplayTransition";
   import FriendList from "@/components/FriendList";
 
   export default {
     name: "Main",
-    components: {GameHeader, News,FriendList},
+    components: {GameHeader, Log,FriendList},
     data () {
       return {
         backgroundImageSrc: require("@/assets/main_back.jpg")

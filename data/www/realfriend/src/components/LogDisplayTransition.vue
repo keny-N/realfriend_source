@@ -1,6 +1,6 @@
 <template>
   <router-link to="/news">
-    <button type="button" class="btn btn-primary btn-sm">ニュース</button>
+    <button type="button" class="btn btn-primary btn-sm">更新情報</button>
   </router-link>
 </template>
 
