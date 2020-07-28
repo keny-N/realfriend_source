@@ -1,44 +1,43 @@
 <template>
   <div class="example-modal-window">
     <!-- コンポーネント MyModal -->
-    <SignUpModal @close="closeModal" v-if="modal">
+    <SignUpModal @close="closeSignUpModal" v-if="modal">
       <!-- default スロットコンテンツ -->
       <div v-if="success == false">
-        <p>
-          <msg1>ユーザー名を入力してください</msg1>
-          <msg2>※必須</msg2>
-          <br>
-          <input type="text" id="userName" value="" placeholder="ユーザ名">
-        </p>
-        <h2>{{resultid}}</h2>
-        <p>
-          <msg1>ユーザーIDを入力してください</msg1>
-          <msg2>※必須</msg2>
-          <br>
-          <input type="text" id="userId" value="" placeholder="ユーザID"></p>
-        <h2>{{resultid}}</h2>
-        <p>
-          <msg1>パスワードを入力してください</msg1>
-          <msg2>※必須</msg2>
-          <br>
-          <input type="password" id="userPassword" value="" placeholder="パスワード"></p>
-        <h2>{{resultpass}}</h2>
+        <form>
+          <p>
+            <msg1>ユーザー名を入力してください</msg1>
+            <msg2>※必須</msg2>
+            <br>
+
+            <input type="text" ref="userThisName" value="" placeholder="ユーザ名" required="required">
+          </p>
+          <h2>{{resultuser}}</h2>
+          <p>
+            <msg1>ユーザーIDを入力してください</msg1>
+            <msg2>※必須</msg2>
+            <br>
+            <input type="text" ref="userThisId" value="" placeholder="ユーザID" required="required"></p>
+          <h2>{{resultid}}</h2>
+          <p>
+            <msg1>パスワードを入力してください</msg1>
+            <msg2>※必須</msg2>
+            <br>
+            <input type="password" ref="userThisPass" value="" placeholder="パスワード" required="required"></p>
+          <h2>{{resultpass}}</h2>
+          <button v-on:click="dataConfirmation">登録</button>
+          <button v-on:click="dataDelete">取り消し</button>
+
+        </form>
         <h1>{{message}}</h1>
       </div>
       <div v-if="success">
         <p>登録が完了しました！再度ログインしてください</p>
+        <button v-on:click="closeSignUpModal">閉じる</button>
       </div>
       <!-- /default -->
       <!-- footer スロットコンテンツ -->
-      <template slot="footer">
-        <div v-if="success == false">
-          <button v-on:click="dataConfirmation">登録</button>
-          <button v-on:click="dataDelete">取り消し</button>
-        </div>
-        <div v-if="success">
-          <button v-on:click="close">閉じる</button>
-        </div>
-      </template>
+
       <!-- /footer -->
 
     </SignUpModal>
@@ -47,7 +46,7 @@
 </template>
 
 <script>
-  import SignUpModal from '@/components/SignUpModal';
+  import SignUpModal from '@/components/SignUpModal'
 
   export default {
     name: "SignUp",
@@ -77,9 +76,9 @@
         this.resultpass = ''
 
         /*テキストボックスから受け取り*/
-        this.username = document.getElementById("userName").value
-        this.userid = document.getElementById("userId").value
-        this.userpass = document.getElementById("userPassword").value
+        this.username = this.$refs.userThisName.value
+        this.userid = this.$refs.userThisId.value
+        this.userpass = this.$refs.userThisPass.value
 
         /*正規表現パターン*/
         // let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
@@ -134,18 +133,22 @@
 
       /*データクリア用*/
       dataDelete: function () {
-        document.getElementById("userName").value = ''
-        document.getElementById("userId").value = ''
-        document.getElementById("userPassword").value = ''
+        this.$refs.userThisName.value = ''
+        this.$refs.userThisId.value = ''
+        this.$refs.userThisPass.value = ''
+        this.resultuser = ''
+        this.resultid = ''
+        this.resultpass = ''
         this.message = '必要情報を入力してください'
       },
 
-      openModal() {
+      openSignUpModal() {
         this.modal = true
       },
 
-      closeModal() {
+      closeSignUpModal() {
         this.modal = false
+        this.success = false
       },
     },
 
