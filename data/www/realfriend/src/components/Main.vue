@@ -4,10 +4,10 @@
     <FriendList class="listposition"></FriendList>
     <FriendInsert></FriendInsert>
     <News></News>
-    <button v-on:click="aIncre">{{$store.state.aCount}}</button>
-    <button v-on:click="bIncre">{{$store.state.bCount}}</button>
-    <button v-on:click="cIncre">{{$store.state.cCount}}</button>
-    <button v-on:click="dIncre">{{$store.state.dCount}}</button>
+<!--    <button v-on:click="aIncre">{{$store.state.aCount}}</button>-->
+<!--    <button v-on:click="bIncre">{{$store.state.bCount}}</button>-->
+<!--    <button v-on:click="cIncre">{{$store.state.cCount}}</button>-->
+<!--    <button v-on:click="dIncre">{{$store.state.dCount}}</button>-->
   </div>
 </template>
 
@@ -26,6 +26,7 @@
             }
         },
         methods: {
+            //カウンターテスト用
             aIncre() {
                 this.$store.dispatch("increment", "a")
             },

@@ -22,6 +22,12 @@ export default new Vuex.Store({
         state.dCount++
       }
       state.aCount++
+    },
+    resetCounter(state) {
+      state.aCount = 0
+      state.bCount = 0
+      state.cCount = 0
+      state.dCount = 0
     }
   },
   actions: {
@@ -29,6 +35,11 @@ export default new Vuex.Store({
       setTimeout(() => {
         commit('increment', payload)
       }, 1000)
+    },
+    resetCounter: ({commit}) => {
+      setTimeout(() => {
+        commit('resetCounter')
+      }, 100)
     }
   },
   modules: {}
