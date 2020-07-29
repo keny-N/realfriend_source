@@ -56,20 +56,14 @@
         // }
 
         let name = this.friendName
-        let img=this.imageData
         let me =this
-        let time=new Date()
-        //img.src=time+'.png'
-        img.setAttribute('src','test.png')
-
-
 
         console.log('put送信します')
         this.axios.post(this.postUrl, {
           user_id: 1,
           friend_name: name,
           //現在はパスが確定していないためパスっぽい文字を入れているだけです。
-          friend_img:String(img.src)
+          friend_img:'matuo/apex'
         }).then(function (response) {
           if (response.data.isSuccess) {
             console.log(response)

@@ -67,7 +67,7 @@
           let testUrl=this.putUrl+friend_id
           //if文のなかだとthisがスコープの都合で参照できないためmeに入れている。
           let me = this
-          //faceApiに顔データを送信
+
           console.log('put送信します')
           this.axios.put(testUrl,{
             //ログとして表示する際に使用するためユーザーIDを送る
@@ -80,8 +80,8 @@
             if (response.data.isSuccess) {
               console.log(response)
               //ifのなかでthisは使えない
-              //me.closeModal()
-              //me.$router.go({path: me.$router.currentRoute.path, force: true})
+              me.closeModal()
+              me.$router.go({path: me.$router.currentRoute.path, force: true})
             }
           }).catch(function (error) {
             console.log(error)

@@ -45,8 +45,9 @@
         // let imgpath=this.friendImg
         let friend_id =Number(this.friendIdDelete)
         let me =this
-        //faceApiに顔データを送信
-        console.log('put送信します')
+
+
+        console.log('delete送信します')
         this.axios.delete(this.deleteUrl+friend_id
           ).then(function (response) {
           if (response.data.isSuccess) {
