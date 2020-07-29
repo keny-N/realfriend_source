@@ -6,11 +6,11 @@
         <h4>本当に削除しますか？</h4>
         <div class="card-body">
           <div>
-            <img v-on:src="FriendName">
+            <img v-on:src="friendNameDelete">
           </div>
         </div>
-        <div>フレンド名前：{{FriendName}}</div>
-        <button class="float-left" v-on:click="deleteFrined">削除</button>
+        <div>フレンド名前：{{friendNameDelete}}</div>
+        <button class="float-left" v-on:click="deleteFriend">削除</button>
         <button class="float-right" v-on:click="closeModal">取り消し</button>
       </div>
     </div>
@@ -20,13 +20,14 @@
 <script>
   export default {
     name: "FriendDelete",
-    props:['friendId','FriendImg','FriendName'],
+    props:['friendId','friendImg','friendName'],
     data() {
       return {
         showContent: false, //モーダルを非表示している
-        imageData: '',//画像
-        friendName: '',//フレンドの名前
-        deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド削除
+        imageDataDelete:this.friendImg,//画像
+        friendNameDelete:this.friendName,//フレンドの名前
+        friendIdDelete:this.friendId,
+        deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド削除URL
       }
     },
     methods: {
@@ -36,28 +37,28 @@
       closeModal: function () {
         this.showContent = false
       },
-      deleteFrined() {
-        if (this.friendName.length > 20 || this.friendName.length < 1) {
-          //２０文字以内かつ一文字以上でない時に実行される。
-        }
-
+      deleteFriend() {
+        //   ２０文字以内かつ一文字以上でない時に実行される。画像用の条件式も書かないと行けない
+        // if (this.friendName.length > 20 || this.friendName.length < 1) {
+        // }
         //画像は何も送られてこないためコメントアウトしています。
-        // let imgpath=this.FriendImg
-        let friend_id =Number(this.friendId)
+        // let imgpath=this.friendImg
+        let friend_id =Number(this.friendIdDelete)
+        let me =this
         //faceApiに顔データを送信
         console.log('put送信します')
         this.axios.delete(this.deleteUrl+friend_id
-        ).then(function (response) {
+          ).then(function (response) {
           if (response.data.isSuccess) {
             console.log(response)
-            this.showContent = false
+            me.showContent = false
+            me.$router.go({path: me.$router.currentRoute.path, force: true})
           }
         }).catch(function (error) {
           console.log(error)
-          this.showContent = true
+          me.showContent = true
         })
         //メイン画面を更新する処理
-        this.$router.go({path: this.$router.currentRoute.path, force: true})
         console.log('以下')
       }
     },

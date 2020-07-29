@@ -7,7 +7,7 @@
         <div>
           {{ friend[2]}}
           <router-link v-bind:to="{name:'GameBody',params:{friendid:friend[0]}}">
-            <button type="button" class="btn btn-primary btn-sm botan">攻略</button>
+            <button type="button" class="btn btn-primary btn-sm c-button">攻略</button>
           </router-link>
         </div>
         <div>
@@ -47,21 +47,22 @@
     },
     methods: {
       //フレンド削除のやつきっと消える
-      deleteFriend(value) {
-        this.axios.delete(this.deleteUrl + Number(value)
-        ).then(function (response) {
-          if (response.data.isSuccess) {
-            console.log(response)
-          }
-        }).catch(function (error) {
-          console.log(error)
-        })
-      },
+      // deleteFriend(value) {
+      //   this.axios.delete(this.deleteUrl + Number(value)
+      //   ).then(function (response) {
+      //     if (response.data.isSuccess) {
+      //       console.log(response)
+      //     }
+      //   }).catch(function (error) {
+      //     console.log(error)
+      //   })
+      // },
       showFriend() {
         let self = this
-        //ログイン画面から遷移する際に動的ルーティングで送られてくる
+        //ログイン画面から遷移する際に動的ルーティングで送られてくる時用
         let userid = this.$route.params.userid
         console.log('get送信します')
+        //動的ルーティングで取得した際の書き方
         //this.axios.get(this.getUrl+Number(userid))
         this.axios.get(this.getUrl)
           .then(function (response) {
@@ -107,7 +108,7 @@
     object-fit: cover;
   }
 
-  .botan {
+  .c-button {
     float: right;
   }
 

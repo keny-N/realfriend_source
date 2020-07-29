@@ -6,12 +6,12 @@
         <h4>フレンド編集</h4>
         <div class="card-body">
           <div>
-            <img v-on:src="imageData" v-if="imageData">
+            <img v-on:src="imageDataEdit" v-if="imageDataEdit">
           </div>
           <h4 class="card-title">画像を選んでください。</h4>
-          <input type="file" accept="image/*" @change="onImgRegister($event)" v-model="friendImg">
+          <input type="file" accept="image/*" @change="onImgRegister($event)" v-model="ImageDataEdit">
         </div>
-        <div>フレンド名前：<input v-model="FriendName"></div>
+        <div>フレンド名前：<input v-model="friendNameEdit"></div>
         <button class="float-left" v-on:click="editFriend">変更</button>
         <button class="float-right" v-on:click="closeModal">取り消し</button>
       </div>
@@ -22,12 +22,13 @@
 <script>
     export default {
         name: "FriendEdit",
-      props:['friendId','imageData','FriendName'],
+      props:['friendId','imageData','friendName'],
       data() {
         return {
           showContent: false, //モーダルを非表示している
-          imageData: '',//画像
-          friendName: '',//フレンドの名前
+          imageDataEdit: '',//画像
+          friendNameEdit: this.friendName,//フレンドの名前
+          friendIdEdit:this.friendId,
           putUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド編集
         }
       },
@@ -40,44 +41,55 @@
         },
         onImgRegister(e) {
           const files = e.target.files
+          let me=this
 
           if (files.length > 0) {
 
             const file = files[0]
             const reader = new FileReader()
             reader.onload = (e) => {
-              this.imageData = e.target.result
+              me.imageDataEdit = e.target.result
             }
             reader.readAsDataURL(file)
           }
         },
         editFriend() {
-          if (this.friendName.length > 20 || this.friendName.length < 1) {
-            //２０文字以内かつ一文字以上でない時に実行される。
-          }
+          //今後文字数の制限が必要となると思うので、画像保存時ようの条件式を書かないといけない。
+          //if (this.friendName.length > 20 || this.friendName.length < 1) {
+          //}
 
-          let name = this.FriendName
+          let name = this.friendNameEdit
           //画像は何も送られてこないためコメントアウトしています。
-          // let imgpath=this.FriendImg
-          let friend_id =Number(this.friendId)
+          // let imgpath=this.friendImg
+          //　動的ルーティングでのuseridを取得するため、子コンポーネントなので取得できているかは不明
+          //let user_id =Number(this.$route.params.userid)
+          let friend_id=Number(this.friendIdEdit)
           let testUrl=this.putUrl+friend_id
+          //if文のなかだとthisがスコープの都合で参照できないためmeに入れている。
+          let me = this
           //faceApiに顔データを送信
           console.log('put送信します')
           this.axios.put(testUrl,{
+            //ログとして表示する際に使用するためユーザーIDを送る
+            //ログインの動的ルーティングが確認できないので1を入れてます。
+            user_id:'1',
             friend_name: name,
             //現在はパスが確定していないためパスっぽい文字を入れているだけです。
             friend_img: '/jk/matuo'
           }).then(function (response) {
             if (response.data.isSuccess) {
               console.log(response)
-              this.showContent = false
+              //ifのなかでthisは使えない
+              //me.closeModal()
+              //me.$router.go({path: me.$router.currentRoute.path, force: true})
             }
           }).catch(function (error) {
             console.log(error)
-            this.showContent = true
+            //ifのなかでthisは使えない
+            me.openModal()
           })
           //メイン画面を更新する処理
-          this.$router.go({path: this.$router.currentRoute.path, force: true})
+          //this.$router.go({path: this.$router.currentRoute.path, force: true})
           console.log('以下')
         }
       },
