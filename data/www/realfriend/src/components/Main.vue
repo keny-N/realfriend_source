@@ -3,19 +3,20 @@
     <GameHeader></GameHeader>
     <FriendList class="listposition"></FriendList>
     <FriendInsert></FriendInsert>
-    <News></News>
+    <Log class="Log"></Log>
   </div>
 </template>
 
 <script>
-  import GameHeader from '@/components/GameHeader'
-  import News from "@/components/News"
-  import FriendList from "@/components/FriendList"
+  import GameHeader from '@/components/GameHeader';
+  import Log from "@/components/LogDisplayTransition";
+  import FriendList from "@/components/FriendList";
   import FriendInsert from "@/components/FriendInsert";
+
   export default {
     name: "Main",
-    components: {GameHeader, News, FriendList,FriendInsert},
-    data() {
+    components: {GameHeader, Log,FriendList,FriendInsert},
+    data () {
       return {
         backgroundImageSrc: require("@/assets/main_back.jpg")
       }
@@ -35,4 +36,5 @@
     margin: 50vh auto 0;
     transform: translateY(-50%);
   }
+
 </style>

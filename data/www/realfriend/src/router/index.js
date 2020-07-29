@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// import HelloWorld from '@/components/HelloWorld'
 import Main from '@/components/Main'
 import GameBody from "@/components/GameBody"
 import LogIn from "@/components/LogIn"
+import Log from "@/components/LogDisplayBody"
 
 Vue.use(Router)
 
@@ -29,5 +30,10 @@ export default new Router({
       name: 'LogIn',
       component: LogIn
     },
+    {
+      path: '/news',
+      name: 'Log',
+      component: Log
+    }
   ]
 })
