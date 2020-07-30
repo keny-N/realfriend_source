@@ -5,6 +5,8 @@ import Main from '@/components/Main'
 import GameBody from "@/components/GameBody"
 import LogIn from "@/components/LogIn"
 import UserProfile from "@/components/UserProfile"
+import User from "@/components/User"
+import UserChangeSuccess from "@/components/UserChangeSuccess"
 
 Vue.use(Router)
 
@@ -16,24 +18,30 @@ export default new Router({
       component: GameBody
     },
     {
-      path: '/main',
+      path: '/main/:userId',
       name: 'Main',
-      component: Main
+      component: Main,
     },
     {
-      path: '/',
-      name: 'Main',
-      component: Main
+      path:'/user/:userId',
+      name: 'User',
+      component: User,
+      children:[
+        {
+          path:'profile',
+          component: UserProfile
+
+        },
+        {
+          path:'success',
+          component: UserChangeSuccess,
+        }
+      ]
     },
     {
       path: '/login',
       name: 'LogIn',
       component: LogIn
     },
-    {
-      path:'/user',
-      name:'UserProfile',
-      component:UserProfile
-    }
   ]
 })

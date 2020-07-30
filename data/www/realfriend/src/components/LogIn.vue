@@ -43,7 +43,7 @@
         resultpass: '',     /*エラーコメント表示用*/
         userid: '',       /*ユーザID受け取り用*/
         userpass: null,     /*ユーザパス受け取り用*/
-        message:'',
+        message: '',
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
@@ -54,7 +54,7 @@
         this.resultid = ''
         this.resultpass = ''
         this.changmsg = ''
-        this.message='',
+        this.message = ''
 
         /*受け取り*/
         this.userid = this.$refs.userThisId.value
@@ -99,7 +99,8 @@
       },
 
       loginSuccess() {
-        this.$router.replace({path: '/', query: {id: this.userid}})
+        let textUrl = '/main/' +this.userid
+        this.$router.push({path:textUrl,params:{userId:this.userid}})
       },
       /*SignUpのモーダルを開く*/
       addAccountPage() {

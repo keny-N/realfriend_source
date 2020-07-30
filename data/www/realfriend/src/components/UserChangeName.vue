@@ -1,18 +1,14 @@
 <template>
   <div>
     <p>
-      <msg1>ユーザー名：</msg1>
-      {{user_name}}
-      <button v-on:click="nameFlagchange">変更</button>
       <br>
     </p>
-    <div v-if="nameflg == true">
       <form>
-        <input type="text" ref="userThisName" value="" required="required">
-        <button v-on:click="openNModal">送信</button>
+        <input type="text" ref="userThisName" value="" required="required" placeholde="新しいユーザ名を入力してください" size="35">
+        <br>
+        <button v-on:click="updateUserNameApi">変更</button>
       </form>
       {{errNameMsg}}
-    </div>
   </div>
 </template>
 
@@ -21,27 +17,23 @@
     name: "UserChangeName",
     data() {
       return {
-        nameflg: false,
-        succses_flg:false,
+        succses_flg:true,
         errNameMsg:'',
+        userid:this.$route.params.userId,
+        apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users'
       }
-    },
-    props: {
-      user_name: '',
-      api_url:''
     },
     methods: {
       updateUserNameApi() {
         let me = this
         this.username = this.$refs.userThisName.value
         if(this.succses_flg == true) {
-          this.axios.put(this.api_url, {
-            user_id: String(this.userid),
+          this.axios.put(this.apiUrl, {
             user_name: String(this.username),
           }).then(function (response) {
             if (response.data.isSuccess == true) {
               me.getUserApi()
-              me.nameflg = false
+              me.$refs.userThisName.value = ''
             } else {
               me.errNameMsg = '失敗しました'
               console.log(response.data.error)
@@ -52,15 +44,14 @@
         }
 
       },
-      openNModal(){
-        this.$emit('open')
-      },
       getUserApi() {
         let me = this
-        this.axios.get(this.api_url, {
+        this.axios.get(this.apiUrl, {
         }).then(function (response) {
           if (response.data.isSuccess == true) {
             me.user_name = response.data.user[1]
+            let plcMsg = "ユーザ名："+me.user_name
+            me.$refs.userThisName.placeholder= plcMsg
           } else {
             console.log(response.data.error)
           }
@@ -68,13 +59,10 @@
           console.log(error)
         })
       },
-      nameFlagchange() {
-        if (this.nameflg) {
-          this.nameflg = false
-        } else {
-          this.nameflg = true
-        }
-      },
+    },
+    created() {
+      this.apiUrl = this.apiUrl+'/'+this.userid
+      this.getUserApi()
     }
   }
 </script>

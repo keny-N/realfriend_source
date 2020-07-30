@@ -1,20 +1,14 @@
 <template>
   <div>
     <p>
-      <msg1>パスワード：＊＊＊＊＊＊</msg1>
-      <button v-on:click="passFlagchange">変更</button>
       <br>
     </p>
-    <div v-if="passflg == true">
-      <form>
-        新しいパスワードを入力してください：
-        <input type="password" ref="newThisPass" value="" required="required"><br>
-        新しいパスワードをもう一度入力してください：
-        <input type="password" ref="checkThisPass" value="" required="required"><br>
-        <button v-on:click="openPModal">送信</button>
-      </form>
-      {{errPassMsg}}
-    </div>
+    <form>
+      <input type="password" ref="newThisPass" value="" required="required" placeholder="新しいパスワードを入力してください" size="35"><br>
+      <input type="password" ref="checkThisPass" value="" required="required" placeholder="もう一度入力してください" size="35"><br>
+      <button v-on:click="checkPass">変更</button>
+    </form>
+    {{errPassMsg}}
   </div>
 </template>
 
@@ -23,11 +17,11 @@
     name: "UserChangePass",
     data() {
       return {
-        passflg: false,
-        succses_flg: false,
+        succses_flg: true,
         pass_url: '',
-        openUModal: "",
         errPassMsg: '',
+        userid:this.$route.params.userId,
+        apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users'
       }
     },
     props: {
@@ -38,13 +32,17 @@
         let me = this
         if (this.succses_flg) {
           me.usernewpass = this.$refs.newThisPass.value
-          me.pass_url = me.api_url + '/pass'
+          me.pass_url = me.apiUrl + '/pass'
+          console.log(me.pass_url)
           this.axios.put(this.pass_url, {
             user_pass: String(me.usernewpass),
           }).then(function (response) {
             if (response.data.isSuccess == true) {
-              me.passflg = false
+              me.errPassMsg = '成功'
+              me.$refs.newThisPass.value =''
+              me.$refs.checkThisPass.value =''
             } else {
+              console.log(response)
               me.errPassMsg = '失敗'
             }
           }).catch(function (error) {
@@ -53,20 +51,17 @@
         }
 
       },
-      openPModal() {
+      checkPass() {
         if (this.$refs.newThisPass.value == this.$refs.checkThisPass.value) {
-          this.$emit('open')
+          this.updateUserPassApi()
         } else {
           this.errPassMsg = '確認用と同じものが指定されていません'
         }
       },
-      passFlagchange() {
-        if (this.passflg) {
-          this.passflg = false
-        } else {
-          this.passflg = true
-        }
-      },
+
+    },
+    created() {
+      this.apiUrl = this.apiUrl+'/'+this.userid
     }
   }
 </script>

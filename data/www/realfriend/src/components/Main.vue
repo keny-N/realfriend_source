@@ -4,6 +4,7 @@
     <FriendList class="listposition"></FriendList>
     <FriendInsert></FriendInsert>
     <News></News>
+    <button v-on:click="userProfileDisplay">変更ページ</button>
   </div>
 </template>
 
@@ -11,14 +12,23 @@
   import GameHeader from '@/components/GameHeader'
   import News from "@/components/News"
   import FriendList from "@/components/FriendList"
-  import FriendInsert from "@/components/FriendInsert";
+  import FriendInsert from "@/components/FriendInsert"
+
   export default {
     name: "Main",
-    components: {GameHeader, News, FriendList,FriendInsert},
+    components: {GameHeader, News, FriendList, FriendInsert},
     data() {
       return {
-        backgroundImageSrc: require("@/assets/main_back.jpg")
+        backgroundImageSrc: require("@/assets/main_back.jpg"),
+        user_id: this.$route.params.userId
       }
+    },
+    methods: {
+      userProfileDisplay() {
+        let textUrl = '/user/' + this.user_id + '/success'
+        this.$router.push({path: textUrl,params:{userId:this.userid}})
+      }
+
     }
   }
 </script>
