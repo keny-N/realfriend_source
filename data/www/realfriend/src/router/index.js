@@ -1,19 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// import HelloWorld from '@/components/HelloWorld'
 import Main from '@/components/Main'
 import GameBody from "@/components/GameBody"
 import LogIn from "@/components/LogIn"
 import UserProfile from "@/components/UserProfile"
 import User from "@/components/User"
 import UserChangeSuccess from "@/components/UserChangeSuccess"
+import Log from "@/components/LogDisplayBody"
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/game/:friendid',
+      path: '/game/:friendId',
       name: 'GameBody',
       component: GameBody
     },
@@ -43,5 +44,10 @@ export default new Router({
       name: 'LogIn',
       component: LogIn
     },
+    {
+      path: '/log',
+      name: 'Log',
+      component: Log
+    }
   ]
 })
