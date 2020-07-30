@@ -56,7 +56,7 @@
         // }
 
         let name = this.friendName
-        let me =this
+        let me = this
 
         console.log('put送信します')
         this.axios.post(this.postUrl, {
