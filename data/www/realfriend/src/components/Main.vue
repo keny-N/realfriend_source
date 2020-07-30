@@ -32,22 +32,21 @@
       userProfileDisplay() {
         let textUrl = '/user/' + this.user_id + '/success'
         this.$router.push({path: textUrl, params: {userId: this.userid}})
+      },
+      //カウンターテスト用
+      aIncre() {
+        this.$store.dispatch("increment", "a")
+      },
+      bIncre() {
+        this.$store.dispatch("increment", "b")
+      },
+      cIncre() {
+        this.$store.dispatch("increment", "c")
+      },
+      dIncre() {
+        this.$store.dispatch("increment", "d")
       }
-
     },
-    //カウンターテスト用
-    aIncre() {
-      this.$store.dispatch("increment", "a")
-    },
-    bIncre() {
-      this.$store.dispatch("increment", "b")
-    },
-    cIncre() {
-      this.$store.dispatch("increment", "c")
-    },
-    dIncre() {
-      this.$store.dispatch("increment", "d")
-    }
 
   }
 </script>
