@@ -15,19 +15,19 @@
 
                 <input type="text" ref="userThisName" value="" placeholder="ユーザ名" required="required">
               </p>
-              <h2>{{resultuser}}</h2>
+              <h2>{{resultUser}}</h2>
               <p>
                 <msg1>ユーザーIDを入力してください</msg1>
                 <msg2>※必須</msg2>
                 <br>
                 <input type="text" ref="userThisId" value="" placeholder="ユーザID" required="required"></p>
-              <h2>{{resultid}}</h2>
+              <h2>{{resultId}}</h2>
               <p>
                 <msg1>パスワードを入力してください</msg1>
                 <msg2>※必須</msg2>
                 <br>
                 <input type="password" ref="userThisPass" value="" placeholder="パスワード" required="required"></p>
-              <h2>{{resultpass}}</h2>
+              <h2>{{resultPass}}</h2>
               <button v-on:click="dataConfirmation">登録</button>
               <button v-on:click="dataDelete">取り消し</button>
 
@@ -57,12 +57,12 @@
     data() {
       return {
         message: '必要情報を入力してください',
-        resultuser: '',       /*エラー表示用*/
-        resultid: '',         /*エラー表示用*/
-        resultpass: '',       /*エラー表示用*/
-        username: null,       /*受け取り用*/
-        userid: null,         /*受け取り用*/
-        userpass: null,       /*受け取り用*/
+        resultUser: '',       /*エラー表示用*/
+        resultId: '',         /*エラー表示用*/
+        resultPass: '',       /*エラー表示用*/
+        userName: null,       /*受け取り用*/
+        userId: null,         /*受け取り用*/
+        userPass: null,       /*受け取り用*/
         modal: false,         /*モーダル展開*/
         success: false,       /*登録用or登録完了切り替え*/
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
@@ -72,42 +72,42 @@
       dataConfirmation: function () {
         /*msg初期化*/
         this.message = ''
-        this.resultuser = ''
-        this.resultid = ''
-        this.resultpass = ''
+        this.resultUser = ''
+        this.resultId = ''
+        this.resultPass = ''
 
         /*テキストボックスから受け取り*/
-        this.username = this.$refs.userThisName.value
-        this.userid = this.$refs.userThisId.value
-        this.userpass = this.$refs.userThisPass.value
+        this.userName = this.$refs.userThisName.value
+        this.userId = this.$refs.userThisId.value
+        this.userPass = this.$refs.userThisPass.value
 
         /*正規表現パターン*/
         // let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
         // let paternpass = new RegExp(/^([a-zA-Z0-9]{1,30})$/)
 
         /*入力値のチェック*/
-        if (this.username == '') {
-          this.resultuser = "ユーザ名が不正です"
-          if (this.userid == '' /*false == paternid.test(this.userid)*/) {
-            this.resultid = "ユーザidが不正です"
-            if (this.userpass == '' /*false == paternpass.test(this.userpass)*/) {
-              this.resultpass = "ユーザpassが不正です"
+        if (this.userName == '') {
+          this.resultUser = "ユーザ名が不正です"
+          if (this.userId == '' /*false == paternid.test(this.userId)*/) {
+            this.resultId = "ユーザidが不正です"
+            if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
+              this.resultPass = "ユーザpassが不正です"
             }
           } else {
-            if (this.userpass == '' /*false == paternpass.test(this.userpass)*/) {
-              this.resultpass = "ユーザpassが不正です"
+            if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
+              this.resultPass = "ユーザpassが不正です"
             }
           }
         } else {
-          if (this.userid == '' /*false == paternid.test(this.userid)*/) {
-            this.resultid = "ユーザidが不正です"
-            if (this.userpass == '' /*false == paternpass.test(this.userpass)*/) {
-              this.resultpass = "ユーザpassが不正です"
+          if (this.userId == '' /*false == paternid.test(this.userId)*/) {
+            this.resultId = "ユーザidが不正です"
+            if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
+              this.resultPass = "ユーザpassが不正です"
             }
 
           } else {
-            if (this.userpass == '' /*false == paternpass.test(this.userpass)*/) {
-              this.resultpass = "ユーザpassが不正です"
+            if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
+              this.resultPass = "ユーザpassが不正です"
             } else {
               this.userAdd()
             }
@@ -118,9 +118,9 @@
       userAdd() {
         let me = this
         this.axios.post(this.apiUrl, {
-          user_name: String(this.username),
-          user_id: String(this.userid),
-          user_pass: String(this.userpass),
+          user_name: String(this.userName),
+          user_id: String(this.userId),
+          user_pass: String(this.userPass),
         }).then(function (response) {
           if (response.data.isSuccess) {
             me.success = true
@@ -137,9 +137,9 @@
         this.$refs.userThisName.value = ''
         this.$refs.userThisId.value = ''
         this.$refs.userThisPass.value = ''
-        this.resultuser = ''
-        this.resultid = ''
-        this.resultpass = ''
+        this.resultUser = ''
+        this.resultId = ''
+        this.resultPass = ''
         this.message = '必要情報を入力してください'
       },
 

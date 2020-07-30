@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    {{username}}さん
+    {{userName}}さん
     <h1>認証ページです</h1>
     <form>
       <p>
@@ -21,26 +21,25 @@
     name: "UserChangeSuccess",
     data() {
       return {
-        userid: this.$route.params.userId,
+        userId: this.$route.params.userId,
         userpass: '',
-        username:'',
-        modal: false,
+        userName: '',
         errMsg: '',
         successUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
-        getUrl:'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
+        getUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
       }
     },
     methods: {
       changeCheck() {
         let me = this
-        this.userpass = this.$refs.userThisPass.value
+        this.userPass = this.$refs.userThisPass.value
         this.axios.post(this.successUrl, {
-          user_id: String(this.userid),
-          user_pass: String(this.userpass),
+          user_id: String(this.userId),
+          user_pass: String(this.userPass),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
-            let textUrl = '/user/' + me.userid + '/profile'
-            me.$router.push({path: textUrl,params:{userId:me.userid}})
+            let textUrl = '/user/' + me.userId + '/profile'
+            me.$router.push({path: textUrl, params: {userId: me.userId}})
           } else {
             me.errMsg = 'IDもしくはパスワードが間違っています'
           }
@@ -50,11 +49,9 @@
       },
       getUserApi() {
         let me = this
-        this.getUrl = this.getUrl+'/'+this.userid
-        this.axios.get(this.getUrl, {
-        }).then(function (response) {
+        this.axios.get(this.getUrl, {}).then(function (response) {
           if (response.data.isSuccess == true) {
-            me.username = response.data.user[1]
+            me.userName = response.data.user[1]
           } else {
             console.log(response.data.error)
           }
@@ -64,7 +61,7 @@
       },
     },
     created() {
-      this.getUrl = this.getUrl+'/'+this.userid
+      this.getUrl = this.getUrl + '/' + this.userId
       this.getUserApi()
     }
   }

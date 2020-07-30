@@ -23,17 +23,17 @@ export default new Router({
       component: Main,
     },
     {
-      path:'/user/:userId',
+      path: '/user/:userId',
       name: 'User',
       component: User,
-      children:[
+      children: [
         {
-          path:'profile',
+          path: 'profile',
           component: UserProfile
 
         },
         {
-          path:'success',
+          path: 'success',
           component: UserChangeSuccess,
         }
       ]

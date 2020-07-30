@@ -26,7 +26,7 @@
     methods: {
       userProfileDisplay() {
         let textUrl = '/user/' + this.user_id + '/success'
-        this.$router.push({path: textUrl,params:{userId:this.userid}})
+        this.$router.push({path: textUrl, params: {userId: this.userid}})
       }
 
     }

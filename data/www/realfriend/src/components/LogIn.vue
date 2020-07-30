@@ -4,20 +4,19 @@
     <!-- アカウント登録の時-->
     <SignUp ref="signup"></SignUp>
     <!-- ログインの時　-->
-    <h1>{{changmsg}}</h1> <!-- 成功メッセージ　-->
     <form>
       <p>
         <msg1>ユーザーIDを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
         <input type="text" ref="userThisId" placeholder="ユーザID" required="required"></p>
-      <h2>{{resultid}}</h2>
+      <h2>{{resultId}}</h2>
       <p>
         <msg1>パスワードを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
         <input type="password" ref="userThisPass" placeholder="パスワード" required="required"></p>
-      <h2>{{resultpass}}</h2>
+      <h2>{{resultPass}}</h2>
 
       <button v-on:click="dataCheck">サインイン</button>
     </form>
@@ -39,8 +38,8 @@
     },
     data() {
       return {
-        resultid: '',       /*エラーコメント表示用*/
-        resultpass: '',     /*エラーコメント表示用*/
+        resultId: '',       /*エラーコメント表示用*/
+        resultPass: '',     /*エラーコメント表示用*/
         userid: '',       /*ユーザID受け取り用*/
         userpass: null,     /*ユーザパス受け取り用*/
         message: '',
@@ -51,9 +50,8 @@
       dataCheck: function () {
         /*初期化*/
         this.resultuser = ''
-        this.resultid = ''
-        this.resultpass = ''
-        this.changmsg = ''
+        this.resultId = ''
+        this.resultPass = ''
         this.message = ''
 
         /*受け取り*/
@@ -68,13 +66,13 @@
         /*if 内のコメントアウトは基本的に正規表現*/
         /*現在は入っているかだけの確認*/
         if (this.userid == ''　/*false == paternid.test(this.userid)*/) {
-          this.resultid = "ユーザidが不正"
+          this.resultId = "ユーザidが不正"
           if (this.userpass == ''　/*false == paternpass.test(this.userpass)*/) {
-            this.resultpass = "ユーザpassが不正"
+            this.resultPass = "ユーザpassが不正"
           }
         } else {
           if (this.userpass == ''/*false == paternpass.test(this.userpass)*/) {
-            this.resultpass = "ユーザpassが不正"
+            this.resultPass = "ユーザpassが不正"
           } else {
             /*すべて入っている場合*/
             this.login()
@@ -99,8 +97,8 @@
       },
 
       loginSuccess() {
-        let textUrl = '/main/' +this.userid
-        this.$router.push({path:textUrl,params:{userId:this.userid}})
+        let textUrl = '/main/' + this.userid
+        this.$router.push({path: textUrl, params: {userId: this.userid}})
       },
       /*SignUpのモーダルを開く*/
       addAccountPage() {

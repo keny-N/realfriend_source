@@ -1,11 +1,9 @@
 <template>
   <div>
     <div>
-      <h2>{{changemessage}}</h2>
-
       <p>
         <msg1>ユーザーID：</msg1>
-        {{userid}}
+        {{userId}}
         <br>
       </p>
       <br>
@@ -13,9 +11,8 @@
       <UserChangeName ref="userchangename"></UserChangeName>
       <UserChangePass ref="userchangepass"></UserChangePass>
 
-
       <button v-on:click="backMainVue">戻る</button>
-<!--      <button v-on:click="deleteUser">アカウントを削除する</button>-->
+      <!--      <button v-on:click="deleteUser">アカウントを削除する</button>-->
     </div>
   </div>
 </template>
@@ -33,17 +30,11 @@
     },
     data() {
       return {
-        userid: this.$route.params.userId,       /*ユーザID受け取り用*/
-        useroldpass: null,     /*ユーザパス受け取り用*/
-        usernewpass: null,
-        changemessage: '',
-        username: '',
-        succsesflg: false,
-        Url: '',
+        userId: this.$route.params.userId,       /*ユーザID受け取り用*/
+        successFlg: this.$route.params.successFlg,
       }
     },
     methods: {
-
 
       // deleteUser() {
       //   let me = this
@@ -67,11 +58,14 @@
       //
       // },
       backMainVue() {
-        let textUrl = '/main/' + this.userid
-        this.$router.push({path: textUrl, params: {userId: this.userid}})
+        let textUrl = '/main/' + this.userId
+        this.$router.push({path: textUrl, params: {userId: this.userId}})
       },
     }
     ,
+    destroyed() {
+      this.$route.params.successFlg = false
+    }
   }
 
 </script>
