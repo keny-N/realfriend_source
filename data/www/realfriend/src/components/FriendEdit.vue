@@ -1,5 +1,5 @@
 <template>
-  <div class="friendedit">
+  <div class="friend-edit">
     <button v-on:click="openModal">フレンド変更</button>
     <div class="overlay" v-show="showContent">
       <div class="content">
@@ -20,80 +20,80 @@
 </template>
 
 <script>
-    export default {
-        name: "FriendEdit",
-      props:['friendId','imageData','friendName'],
-      data() {
-        return {
-          showContent: false, //モーダルを非表示している
-          imageDataEdit: '',//画像
-          friendNameEdit: this.friendName,//フレンドの名前
-          friendIdEdit:this.friendId,
-          putUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド編集
-        }
+  export default {
+    name: "FriendEdit",
+    props: ['friendId', 'imageData', 'friendName'],
+    data() {
+      return {
+        showContent: false, //モーダルを非表示している
+        imageDataEdit: '',//画像
+        friendNameEdit: this.friendName,//フレンドの名前
+        friendIdEdit: this.friendId,
+        Url: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド編集
+      }
+    },
+    methods: {
+      openModal: function () {
+        this.showContent = true
       },
-      methods: {
-        openModal: function () {
-          this.showContent = true
-        },
-        closeModal: function () {
-          this.showContent = false
-        },
-        onImgRegister(e) {
-          const files = e.target.files
-          let me=this
+      closeModal: function () {
+        this.showContent = false
+      },
+      onImgRegister(e) {
+        const files = e.target.files
+        let me = this
 
-          if (files.length > 0) {
+        if (files.length > 0) {
 
-            const file = files[0]
-            const reader = new FileReader()
-            reader.onload = (e) => {
-              me.imageDataEdit = e.target.result
-            }
-            reader.readAsDataURL(file)
+          const file = files[0]
+          const reader = new FileReader()
+          reader.onload = (e) => {
+            me.imageDataEdit = e.target.result
           }
-        },
-        editFriend() {
-          //今後文字数の制限が必要となると思うので、画像保存時ようの条件式を書かないといけない。
-          //if (this.friendName.length > 20 || this.friendName.length < 1) {
-          //}
-
-          let name = this.friendNameEdit
-          //画像は何も送られてこないためコメントアウトしています。
-          // let imgpath=this.friendImg
-          //　動的ルーティングでのuseridを取得するため、子コンポーネントなので取得できているかは不明
-          //let user_id =Number(this.$route.params.userid)
-          let friend_id=Number(this.friendIdEdit)
-          let testUrl=this.putUrl+friend_id
-          //if文のなかだとthisがスコープの都合で参照できないためmeに入れている。
-          let me = this
-
-          console.log('put送信します')
-          this.axios.put(testUrl,{
-            //ログとして表示する際に使用するためユーザーIDを送る
-            //ログインの動的ルーティングが確認できないので1を入れてます。
-            user_id:'1',
-            friend_name: name,
-            //現在はパスが確定していないためパスっぽい文字を入れているだけです。
-            friend_img: '/jk/matuo'
-          }).then(function (response) {
-            if (response.data.isSuccess) {
-              console.log(response)
-              //ifのなかでthisは使えない
-              me.closeModal()
-              me.$router.go({path: me.$router.currentRoute.path, force: true})
-            }
-          }).catch(function (error) {
-            console.log(error)
-            //ifのなかでthisは使えない
-            me.openModal()
-          })
-          //メイン画面を更新する処理
-          //this.$router.go({path: this.$router.currentRoute.path, force: true})
-          console.log('以下')
+          reader.readAsDataURL(file)
         }
       },
-    }
+      editFriend() {
+        //今後文字数の制限が必要となると思うので、画像保存時ようの条件式を書かないといけない。
+        //if (this.friendName.length > 20 || this.friendName.length < 1) {
+        //}
+
+        let name = this.friendNameEdit
+        //画像は何も送られてこないためコメントアウトしています。
+        // let imgpath=this.friendImg
+        //　動的ルーティングでのuseridを取得するため、子コンポーネントなので取得できているかは不明
+        //let user_id =Number(this.$route.params.userid)
+        let friendId = Number(this.friendIdEdit)
+        let putUrl = this.Url + friendId
+        //if文のなかだとthisがスコープの都合で参照できないためmeに入れている。
+        let me = this
+
+        console.log('put送信します')
+        this.axios.put(putUrl, {
+          //ログとして表示する際に使用するためユーザーIDを送る
+          //ログインの動的ルーティングが確認できないので1を入れてます。
+          user_id: '1',
+          friend_name: name,
+          //現在はパスが確定していないためパスっぽい文字を入れているだけです。
+          friend_img: '/jk/matuo'
+        }).then(function (response) {
+          if (response.data.isSuccess) {
+            console.log(response)
+            //ifのなかでthisは使えない
+            me.closeModal()
+            me.$router.go({path: me.$router.currentRoute.path, force: true})
+          }
+        }).catch(function (error) {
+          console.log(error)
+          //ifのなかでthisは使えない
+          me.openModal()
+        })
+        //メイン画面を更新する処理
+        //this.$router.go({path: this.$router.currentRoute.path, force: true})
+        console.log('以下')
+      }
+    },
+  }
 </script>
 
 <style scoped>

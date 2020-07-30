@@ -1,5 +1,5 @@
 <template>
-  <div class="friendinsert">
+  <div class="friend-insert">
     <button v-on:click="openModal">フレンド登録</button>
     <div class="overlay" v-show="showContent">
       <div class="content">

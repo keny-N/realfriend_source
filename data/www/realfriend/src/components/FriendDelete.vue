@@ -1,5 +1,5 @@
 <template>
-  <div class="frienddelete">
+  <div class="friend-delete">
     <button v-on:click="openModal">削除</button>
     <div class="overlay" v-show="showContent">
       <div class="content">
@@ -20,13 +20,13 @@
 <script>
   export default {
     name: "FriendDelete",
-    props:['friendId','friendImg','friendName'],
+    props: ['friendId', 'friendImg', 'friendName'],
     data() {
       return {
         showContent: false, //モーダルを非表示している
-        imageDataDelete:this.friendImg,//画像
-        friendNameDelete:this.friendName,//フレンドの名前
-        friendIdDelete:this.friendId,
+        imageDataDelete: this.friendImg,//画像
+        friendNameDelete: this.friendName,//フレンドの名前
+        friendIdDelete: this.friendId,
         deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド削除URL
       }
     },
@@ -43,13 +43,13 @@
         // }
         //画像は何も送られてこないためコメントアウトしています。
         // let imgpath=this.friendImg
-        let friend_id =Number(this.friendIdDelete)
-        let me =this
+        let friendId = Number(this.friendIdDelete)
+        let me = this
 
 
         console.log('delete送信します')
-        this.axios.delete(this.deleteUrl+friend_id
-          ).then(function (response) {
+        this.axios.delete(this.deleteUrl + friendId
+        ).then(function (response) {
           if (response.data.isSuccess) {
             console.log(response)
             me.showContent = false
