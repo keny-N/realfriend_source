@@ -10,13 +10,13 @@
 </template>
 
 <script>
-    export default {
-        name: "GameHeader"
-    }
+  export default {
+    name: "GameHeader"
+  }
 </script>
 
 <style scoped>
-  .gameheader{
+  .gameheader {
     background-color: #0b2e13;
   }
 
