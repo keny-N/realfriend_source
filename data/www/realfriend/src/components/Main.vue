@@ -1,7 +1,7 @@
 <template>
   <div class="main" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
-    <FriendList class="listposition"></FriendList>
+    <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
     <Log class="Log"></Log>
     <News></News>
@@ -52,7 +52,7 @@
     height: 100vh;
   }
 
-  .listposition {
+  .list-position {
     margin: 50vh auto 0;
     transform: translateY(-50%);
   }

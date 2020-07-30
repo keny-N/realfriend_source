@@ -11,7 +11,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/game/:friendid',
+      path: '/game/:friendId',
       name: 'GameBody',
       component: GameBody
     },

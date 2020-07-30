@@ -1,18 +1,18 @@
 <template>
-  <div class="friendinsert">
+  <div class="friend-insert">
     <button v-on:click="openModal">フレンド登録</button>
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド登録</h4>
         <div class="card-body">
-          <div>
-            <img v-on:src="imageData" v-if="imageData">
+          <div class="trim" >
+            <img v-bind:src="imageData" v-if="imageData">
           </div>
           <h4 class="card-title">画像を選んでください。</h4>
-          <input type="file" accept="image/*" @change="onImgRegister($event)" v-model="friendImg">
+          <input type="file" accept="image/*" @change="onImgRegister($event)">
         </div>
         <div>フレンド名前：<input v-model="friendName"></div>
-        <button class="float-left" v-on:click="registerFrined">登録</button>
+        <button class="float-left" v-on:click="registerFriend">登録</button>
         <button class="float-right" v-on:click="closeModal">取り消し</button>
       </div>
     </div>
@@ -28,7 +28,7 @@
         showContent: false, //モーダルを非表示している
         imageData: '',//画像
         friendName: '',//フレンドの名前
-        postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one'//フレンド登録URL
+        postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one',//フレンド登録URL
       }
     },
     methods: {
@@ -42,7 +42,6 @@
         const files = e.target.files
 
         if (files.length > 0) {
-
           const file = files[0]
           const reader = new FileReader()
           reader.onload = (e) => {
@@ -51,30 +50,31 @@
           reader.readAsDataURL(file)
         }
       },
-      registerFrined() {
-        if (this.friendName.length > 20 || this.friendName.length < 1) {
-          //２０文字以内かつ一文字以上でない時に実行される。
-        }
+      registerFriend() {
+        //   ２０文字以内かつ一文字以上でない時に実行される。画像用の条件式も書かないと行けない
+        // if (this.friendName.length > 20 || this.friendName.length < 1) {
+        // }
 
         let name = this.friendName
-        //faceApiに顔データを送信
+        let me = this
+
         console.log('put送信します')
         this.axios.post(this.postUrl, {
           user_id: 1,
           friend_name: name,
           //現在はパスが確定していないためパスっぽい文字を入れているだけです。
-          friend_img: '/jk/matuo'
+          friend_img:'matuo/apex'
         }).then(function (response) {
           if (response.data.isSuccess) {
             console.log(response)
-            this.showContent = false
+            me.showContent = false
+            me.$router.go({path: me.$router.currentRoute.path, force: true})
           }
         }).catch(function (error) {
           console.log(error)
-          this.showContent = true
+          me.showContent = true
         })
         //メイン画面を更新する処理
-        this.$router.go({path: this.$router.currentRoute.path, force: true})
         console.log('以下')
       }
     },
@@ -106,6 +106,23 @@
     width: 50%;
     padding: 1em;
     background: #fff;
+  }
+  .trim{
+    height: 150px;  /* トリミングしたい高さ */
+    overflow: hidden;
+    position: relative;
+  }
+  .trim img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
   }
 </style>
 
