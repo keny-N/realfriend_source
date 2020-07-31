@@ -1,5 +1,6 @@
 <template>
   <div>
+    <LogOut ref="logOut"></LogOut>
     <div>
       <p>
         <msg1>ユーザーID：</msg1>
@@ -12,6 +13,7 @@
       <UserChangePass ref="userchangepass"></UserChangePass>
 
       <button v-on:click="backMainVue">戻る</button>
+      <button v-on:click="logOutOpen">ログアウト</button>
       <!--      <button v-on:click="deleteUser">アカウントを削除する</button>-->
     </div>
   </div>
@@ -21,12 +23,14 @@
 <script>
   import UserChangeName from "@/components/UserChangeName"
   import UserChangePass from "@/components/UserChangePass"
+  import LogOut from "@/components/LogOut"
 
   export default {
     name: "UserProfile",
     components: {
       UserChangePass: UserChangePass,
       UserChangeName: UserChangeName,
+      LogOut:LogOut,
     },
     data() {
       return {
@@ -57,9 +61,11 @@
       //   }
       //
       // },
+      logOutOpen(){
+        this.$refs.logOut.openLogOutModal()
+      },
       backMainVue() {
-        let textUrl = '/main/' + this.userId
-        this.$router.push({path: textUrl, params: {userId: this.userId}})
+        this.$router.push({name: 'Main', params: {userId: this.userId}})
       },
     }
     ,

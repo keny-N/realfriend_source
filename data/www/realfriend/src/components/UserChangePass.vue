@@ -3,12 +3,10 @@
     <p>
       <br>
     </p>
-    <form>
       <input type="password" ref="newThisPass" value="" required="required" placeholder="新しいパスワードを入力してください"
              size="35"><br>
       <input type="password" ref="checkThisPass" value="" required="required" placeholder="もう一度入力してください" size="35"><br>
       <button v-on:click="checkPass">変更</button>
-    </form>
     {{errPassMsg}}
   </div>
 </template>

@@ -3,11 +3,9 @@
     <p>
       <br>
     </p>
-    <form>
       <input type="text" ref="userThisName" value="" required="required" placeholde="新しいユーザ名を入力してください" size="35">
       <br>
       <button v-on:click="updateUserNameApi">変更</button>
-    </form>
     {{errNameMsg}}
   </div>
 </template>

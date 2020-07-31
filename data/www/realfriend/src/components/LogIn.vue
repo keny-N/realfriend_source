@@ -2,9 +2,8 @@
   <div>
     {{message}}
     <!-- アカウント登録の時-->
-    <SignUp ref="signup"></SignUp>
+    <SignUp ref="signUp"></SignUp>
     <!-- ログインの時　-->
-    <form>
       <p>
         <msg1>ユーザーIDを入力してください</msg1>
         <msg2>※必須</msg2>
@@ -19,7 +18,7 @@
       <h2>{{resultPass}}</h2>
 
       <button v-on:click="dataCheck">サインイン</button>
-    </form>
+
     <br>
     <button v-on:click="addAccountPage">アカウント新規登録</button>
 
@@ -40,8 +39,8 @@
       return {
         resultId: '',       /*エラーコメント表示用*/
         resultPass: '',     /*エラーコメント表示用*/
-        userid: '',       /*ユーザID受け取り用*/
-        userpass: null,     /*ユーザパス受け取り用*/
+        userId: '',       /*ユーザID受け取り用*/
+        userPass: null,     /*ユーザパス受け取り用*/
         message: '',
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
@@ -55,9 +54,8 @@
         this.message = ''
 
         /*受け取り*/
-        this.userid = this.$refs.userThisId.value
-        this.userpass = this.$refs.userThisPass.value
-
+        this.userId = this.$refs.userThisId.value
+        this.userPass = this.$refs.userThisPass.value
 
         /*正規表現パターン
         let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
@@ -65,13 +63,13 @@
 
         /*if 内のコメントアウトは基本的に正規表現*/
         /*現在は入っているかだけの確認*/
-        if (this.userid == ''　/*false == paternid.test(this.userid)*/) {
+        if (this.userId == ''　/*false == paternid.test(this.userid)*/) {
           this.resultId = "ユーザidが不正"
-          if (this.userpass == ''　/*false == paternpass.test(this.userpass)*/) {
+          if (this.userPass == ''　/*false == paternpass.test(this.userpass)*/) {
             this.resultPass = "ユーザpassが不正"
           }
         } else {
-          if (this.userpass == ''/*false == paternpass.test(this.userpass)*/) {
+          if (this.userPass == ''/*false == paternpass.test(this.userpass)*/) {
             this.resultPass = "ユーザpassが不正"
           } else {
             /*すべて入っている場合*/
@@ -83,8 +81,8 @@
       login() {
         let me = this
         this.axios.post(this.apiUrl, {
-          user_id: String(this.userid),
-          user_pass: String(this.userpass),
+          user_id: String(this.userId),
+          user_pass: String(this.userPass),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
             me.loginSuccess()
@@ -97,12 +95,11 @@
       },
 
       loginSuccess() {
-        let textUrl = '/main/' + this.userid
-        this.$router.push({path: textUrl, params: {userId: this.userid}})
+        this.$router.push({name: 'Main', params: {userId: this.userId}})
       },
       /*SignUpのモーダルを開く*/
       addAccountPage() {
-        this.$refs.signup.openSignUpModal()
+        this.$refs.signUp.openSignUpModal()
       }
 
     },
