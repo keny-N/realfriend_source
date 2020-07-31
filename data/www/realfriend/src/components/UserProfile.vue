@@ -9,8 +9,8 @@
       </p>
       <br>
 
-      <UserChangeName ref="userchangename"></UserChangeName>
-      <UserChangePass ref="userchangepass"></UserChangePass>
+      <UserChangeName></UserChangeName>
+      <UserChangePass></UserChangePass>
 
       <button v-on:click="backMainVue">戻る</button>
       <button v-on:click="logOutOpen">ログアウト</button>

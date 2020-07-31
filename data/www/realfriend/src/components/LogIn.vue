@@ -72,7 +72,7 @@
             this.resultPass = "入力してください"
           } else {
             /*すべて入っている場合*/
-            this.login()
+            this.logn()
           }
         }
 
@@ -84,7 +84,7 @@
           user_pass: String(this.userPass),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
-            me.loginSuccess()
+            me.logInSuccess()
           } else {
             me.message = 'IDもしくはパスワードが間違っています'
           }
@@ -93,7 +93,7 @@
         })
       },
 
-      loginSuccess() {
+      logInSuccess() {
         this.$router.push({name: 'Main', params: {userId: this.userId}})
       },
       /*SignUpのモーダルを開く*/
