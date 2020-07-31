@@ -5,7 +5,6 @@ import Main from '@/components/Main'
 import GameBody from "@/components/GameBody"
 import LogIn from "@/components/LogIn"
 import UserProfile from "@/components/UserProfile"
-import User from "@/components/User"
 import UserChangeSuccess from "@/components/UserChangeSuccess"
 import Log from "@/components/LogDisplayBody"
 
@@ -24,20 +23,14 @@ export default new Router({
       component: Main,
     },
     {
-      path: '/user/:userId',
-      name: 'User',
-      component: User,
-      children: [
-        {
-          path: 'profile',
-          component: UserProfile
-
-        },
-        {
-          path: 'success',
-          component: UserChangeSuccess,
-        }
-      ]
+      path:'/profile/:userId',
+      name:'Profile',
+      component: UserProfile
+    },
+    {
+      path:'changesuccess/:userId',
+      name:'ChangeSuccess',
+      component: UserChangeSuccess
     },
     {
       path: '/login',

@@ -3,11 +3,11 @@
     <p>
       <br>
     </p>
-      <input type="password" ref="newThisPass" value="" required="required" placeholder="新しいパスワードを入力してください"
+      <input type="password" ref="newThisPass" placeholder="新しいパスワードを入力してください"
              size="35"><br>
-      <input type="password" ref="checkThisPass" value="" required="required" placeholder="もう一度入力してください" size="35"><br>
-      <button v-on:click="checkPass">変更</button>
+      <input type="password" ref="checkThisPass" placeholder="もう一度入力してください" size="35"><br>
     {{errPassMsg}}
+      <button v-on:click="checkPass">変更</button>
   </div>
 </template>
 
@@ -48,10 +48,15 @@
 
       },
       checkPass() {
-        if (this.$refs.newThisPass.value == this.$refs.checkThisPass.value) {
-          this.updateUserPassApi()
-        } else {
-          this.errPassMsg = '確認用と同じものが指定されていません'
+        if(this.$refs.newThisPass.value == '' || this.$refs.checkThisPass.value =='') {
+          this.errPassMsg = '入力してください'
+          console.log('a')
+        }else{
+          if (this.$refs.newThisPass.value == this.$refs.checkThisPass.value) {
+            this.updateUserPassApi()
+          } else {
+            this.errPassMsg = '確認用と同じものが指定されていません'
+          }
         }
       },
 

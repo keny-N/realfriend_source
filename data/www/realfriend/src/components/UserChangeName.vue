@@ -2,10 +2,10 @@
   <div>
     <p>
       <br>
-    </p>
-      <input type="text" ref="userThisName" value="" required="required" placeholde="新しいユーザ名を入力してください" size="35">
-      <br>
-      <button v-on:click="updateUserNameApi">変更</button>
+      <input type="text" ref="userThisName" size="35" ></p>
+    <br>
+    {{errMsg}}
+    <button v-on:click="updateUserNameApi">変更</button>
     {{errNameMsg}}
   </div>
 </template>
@@ -17,6 +17,7 @@
       return {
         errNameMsg: '',
         userId: this.$route.params.userId,
+        errMsg:'',
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users'
       }
     },
@@ -24,19 +25,23 @@
       updateUserNameApi() {
         let me = this
         this.userName = this.$refs.userThisName.value
-        this.axios.put(this.apiUrl, {
-          user_name: String(this.userName),
-        }).then(function (response) {
-          if (response.data.isSuccess == true) {
-            me.getUserApi()
-            me.$refs.userThisName.value = ''
-          } else {
-            me.errNameMsg = '失敗しました'
-            console.log(response.data.error)
-          }
-        }).catch(function (error) {
-          console.log(error)
-        })
+        if (this.userName == '') {
+            this.errMsg = '入力してください'
+        } else {
+          this.axios.put(this.apiUrl, {
+            user_name: String(this.userName),
+          }).then(function (response) {
+            if (response.data.isSuccess == true) {
+              me.getUserApi()
+              me.$refs.userThisName.value = ''
+            } else {
+              me.errNameMsg = '失敗しました'
+              console.log(response.data.error)
+            }
+          }).catch(function (error) {
+            console.log(error)
+          })
+        }
 
 
       },

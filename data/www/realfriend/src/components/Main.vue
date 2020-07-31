@@ -25,13 +25,12 @@
     data() {
       return {
         backgroundImageSrc: require("@/assets/main_back.jpg"),
-        user_id: this.$route.params.userId
+        userId: this.$route.params.userId
       }
     },
     methods: {
       userProfileDisplay() {
-        let textUrl = '/user/' + this.user_id + '/success'
-        this.$router.push({path: textUrl, params: {userId: this.userid}})
+        this.$router.push({name:'ChangeSuccess' , params: {userId: this.userId}})
       },
       //カウンターテスト用
       aIncre() {

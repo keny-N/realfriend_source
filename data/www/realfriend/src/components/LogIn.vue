@@ -8,13 +8,13 @@
         <msg1>ユーザーIDを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
-        <input type="text" ref="userThisId" placeholder="ユーザID" required="required"></p>
+        <input type="text" ref="userThisId" placeholder="ユーザID" ></p>
       <h2>{{resultId}}</h2>
       <p>
         <msg1>パスワードを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
-        <input type="password" ref="userThisPass" placeholder="パスワード" required="required"></p>
+        <input type="password" ref="userThisPass" placeholder="パスワード" ></p>
       <h2>{{resultPass}}</h2>
 
       <button v-on:click="dataCheck">サインイン</button>
@@ -48,7 +48,6 @@
     methods: {
       dataCheck: function () {
         /*初期化*/
-        this.resultuser = ''
         this.resultId = ''
         this.resultPass = ''
         this.message = ''
@@ -64,13 +63,13 @@
         /*if 内のコメントアウトは基本的に正規表現*/
         /*現在は入っているかだけの確認*/
         if (this.userId == ''　/*false == paternid.test(this.userid)*/) {
-          this.resultId = "ユーザidが不正"
+          this.resultId = "入力してください"
           if (this.userPass == ''　/*false == paternpass.test(this.userpass)*/) {
-            this.resultPass = "ユーザpassが不正"
+            this.resultPass = "入力してください"
           }
         } else {
           if (this.userPass == ''/*false == paternpass.test(this.userpass)*/) {
-            this.resultPass = "ユーザpassが不正"
+            this.resultPass = "入力してください"
           } else {
             /*すべて入っている場合*/
             this.login()

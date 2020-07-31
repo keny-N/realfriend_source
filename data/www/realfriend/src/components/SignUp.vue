@@ -7,7 +7,7 @@
           <!-- コンポーネント MyModal -->
           <!-- default スロットコンテンツ -->
           <div v-if="success == false">
-            <form>
+
               <p>
                 <msg1>ユーザー名を入力してください</msg1>
                 <msg2>※必須</msg2>
@@ -31,7 +31,7 @@
               <button v-on:click="dataConfirmation">登録</button>
               <button v-on:click="dataDelete">取り消し</button>
 
-            </form>
+
             <h1>{{message}}</h1>
           </div>
           <div v-if="success">
