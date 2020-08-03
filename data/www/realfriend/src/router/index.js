@@ -5,7 +5,7 @@ import Main from '@/components/Main'
 import GameBody from "@/components/GameBody"
 import LogIn from "@/components/LogIn"
 import Log from "@/components/LogDisplayBody"
-import Store from "../store"
+import store from "@/store"
 
 Vue.use(Router)
 
@@ -41,19 +41,24 @@ const router = new Router({
 
 })
 
+//グローバルにパラメータのバリデーションを行う
+//アクセスのガードを行う
 router.beforeEach((to, from, next) => {
-    console.log(Store.getters.loginGet)
-    console.log(Store.token.state.token)
-  if (Store.getters.loginGet === true){
+  console.log(store.getters.loginGet)
 
+  //この書き方でstoreのトークンを取得しています。
+  //importしたstoreでstoreフォルダのindex.jsを参照し。stateの中身を見に行っています
+  //modluesに設定したtokenをさらに参照し、Token.jsのstateにあるtokenを呼び出しています
+  console.log(store.state.token.token)
+  if (store.getters.loginGet === true) {
     console.log('aaaa')
     next()
-  } else if (Store.getters.token !== 0 && Store.getters.firstFlag === false){
+  } else if (store.getters.token !== 0 && store.getters.firstFlag === false) {
     console.log('bbbbb')
     next()
-  }else{
-    Store.dispatch("setLogin", true)
-    console.log(Store.getters.loginGet)
+  } else {
+    store.dispatch("token/setLogin", true)
+    console.log(store.getters.loginGet)
     next('/login')
   }
 
