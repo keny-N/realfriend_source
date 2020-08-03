@@ -3,7 +3,7 @@
     <!--    <button v-on:click="faceApi">POST送信</button>-->
     <!--    <button v-on:click="empath">empath送信</button>-->
     <div>
-      <video ref="video" id="video" width="500" height="500" autoplay muted class="camerasize"></video>
+      <video ref="video" id="video" width="500" height="500" autoplay muted class="camera-size"></video>
       <canvas ref="canvas" id="canvas" width="500" height="500"></canvas>
       <div>
         <button v-on:click="recStart">Start</button>
@@ -55,13 +55,21 @@
                 console.log(this.wav)
                 this.axios.post(this.postUrl, {
                     image: String(this.image),
-                    voice: this.wav
+                    voice: this.wav,
+                    friend_id: 77,
+                    friend_name: "ウンチ"
+                }, {
+                    headers: {
+                        //トークンをヘッダーに付与する
+                        'Authorization': 'CQ8yKBb2LN4k_hGvDXIPPlW5lEa4z1CtRRX0tFOZEFVi1Nn5OB_9tmfr39WqZahjt7IhDXXbbc12PXuzIXlbQA'
+                    }
                 }).then(function (response) {
-                    if (response.data.isSuccess) {
+                    console.log(response.status)
+                    if (response.status == 200) {
                         console.log(response)
                         me.msg = response.data.result
                     } else {
-                        me.msg = response.data.result
+                        // me.msg = response.data.result
                         console.log(response)
                     }
                 }).catch(function (error) {
@@ -69,36 +77,59 @@
                     me.msg = "catch_error"
                 })
             },
-            empath(wav) {
-                console.log("empath起動")
-                console.log(wav)
-                this.axios.post('https://23gjh3gnd7.execute-api.ap-northeast-1.amazonaws.com/empath/mastuo_lamda_test', {
-                    wav: String(wav)
-                }).then(function (response) {
-                    console.log(response)
-                }).catch(function (error) {
-                    console.log(error)
-                })
-
-            },
+            // empath(wav) {
+            //     console.log("empath起動")
+            //     console.log(wav)
+            //     this.axios.post('https://23gjh3gnd7.execute-api.ap-northeast-1.amazonaws.com/empath/mastuo_lamda_test', {
+            //         wav: String(wav)
+            //     }).then(function (response) {
+            //         console.log(response)
+            //     }).catch(function (error) {
+            //         console.log(error)
+            //     })
+            //
+            // },
             capture() {
-                //カメラが写っている範囲を指定し、その領域を画像として切り取る
-                this.canvas = this.$refs.canvas
-                this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480)
+                const EXECUTE = async () => {
+                    const createImage = () => {
+                        return new Promise(((resolve, reject) => {
+                            //カメラが写っている範囲を指定し、その領域を画像として切り取る
+                            this.canvas = this.$refs.canvas
+                            this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480)
 
-                //画像データをbase64にエンコード
-                this.image = this.canvas.toDataURL("image/jpeg")
-                this.image = this.image.substr(23)
+                            //画像データをbase64にエンコード
+                            this.image = this.canvas.toDataURL("image/jpeg")
+                            this.image = this.image.substr(23)
+                            resolve()
+                        }))
+                    }
 
+                    const createWav = () => {
+                        return new Promise(((resolve, reject) => {
+                            this.exportWAV()
+                            resolve()
+                        }))
+                    }
 
-                this.exportWAV()
+                    const runApi = () => {
+                        return new Promise(((resolve, reject) => {
+                            //感情測定APIを実行[empath|faceapi]
+                            this.emotionJudgement()
+                            resolve()
+                        }))
+                    }
 
-                //感情測定APIを実行[empath|faceapi]
-                this.emotionJudgement()
-
-
-                //親コンポーネント(GameBodyのupdateMSGを実行する)
-                this.$emit('updateMsg', this.msg)
+                    await createImage()
+                    console.log("画像生成完了")
+                    await createWav()
+                    console.log("音声生成完了")
+                    await runApi()
+                    console.log("APIに送信完了")
+                    //親コンポーネント(GameBodyのupdateMSGを実行する)
+                    this.$emit('updateMsg', this.msg)
+                    console.log("メッセージの更新完了")
+                }
+                EXECUTE()
             },
             // saveAudio() {
             //     // this.$refs.download.href =
@@ -263,7 +294,7 @@
     padding: 5px;
   }
 
-  .camerasize {
+  .camera-size {
     width: 100%;
   }
 
