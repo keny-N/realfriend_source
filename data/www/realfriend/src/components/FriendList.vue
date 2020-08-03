@@ -30,6 +30,7 @@
 <script>
   import FriendEdit from "@/components/FriendEdit"
   import FriendDelete from "@/components/FriendDelete"
+  import http from "@/axios/axios"
 
   export default {
     name: "FriendList",
@@ -65,18 +66,15 @@
         console.log('get送信します')
         //動的ルーティングで取得した際の書き方
         //this.axios.get(this.getUrl+Number(userid))
-        this.axios.get(this.getUrl)
-          .then(function (response) {
-            if (response.data.isSuccess) {
-              console.log(response.data)
-              me.friends = response.data.friends
-            } else {
-              me.msg = "エラーリスト表示"
-            }
-          }).catch(function (error) {
-          console.log(error)
-          me.msg = "エラーリスト表示"
-        })
+        // http.get(this.getUrl)
+        //   .then(function (response) {
+        //     if (response.data.isSuccess) {
+        //       console.log(response.data)
+        //       me.friends = response.data.friends
+        //     } else {
+        //       me.msg = "エラーリスト表示"
+        //     }
+        //   })
       }
     }
   }

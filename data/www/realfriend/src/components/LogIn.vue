@@ -47,6 +47,17 @@
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
+    created() {
+      if (this.$store.getters.tokenGet !== 0 && this.$store.getters.firstFlagGet === true){
+        //一度ログインしてアクセスした場合
+      }else if(this.$store.getters.tokenGet === 0){
+        // 一番最初にアクセスした場合
+      }else if (this.$store.getters.tokenErrorGet === true){
+        //認証失敗などで遷移させられた場合
+      }else{
+        //おそらく不正に画面アクセスした場合?main画面等に遷移させる？
+      }
+    },
     methods: {
       dataCheck: function () {
         /*初期化*/
@@ -88,18 +99,17 @@
           user_id: String(this.userid),
           user_pass: String(this.userpass),
         }).then(function (response) {
-          if (response.data.isSuccess == true) {
-            me.loginSuccess()
-          } else {
+          me.loginSuccess()
+        }).catch(function (error) {
+          if(error.response.status === 401){
             me.message = 'IDもしくはパスワードが間違っています'
           }
-        }).catch(function (error) {
-          console.log(error)
         })
       },
 
       loginSuccess() {
-        this.$router.replace({path: '/', query: {id: this.userid}})
+        // this.$router.replace({path: '/', query: {id: this.userid}})
+        this.$router.push('/')
       },
       /*SignUpのモーダルを開く*/
       addAccountPage() {
