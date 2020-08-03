@@ -5,6 +5,8 @@
 </template>
 
 <script>
+
+
     export default {
         name: 'App',
         created() {
@@ -15,17 +17,17 @@
         },
         methods: {
             confirmSave(event) {
-                this.counterSave()
+                // this.counterSave()
                 event.returnValue = "編集中のものは保存されませんが、よろしいですか？"
             },
             counterSave() {
                 let me = this
                 //ユーザー動向のカウンター値をDBに保存する
                 this.axios.post('https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/counter', {
-                    A: this.$store.state.aCount,
-                    B: this.$store.state.bCount,
-                    C: this.$store.state.cCount,
-                    D: this.$store.state.dCount
+                    A: this.$store.state.counter.aCount,
+                    B: this.$store.state.counter.bCount,
+                    C: this.$store.state.counter.cCount,
+                    D: this.$store.state.counter.dCount
                 }).then(function (response) {
                     me.$store.dispatch("resetCounter")
                     console.log(response)
