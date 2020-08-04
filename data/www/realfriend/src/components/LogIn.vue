@@ -2,25 +2,23 @@
   <div>
     {{message}}
     <!-- アカウント登録の時-->
-    <SignUp ref="signup"></SignUp>
+    <SignUp ref="signUp"></SignUp>
     <!-- ログインの時　-->
-    <h1>{{changmsg}}</h1> <!-- 成功メッセージ　-->
-    <form>
       <p>
         <msg1>ユーザーIDを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
-        <input type="text" ref="userThisId" placeholder="ユーザID" required="required"></p>
-      <h2>{{resultid}}</h2>
+        <input type="text" ref="userThisId" placeholder="ユーザID" ></p>
+      <h2>{{resultId}}</h2>
       <p>
         <msg1>パスワードを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
-        <input type="password" ref="userThisPass" placeholder="パスワード" required="required"></p>
-      <h2>{{resultpass}}</h2>
+        <input type="password" ref="userThisPass" placeholder="パスワード" ></p>
+      <h2>{{resultPass}}</h2>
 
       <button v-on:click="dataCheck">サインイン</button>
-    </form>
+
     <br>
     <button v-on:click="addAccountPage">アカウント新規登録</button>
 
@@ -39,27 +37,24 @@
     },
     data() {
       return {
-        resultid: '',       /*エラーコメント表示用*/
-        resultpass: '',     /*エラーコメント表示用*/
-        userid: '',       /*ユーザID受け取り用*/
-        userpass: null,     /*ユーザパス受け取り用*/
-        message:'',
+        resultId: '',       /*エラーコメント表示用*/
+        resultPass: '',     /*エラーコメント表示用*/
+        userId: '',       /*ユーザID受け取り用*/
+        userPass: null,     /*ユーザパス受け取り用*/
+        message: '',
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
       }
     },
     methods: {
       dataCheck: function () {
         /*初期化*/
-        this.resultuser = ''
-        this.resultid = ''
-        this.resultpass = ''
-        this.changmsg = ''
-        this.message='',
+        this.resultId = ''
+        this.resultPass = ''
+        this.message = ''
 
         /*受け取り*/
-        this.userid = this.$refs.userThisId.value
-        this.userpass = this.$refs.userThisPass.value
-
+        this.userId = this.$refs.userThisId.value
+        this.userPass = this.$refs.userThisPass.value
 
         /*正規表現パターン
         let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
@@ -67,14 +62,14 @@
 
         /*if 内のコメントアウトは基本的に正規表現*/
         /*現在は入っているかだけの確認*/
-        if (this.userid == ''　/*false == paternid.test(this.userid)*/) {
-          this.resultid = "ユーザidが不正"
-          if (this.userpass == ''　/*false == paternpass.test(this.userpass)*/) {
-            this.resultpass = "ユーザpassが不正"
+        if (this.userId == ''　/*false == paternid.test(this.userid)*/) {
+          this.resultId = "入力してください"
+          if (this.userPass == ''　/*false == paternpass.test(this.userpass)*/) {
+            this.resultPass = "入力してください"
           }
         } else {
-          if (this.userpass == ''/*false == paternpass.test(this.userpass)*/) {
-            this.resultpass = "ユーザpassが不正"
+          if (this.userPass == ''/*false == paternpass.test(this.userpass)*/) {
+            this.resultPass = "入力してください"
           } else {
             /*すべて入っている場合*/
             this.login()
@@ -85,12 +80,13 @@
       login() {
         let me = this
         this.axios.post(this.apiUrl, {
-          user_id: String(this.userid),
-          user_pass: String(this.userpass),
+          user_id: String(this.userId),
+          user_pass: String(this.userPass),
         }).then(function (response) {
           if (response.data.isSuccess == true) {
-            me.loginSuccess()
+            me.logInSuccess()
           } else {
+            // console.log(response)
             me.message = 'IDもしくはパスワードが間違っています'
           }
         }).catch(function (error) {
@@ -98,12 +94,12 @@
         })
       },
 
-      loginSuccess() {
-        this.$router.replace({path: '/', query: {id: this.userid}})
+      logInSuccess() {
+        this.$router.push({name: 'Main', params: {userId: this.userId}})
       },
       /*SignUpのモーダルを開く*/
       addAccountPage() {
-        this.$refs.signup.openSignUpModal()
+        this.$refs.signUp.openSignUpModal()
       }
 
     },
