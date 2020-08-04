@@ -7,6 +7,7 @@
 
 <script>
   import InformationList from "@/components/LogDisplayList"
+  import http from "../axios/axios"
 
   export default {
     name: "LogDisplayBody",
@@ -27,7 +28,11 @@
 
     methods: {
       apiGet: async function (url, data) {
-        await this.axios.get(url)
+        http.interceptors.request.use((config) => {
+          config.headers.Authorization = this.$store.getters['token/tokenGet']
+          return config
+        })
+        await http.get(url)
           .then(response =>
             response.data.logs.forEach(tmpData=> {
               data.body.push({title:tmpData[1], body:tmpData[0]})
@@ -40,7 +45,7 @@
       },
 
       dataGet: async function () {
-        const LOG_URL = this.BASE_URL + "/users/" + this.USER_ID + "/log"
+        const LOG_URL = this.BASE_URL + "/users/log"
         // await Promis.all([this.updateGet,this.logGet])
         // await Promis.all([this.logGet()])
         await this.apiGet(LOG_URL, this.logInformation)

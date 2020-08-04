@@ -18,6 +18,7 @@ http.interceptors.response.use(function (response) {
     Store.dispatch("token/setError", true)
     Store.dispatch("token/setLogin", true)
     console.log("error!!!")
+    console.log(error.status)
     // システムエラー時の処理
   }
   return Promise.reject(error)

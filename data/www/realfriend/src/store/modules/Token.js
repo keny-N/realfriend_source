@@ -27,6 +27,9 @@ export default {
     setLogin: (state, flag) => {
       state.loginScreenJudgment = flag
     },
+    setToken: (state, value) => {
+      state.token = value
+    }
    },
   actions: {
     setFirstFlag: ({commit}, flag) => {
@@ -38,5 +41,8 @@ export default {
     setLogin:({commit}, flag) => {
       commit('setLogin', flag)
     },
+    setToken:({commit}, value) => {
+      commit('setToken', value)
+    }
   }
 }

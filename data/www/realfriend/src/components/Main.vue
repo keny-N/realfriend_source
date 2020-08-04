@@ -37,7 +37,10 @@
             //     dCount: state => state.counter.dCount,
             // })
         },
-        methods: {
+      created() {
+        console.log(this.$store.getters['token/tokenGet']  )
+      },
+      methods: {
             userProfileDisplay() {
                 this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
             },

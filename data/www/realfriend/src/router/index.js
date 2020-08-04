@@ -24,13 +24,13 @@ const router = new Router({
       component: Main,
     },
     {
-      path:'/profile/:userId',
-      name:'Profile',
+      path: '/profile/:userId',
+      name: 'Profile',
       component: UserProfile
     },
     {
-      path:'/changesuccess/:userId',
-      name:'ChangeSuccess',
+      path: '/changesuccess/:userId',
+      name: 'ChangeSuccess',
       component: UserChangeSuccess
     },
     {
@@ -44,7 +44,6 @@ const router = new Router({
       component: Log
     }
   ],
-
 
 })
 
@@ -60,7 +59,7 @@ router.beforeEach((to, from, next) => {
   if (store.getters["token/loginGet"] === true) {
     console.log('aaaa')
     next()
-  } else if (store.getters["token/tokenGet"] !== 0 && store.getters["token/firstFlagGet"]=== false) {
+  } else if (store.getters["token/tokenGet"] !== '0' && store.getters["token/firstFlagGet"] === false) {
     console.log('bbbbb')
     next()
   } else {
@@ -68,8 +67,6 @@ router.beforeEach((to, from, next) => {
     // console.log(store.token.getters.loginGet)
     next('/login')
   }
-
-
 })
 
 export default router

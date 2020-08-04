@@ -11,19 +11,19 @@ export default {
   name: 'App',
   created() {
     window.addEventListener("beforeunload", this.confirmSave)
-    http.post('https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login', {
-      user_id: 'Ryu',
-      user_pass: 'RRRyu'
-    }
-      // headers:{
-      //   Authorization:""
-      // }
-    )
-      .then(function(response){
-        console.log(response)
-        console.log(response.status)
-        console.log(response.data)
-      })
+    // http.post('https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login', {
+    //   user_id: 'Ryu',
+    //   user_pass: 'RRRyu'
+    // }
+    //   // headers:{
+    //   //   Authorization:""
+    //   // }
+    // )
+    //   .then(function(response){
+    //     console.log(response)
+    //     console.log(response.status)
+    //     console.log(response.data)
+    //   })
   },
   destroyed() {
     window.removeEventListener("beforeunload", this.confirmSave)
