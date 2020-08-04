@@ -28,7 +28,7 @@ export default new Router({
       component: UserProfile
     },
     {
-      path:'changesuccess/:userId',
+      path:'/changesuccess/:userId',
       name:'ChangeSuccess',
       component: UserChangeSuccess
     },

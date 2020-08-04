@@ -13,20 +13,20 @@
                 <msg2>※必須</msg2>
                 <br>
 
-                <input type="text" ref="userThisName" value="" placeholder="ユーザ名" required="required">
+                <input type="text" ref="userThisName" value="" placeholder="ユーザ名">
               </p>
               <h2>{{resultUser}}</h2>
               <p>
                 <msg1>ユーザーIDを入力してください</msg1>
                 <msg2>※必須</msg2>
                 <br>
-                <input type="text" ref="userThisId" value="" placeholder="ユーザID" required="required"></p>
+                <input type="text" ref="userThisId" value="" placeholder="ユーザID"></p>
               <h2>{{resultId}}</h2>
               <p>
                 <msg1>パスワードを入力してください</msg1>
                 <msg2>※必須</msg2>
                 <br>
-                <input type="password" ref="userThisPass" value="" placeholder="パスワード" required="required"></p>
+                <input type="password" ref="userThisPass" value="" placeholder="パスワード"></p>
               <h2>{{resultPass}}</h2>
               <button v-on:click="dataConfirmation">登録</button>
               <button v-on:click="dataDelete">取り消し</button>
@@ -134,13 +134,7 @@
 
       /*データクリア用*/
       dataDelete: function () {
-        this.$refs.userThisName.value = ''
-        this.$refs.userThisId.value = ''
-        this.$refs.userThisPass.value = ''
-        this.resultUser = ''
-        this.resultId = ''
-        this.resultPass = ''
-        this.message = '必要情報を入力してください'
+        this.closeSignUpModal()
       },
 
       openSignUpModal() {

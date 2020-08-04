@@ -72,7 +72,7 @@
             this.resultPass = "入力してください"
           } else {
             /*すべて入っている場合*/
-            this.logn()
+            this.login()
           }
         }
 
@@ -86,6 +86,7 @@
           if (response.data.isSuccess == true) {
             me.logInSuccess()
           } else {
+            // console.log(response)
             me.message = 'IDもしくはパスワードが間違っています'
           }
         }).catch(function (error) {
