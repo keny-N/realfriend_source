@@ -1,7 +1,7 @@
 export default {
   namespaced: true,  //モジュールを名前空間に分ける
   state: {
-    token:0,
+    token:"私はToken.jsのstateのtokenです！",
     firstFlag: true,
     tokenError: false,
     loginScreenJudgment: false
