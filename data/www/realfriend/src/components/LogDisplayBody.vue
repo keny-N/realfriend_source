@@ -6,25 +6,24 @@
 </template>
 
 <script>
-  import InformationList from "@/components/LogDisplayList"
-  import http from "../axios/axios"
+    import InformationList from "@/components/LogDisplayList"
 
-  export default {
-    name: "LogDisplayBody",
-    components: {InformationList},
-    data() {
-      return {
-        updateInformation: {
-          title: "更新情報", body: [{title: "全米が驚愕", body: "あほくさ"}]
+    export default {
+        name: "LogDisplayBody",
+        components: {InformationList},
+        data() {
+            return {
+                updateInformation: {
+                    title: "更新情報", body: [{title: "全米が驚愕", body: "あほくさ"}]
+                },
+                logInformation: {
+                    title: "ログ情報", body: [{title: "07/07/02/21", body: "削除完了"}]
+                },
+                USER_ID: "1",
+                BASE_URL: "https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend",
+                apiError: false
+            }
         },
-        logInformation: {
-          title: "ログ情報", body: [{title: "07/07/02/21", body: "削除完了"}]
-        },
-        USER_ID: "1",
-        BASE_URL: "https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend",
-        apiError: false
-      }
-    },
 
     methods: {
       apiGet: async function (url, data) {
@@ -52,15 +51,17 @@
       },
     },
 
-    async mounted() {
-      await this.dataGet()
-      if (this.apiError === true) {
-        alert("エラーが発生しました。再度実行してください。")
-      }
-      // console.log(this.apiError)
-      // console.log(this.logInformation)
+        async mounted() {
+            await this.dataGet()
+            if (this.apiError === true) {
+                alert("エラーが発生しました。再度実行してください。")
+            }
+            // console.log(this.apiError)
+            // console.log(this.logInformation)
+        }
+
+
     }
-  }
 </script>
 
 <style scoped>

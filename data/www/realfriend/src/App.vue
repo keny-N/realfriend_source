@@ -7,30 +7,20 @@
 <script>
 import http from "./axios/axios"
 
-export default {
-  name: 'App',
-  created() {
-    window.addEventListener("beforeunload", this.confirmSave)
-    // http.post('https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login', {
-    //   user_id: 'Ryu',
-    //   user_pass: 'RRRyu'
-    // }
-    //   // headers:{
-    //   //   Authorization:""
-    //   // }
-    // )
-    //   .then(function(response){
-    //     console.log(response)
-    //     console.log(response.status)
-    //     console.log(response.data)
-    //   })
-  },
-  destroyed() {
-    window.removeEventListener("beforeunload", this.confirmSave)
-    // this.$store.dispatch("token/setAxiosToken")
-    // console.log(http.request.headers.Authorization)
-  },
-  methods: {
+    export default {
+        name: 'App',
+        beforeCreate() {
+            //vueインスタンス生成時
+            this.$store.dispatch("token/localStorageLoad")
+        },
+        created() {
+            window.addEventListener("beforeunload", this.confirmSave)
+        },
+        destroyed() {
+            window.removeEventListener("beforeunload", this.confirmSave)
+            this.$store.token.console.log(http.request.headers.Authorization)
+        },
+        methods: {
 
 
     confirmSave(event) {
@@ -64,5 +54,5 @@ export default {
   text-align: center;
   color: #2c3e50;
 
-}
+  }
 </style>
