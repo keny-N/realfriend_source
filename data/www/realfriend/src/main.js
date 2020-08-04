@@ -8,12 +8,12 @@ import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
 import store from './store'
 
+
 Vue.config.productionTip = false
 Vue.use(VueAxios, Axios, BootstrapVue)
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
 
 
 /* eslint-disable no-new */
