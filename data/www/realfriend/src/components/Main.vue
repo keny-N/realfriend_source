@@ -6,10 +6,10 @@
     <Log class="Log"></Log>
     <News></News>
     <button v-on:click="userProfileDisplay">変更ページ</button>
-<!--    <button v-on:click="aIncre">{{aCount}}</button>-->
-<!--    <button v-on:click="bIncre">{{bCount}}</button>-->
-<!--    <button v-on:click="cIncre">{{cCount}}</button>-->
-<!--    <button v-on:click="dIncre">{{dCount}}</button>-->
+    <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
+    <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
+    <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
+    <!--    <button v-on:click="dIncre">{{dCount}}</button>-->
   </div>
 </template>
 
@@ -20,42 +20,42 @@
     import FriendInsert from "@/components/FriendInsert"
     import {mapState} from "vuex"
 
-  export default {
-    name: "Main",
-    components: {GameHeader, Log,FriendList,FriendInsert},
-    data () {
-      return {
-        backgroundImageSrc: require("@/assets/main_back.jpg")
-          userId: this.$route.params.userId
-      }
-    },
-      computed: {
-          // ...mapState({
-          //     aCount: state => state.counter.aCount,
-          //     bCount: state => state.counter.bCount,
-          //     cCount: state => state.counter.cCount,
-          //     dCount: state => state.counter.dCount,
-          // })
-      },
-      methods: {
-          userProfileDisplay() {
-              this.$router.push({name:'ChangeSuccess' , params: {userId: this.userId}})
-          },
-          //カウンターテスト用
-          // aIncre() {
-          //     this.$store.dispatch("counter/increment", "a")
-          // },
-          // bIncre() {
-          //     this.$store.dispatch("counter/increment", "b")
-          // },
-          // cIncre() {
-          //     this.$store.dispatch("counter/increment", "c")
-          // },
-          // dIncre() {
-          //     this.$store.dispatch("counter/increment", "d")
-          // }
-      }
-  }
+    export default {
+        name: "Main",
+        components: {GameHeader, Log, FriendList, FriendInsert},
+        data() {
+            return {
+                // backgroundImageSrc: require("@/assets/main_back.jpg")
+                userId: this.$route.params.userId
+            }
+        },
+        computed: {
+            // ...mapState({
+            //     aCount: state => state.counter.aCount,
+            //     bCount: state => state.counter.bCount,
+            //     cCount: state => state.counter.cCount,
+            //     dCount: state => state.counter.dCount,
+            // })
+        },
+        methods: {
+            userProfileDisplay() {
+                this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
+            },
+            //カウンターテスト用
+            // aIncre() {
+            //     this.$store.dispatch("counter/increment", "a")
+            // },
+            // bIncre() {
+            //     this.$store.dispatch("counter/increment", "b")
+            // },
+            // cIncre() {
+            //     this.$store.dispatch("counter/increment", "c")
+            // },
+            // dIncre() {
+            //     this.$store.dispatch("counter/increment", "d")
+            // }
+        }
+    }
 </script>
 
 <style scoped>
