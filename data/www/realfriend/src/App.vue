@@ -5,17 +5,21 @@
 </template>
 
 <script>
-
+    import http from "./axios/axios"
 
     export default {
         name: 'App',
         created() {
-            window.addEventListener("beforeunload", this.confirmSave)
-        },
+          window.addEventListener("beforeunload", this.confirmSave)
+          },
         destroyed() {
             window.removeEventListener("beforeunload", this.confirmSave)
+            this.$store.token.
+            console.log(http.request.headers.Authorization)
         },
         methods: {
+
+
             confirmSave(event) {
                 // this.counterSave()
                 event.returnValue = "編集中のものは保存されませんが、よろしいですか？"

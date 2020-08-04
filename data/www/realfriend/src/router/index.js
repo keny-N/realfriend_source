@@ -50,15 +50,15 @@ router.beforeEach((to, from, next) => {
   //importしたstoreでstoreフォルダのindex.jsを参照し。stateの中身を見に行っています
   //modluesに設定したtokenをさらに参照し、Token.jsのstateにあるtokenを呼び出しています
   console.log(store.state.token.token)
-  if (store.getters.loginGet === true) {
+  if (store.token.getters.loginGet === true) {
     console.log('aaaa')
     next()
-  } else if (store.getters.token !== 0 && store.getters.firstFlag === false) {
+  } else if (store.token.getters.token !== 0 && store.token.getters.firstFlag === false) {
     console.log('bbbbb')
     next()
   } else {
     store.dispatch("token/setLogin", true)
-    console.log(store.getters.loginGet)
+    console.log(store.token.getters.loginGet)
     next('/login')
   }
 
