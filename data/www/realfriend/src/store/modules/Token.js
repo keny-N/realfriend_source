@@ -4,7 +4,7 @@ import http from "../../axios/axios"
 export default {
   namespaced: true,  //モジュールを名前空間に分ける
   state: {
-    token:"私はToken.jsのstateのtokenです！",
+    token: "私はToken.jsのstateのtokenです！",
     firstFlag: true,
     tokenError: false,
     loginScreenJudgment: false,
@@ -12,10 +12,14 @@ export default {
   },
 
   getters: {
-    tokenGet: (state) => {return state.token},
+    tokenGet: (state) => {
+      return state.token
+    },
     firstFlagGet: (state) => state.firstFlag,
     tokenErrorGet: (state) => state.tokenError,
-    loginGet: (state) => {return state.loginScreenJudgment},
+    loginGet: (state) => {
+      return state.loginScreenJudgment
+    },
   },
   mutations: {
     setFirstFlag: (state, flag) => {
@@ -32,6 +36,21 @@ export default {
         config.headers.Authorization = state.token
         return config
       }))
+    },
+    localStorageSave: (state) => {
+      //ローカルストレージにstateのトークンを保存する処理
+      // Json文字列に変換しLocalStorageへ保存
+      localStorage.setItem('token', JSON.stringify(state.token))
+    },
+    localStorageLoad: (state) => {
+      //ローカルストレージのトークンをstateのトークンに保存する処理
+      if (localStorage.getItem('token')) {
+        console.log("tokenをstateに保存します")
+        // LocalStorageから取得したJson文字列をパース
+        const token = JSON.parse(localStorage.getItem('token'))
+        // stateを置き換えます。
+        state.token = token
+      }
     }
   },
   actions: {
@@ -41,11 +60,17 @@ export default {
     setError: ({commit}, flag) => {
       commit('setError', flag)
     },
-    setLogin:({commit}, flag) => {
+    setLogin: ({commit}, flag) => {
       commit('setLogin', flag)
     },
-    setAxiosToken:({commit}) => {
+    setAxiosToken: ({commit}) => {
       commit('setAxiosToken')
+    },
+    localStorageSave: ({commit}) => {
+      commit('localStorageSave')
+    },
+    localStorageLoad: ({commit}) => {
+      commit('localStorageLoad')
     }
   }
 }
