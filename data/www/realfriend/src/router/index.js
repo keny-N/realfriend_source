@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import GameBody from "@/components/GameBody"
 import LogIn from "@/components/LogIn"
+import UserProfile from "@/components/UserProfile"
+import UserChangeSuccess from "@/components/UserChangeSuccess"
 import Log from "@/components/LogDisplayBody"
 import store from "@/store"
 
@@ -17,14 +19,19 @@ const router = new Router({
       component: GameBody
     },
     {
-      path: '/main',
+      path: '/main/:userId',
       name: 'Main',
-      component: Main
+      component: Main,
     },
     {
-      path: '/',
-      name: 'Main',
-      component: Main
+      path:'/profile/:userId',
+      name:'Profile',
+      component: UserProfile
+    },
+    {
+      path:'/changesuccess/:userId',
+      name:'ChangeSuccess',
+      component: UserChangeSuccess
     },
     {
       path: '/login',

@@ -5,10 +5,11 @@
     <FriendInsert></FriendInsert>
     <Log class="Log"></Log>
     <News></News>
-<!--    <button v-on:click="aIncre">{{aCount}}</button>-->
-<!--    <button v-on:click="bIncre">{{bCount}}</button>-->
-<!--    <button v-on:click="cIncre">{{cCount}}</button>-->
-<!--    <button v-on:click="dIncre">{{dCount}}</button>-->
+    <button v-on:click="userProfileDisplay">変更ページ</button>
+    <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
+    <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
+    <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
+    <!--    <button v-on:click="dIncre">{{dCount}}</button>-->
   </div>
 </template>
 
@@ -24,7 +25,8 @@
         components: {GameHeader, Log, FriendList, FriendInsert},
         data() {
             return {
-                backgroundImageSrc: require("@/assets/main_back.jpg")
+                // backgroundImageSrc: require("@/assets/main_back.jpg")
+                userId: this.$route.params.userId
             }
         },
         computed: {
@@ -36,6 +38,9 @@
             // })
         },
         methods: {
+            userProfileDisplay() {
+                this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
+            },
             //カウンターテスト用
             // aIncre() {
             //     this.$store.dispatch("counter/increment", "a")
