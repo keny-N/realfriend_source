@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
   //この書き方でstoreのトークンを取得しています。
   //importしたstoreでstoreフォルダのindex.jsを参照し。stateの中身を見に行っています
   //modluesに設定したtokenをさらに参照し、Token.jsのstateにあるtokenを呼び出しています
-  console.log(store.state.token.token)
+  // console.log(store.state.token.token)
   if (store.getters["token/loginGet"] === true) {
     console.log('aaaa')
     next()

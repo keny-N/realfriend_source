@@ -31,6 +31,7 @@
 
 <script>
   import SignUp from "@/components/SignUp"
+  import http from "../axios/axios"
 
   export default {
     name: "LogIn",
@@ -48,15 +49,20 @@
       }
     },
     created() {
-      if (this.$store.getters.tokenGet !== 0 && this.$store.getters.firstFlagGet === true){
+      if (this.$store.getters["token/tokenGet"] !== 0 && this.$store.getters["token/firstFlagGet"] === true){
         //一度ログインしてアクセスした場合
-      }else if(this.$store.getters.tokenGet === 0){
+        //ここだけ自動ログイン
+      }else if(this.$store.getters["token/tokenGet"] === 0){
         // 一番最初にアクセスした場合
-      }else if (this.$store.getters.tokenErrorGet === true){
+      }else if (this.$store.getters["token/tokenErrorGet"] === true) {
         //認証失敗などで遷移させられた場合
-      }else{
-        //おそらく不正に画面アクセスした場合?main画面等に遷移させる？
+        this.$store.dispatch("token/setError", false)
       }
+    },
+    beforeDestroy() {
+      this.$store.dispatch("token/setLogin",false)
+      this.$store.dispatch("token/setFirstFlag", false)
+      console.log('login終了')
     },
     methods: {
       dataCheck: function () {
@@ -65,7 +71,7 @@
         this.resultid = ''
         this.resultpass = ''
         this.changmsg = ''
-        this.message='',
+        this.message=''
 
         /*受け取り*/
         this.userid = this.$refs.userThisId.value

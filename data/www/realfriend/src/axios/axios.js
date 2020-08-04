@@ -5,21 +5,21 @@ import Store from "../store"
 
 
 const http = Axios.create({
-  withCredentials: true
+  // withCredentials: true
 })
 
 http.interceptors.response.use(function (response) {
-}, function (error,) {
+  return response
+  }, function (error,) {
   // 認証エラー時の処理
   console.log(error)
   if (error.status !== 200) {
     router.push('/login')
+    Store.dispatch("token/setError", true)
+    Store.dispatch("token/setLogin", true)
+    console.log("error!!!")
     // システムエラー時の処理
   }
-  // } else if (error.response.status === 500) {
-  //   Vue.toasted.clear()
-  //   Vue.toasted.error(error.response.data.message)
-  // }
   return Promise.reject(error)
 })
 
