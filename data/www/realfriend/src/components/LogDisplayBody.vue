@@ -33,7 +33,7 @@
           config.headers.Authorization = token
           return config
         })
-        console.log(token)
+        // console.log(token)
         await http.get(url)
           .then(response =>
             response.data.logs.forEach(tmpData=> {
