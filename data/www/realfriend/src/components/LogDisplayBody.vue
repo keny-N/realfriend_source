@@ -6,31 +6,34 @@
 </template>
 
 <script>
-    import InformationList from "@/components/LogDisplayList"
+  import InformationList from "@/components/LogDisplayList"
+  import http from "../axios/axios"
 
-    export default {
-        name: "LogDisplayBody",
-        components: {InformationList},
-        data() {
-            return {
-                updateInformation: {
-                    title: "更新情報", body: [{title: "全米が驚愕", body: "あほくさ"}]
-                },
-                logInformation: {
-                    title: "ログ情報", body: [{title: "07/07/02/21", body: "削除完了"}]
-                },
-                USER_ID: "1",
-                BASE_URL: "https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend",
-                apiError: false
-            }
+  export default {
+    name: "LogDisplayBody",
+    components: {InformationList},
+    data() {
+      return {
+        updateInformation: {
+          title: "更新情報", body: [{title: "全米が驚愕", body: "あほくさ"}]
         },
+        logInformation: {
+          title: "ログ情報", body: [{title: "07/07/02/21", body: "削除完了"}]
+        },
+        USER_ID: "1",
+        BASE_URL: "https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend",
+        apiError: false
+      }
+    },
 
     methods: {
       apiGet: async function (url, data) {
+        const token = this.$store.getters['token/tokenGet']
         http.interceptors.request.use((config) => {
-          config.headers.Authorization = this.$store.getters['token/tokenGet']
+          config.headers.Authorization = token
           return config
         })
+        console.log(token)
         await http.get(url)
           .then(response =>
             response.data.logs.forEach(tmpData=> {

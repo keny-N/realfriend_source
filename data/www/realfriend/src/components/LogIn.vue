@@ -51,12 +51,15 @@ export default {
       //一度ログインしてアクセスした場合
       //ここだけ自動ログイン
       console.log('aaaaaa')
-    } else if (this.$store.getters["token/tokenGet"] === 0) {
+      // this.$store.dispatch("token/localStorageLoad")
+      // this.logInSuccess()
+    } else if (this.$store.getters["token/tokenGet"] === "0") {
       console.log('OK!')
       // 一番最初にアクセスした場合
     } else if (this.$store.getters["token/tokenErrorGet"] === true) {
       //認証失敗などで遷移させられた場合
       this.$store.dispatch("token/setError", false)
+
       console.log('gfdad')
     }
     console.log('000000000000000000')
@@ -104,6 +107,7 @@ export default {
           user_pass: String(this.userPass),
         }).then(function (response) {
           me.$store.dispatch('token/setToken', response.data.token)
+          // me.$store.dispatch('token/localStorageSave')
           me.logInSuccess()
         }).catch(function (error) {
           if (error.status === 401) {

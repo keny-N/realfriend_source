@@ -1,14 +1,12 @@
-import Axios from "axios"
-import http from "../../axios/axios"
 
 export default {
   namespaced: true,  //モジュールを名前空間に分ける
   state: {
-    token:"私はToken.jsのstateのtokenです！",
+    token:"0",
     firstFlag: true,
     tokenError: false,
     loginScreenJudgment: false,
-    axios: http
+
   },
 
   getters: {
@@ -33,12 +31,13 @@ export default {
     },
     setToken: (state, value) => {
       state.token = value
-    },setAxiosToken: (state) => {
-      state.axios.interceptors.request.use((config => {
-        config.headers.Authorization = state.token
-        return config
-      }))
     },
+    // setAxiosToken: (state) => {
+    //   state.axios.interceptors.request.use((config => {
+    //     config.headers.Authorization = state.token
+    //     return config
+    //   }))
+    // },
     localStorageSave: (state) => {
       //ローカルストレージにstateのトークンを保存する処理
       // Json文字列に変換しLocalStorageへ保存
@@ -68,9 +67,9 @@ export default {
     setToken:({commit}, value) => {
       commit('setToken', value)
     },
-    setAxiosToken: ({commit}) => {
-      commit('setAxiosToken')
-    },
+    // setAxiosToken: ({commit}) => {
+    //   commit('setAxiosToken')
+    // },
     localStorageSave: ({commit}) => {
       commit('localStorageSave')
     },

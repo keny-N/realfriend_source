@@ -11,14 +11,14 @@ import http from "./axios/axios"
         name: 'App',
         beforeCreate() {
             //vueインスタンス生成時
-            this.$store.dispatch("token/localStorageLoad")
+            // this.$store.dispatch("token/localStorageLoad")
         },
         created() {
             window.addEventListener("beforeunload", this.confirmSave)
         },
         destroyed() {
             window.removeEventListener("beforeunload", this.confirmSave)
-            this.$store.token.console.log(http.request.headers.Authorization)
+            // thislog(http.request.headers.Authorization)
         },
         methods: {
 

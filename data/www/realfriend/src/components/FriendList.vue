@@ -46,7 +46,7 @@
     },
     mounted() {
       this.showFriend()
-      console.log(http.request.headers)
+      // console.log(http.request.headers)
     },
     methods: {
       //フレンド削除のやつきっと消える
