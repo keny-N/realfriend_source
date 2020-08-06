@@ -44,6 +44,7 @@
             this.apiError = true
             // console.log(error.response.status)
           })
+
       },
 
       dataGet: async function () {

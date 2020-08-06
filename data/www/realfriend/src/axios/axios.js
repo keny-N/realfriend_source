@@ -14,11 +14,11 @@ http.interceptors.response.use(function (response) {
   // 認証エラー時の処理
   console.log(error)
   if (error.status !== 200) {
-    router.push('/login')
-    Store.dispatch("token/setError", true)
-    Store.dispatch("token/setLogin", true)
-    console.log("error!!!")
-    console.log(error.status)
+    // Store.dispatch("token/setError", true)
+    // Store.dispatch("token/setLogin", true)
+    // console.log("error!!!")
+    // console.log(error.status)
+    // router.push('/login')
     // システムエラー時の処理
   }
   return Promise.reject(error)

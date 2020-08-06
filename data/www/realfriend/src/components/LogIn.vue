@@ -50,20 +50,20 @@ export default {
     if (this.$store.getters["token/tokenGet"] !== '0' && this.$store.getters["token/firstFlagGet"] === true) {
       //一度ログインしてアクセスした場合
       //ここだけ自動ログイン
-      console.log('aaaaaa')
+      // console.log('aaaaaa')
       // this.$store.dispatch("token/localStorageLoad")
-      // this.logInSuccess()
+      // console.log(this.$store.dispatch('token/localStorageLoad'))
+      this.logInSuccess()
     } else if (this.$store.getters["token/tokenGet"] === "0") {
-      console.log('OK!')
+      // console.log('OK!')
       // 一番最初にアクセスした場合
     } else if (this.$store.getters["token/tokenErrorGet"] === true) {
       //認証失敗などで遷移させられた場合
       this.$store.dispatch("token/setError", false)
-
-      console.log('gfdad')
+      this.$store.dispatch("token/setToken", '0')
+      // console.log('gfdad')
     }
-    console.log('000000000000000000')
-    this.$store.dispatch("token/setToken", '0')
+    // console.log('000000000000000000')
   },
   beforeDestroy() {
     this.$store.dispatch("token/setLogin", false)

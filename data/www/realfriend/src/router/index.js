@@ -57,10 +57,10 @@ router.beforeEach((to, from, next) => {
   //modluesに設定したtokenをさらに参照し、Token.jsのstateにあるtokenを呼び出しています
   // console.log(store.state.token.token)
   if (store.getters["token/loginGet"] === true) {
-    console.log('aaaa')
+    // console.log('aaaa')
     next()
   } else if (store.getters["token/tokenGet"] !== '0' && store.getters["token/firstFlagGet"] === false) {
-    console.log('bbbbb')
+    // console.log('bbbbb')
     next()
   } else {
     store.dispatch("token/setLogin", true)
