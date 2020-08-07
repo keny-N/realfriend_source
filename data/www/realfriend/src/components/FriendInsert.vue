@@ -20,7 +20,7 @@
 </template>
 
 <script>
-
+  import http from "../../static/axios/axios"
   export default {
     name: "FriendInsert",
     data() {
@@ -58,24 +58,31 @@
         let name = this.friendName
         let me = this
 
-        console.log('put送信します')
-        this.axios.post(this.postUrl, {
-          user_id: 1,
+        console.log('post送信します')
+
+        http.interceptors.request.use(request => {
+          request.headers.Authorization = this.$store.getters['token/tokenGet']
+          return request
+        })
+
+        http.post(this.postUrl, {
           friend_name: name,
           //現在はパスが確定していないためパスっぽい文字を入れているだけです。
           friend_img:'matuo/apex'
         }).then(function (response) {
-          if (response.data.isSuccess) {
             console.log(response)
             me.showContent = false
-            me.$router.go({path: me.$router.currentRoute.path, force: true})
-          }
-        }).catch(function (error) {
+            me.reload()
+          }).catch(function (error) {
           console.log(error)
           me.showContent = true
         })
         //メイン画面を更新する処理
         console.log('以下')
+      },
+      reload(){
+        const me = this
+        me.$router.go('/main/')
       }
     },
   }

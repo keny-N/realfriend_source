@@ -29,7 +29,7 @@
 
 <script>
 import SignUp from "@/components/SignUp"
-import http from "../axios/axios"
+import http from "../../static/axios/axios"
 
 export default {
   name: "LogIn",
@@ -50,20 +50,16 @@ export default {
     if (this.$store.getters["token/tokenGet"] !== '0' && this.$store.getters["token/firstFlagGet"] === true) {
       //一度ログインしてアクセスした場合
       //ここだけ自動ログイン
-      // console.log('aaaaaa')
       // this.$store.dispatch("token/localStorageLoad")
       // console.log(this.$store.dispatch('token/localStorageLoad'))
       this.logInSuccess()
     } else if (this.$store.getters["token/tokenGet"] === "0") {
-      // console.log('OK!')
       // 一番最初にアクセスした場合
     } else if (this.$store.getters["token/tokenErrorGet"] === true) {
       //認証失敗などで遷移させられた場合
       this.$store.dispatch("token/setError", false)
       this.$store.dispatch("token/setToken", '0')
-      // console.log('gfdad')
     }
-    // console.log('000000000000000000')
   },
   beforeDestroy() {
     this.$store.dispatch("token/setLogin", false)
@@ -107,7 +103,7 @@ export default {
           user_pass: String(this.userPass),
         }).then(function (response) {
           me.$store.dispatch('token/setToken', response.data.token)
-          // me.$store.dispatch('token/localStorageSave')
+          me.$store.dispatch('token/localStorageSave')
           me.logInSuccess()
         }).catch(function (error) {
           if (error.status === 401) {
@@ -118,9 +114,8 @@ export default {
       },
       logInSuccess()
       {
-
         this.$store.dispatch("token/setFirstFlag", false)
-        this.$router.push('/main/1')
+        this.$router.push('/main/')
       }
     ,
       /*SignUpのモーダルを開く*/

@@ -4,7 +4,6 @@
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
     <Log class="Log"></Log>
-    <News></News>
     <button v-on:click="userProfileDisplay">変更ページ</button>
     <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
     <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
@@ -25,8 +24,7 @@
         components: {GameHeader, Log, FriendList, FriendInsert},
         data() {
             return {
-                // backgroundImageSrc: require("@/assets/main_back.jpg")
-                userId: this.$route.params.userId
+                backgroundImageSrc: require("@/assets/main_back.jpg")
             }
         },
         computed: {
@@ -37,9 +35,7 @@
             //     dCount: state => state.counter.dCount,
             // })
         },
-      // created() {
-      //   console.log(this.$store.getters['token/tokenGet']  )
-      // },
+
       methods: {
             userProfileDisplay() {
                 this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})

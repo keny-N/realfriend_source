@@ -32,12 +32,7 @@ export default {
     setToken: (state, value) => {
       state.token = value
     },
-    // setAxiosToken: (state) => {
-    //   state.axios.interceptors.request.use((config => {
-    //     config.headers.Authorization = state.token
-    //     return config
-    //   }))
-    // },
+
     localStorageSave: (state) => {
       //ローカルストレージにstateのトークンを保存する処理
       // Json文字列に変換しLocalStorageへ保存

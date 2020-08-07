@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import http from "./axios/axios"
+import http from "../static/axios/axios"
 
     export default {
         name: 'App',
         beforeCreate() {
             //vueインスタンス生成時
-            // this.$store.dispatch("token/localStorageLoad")
+            this.$store.dispatch("token/localStorageLoad")
         },
         created() {
             window.addEventListener("beforeunload", this.confirmSave)

@@ -7,7 +7,7 @@
 
 <script>
   import InformationList from "@/components/LogDisplayList"
-  import http from "../axios/axios"
+  import http from "../../static/axios/axios"
 
   export default {
     name: "LogDisplayBody",
@@ -60,11 +60,7 @@
             if (this.apiError === true) {
                 alert("エラーが発生しました。再度実行してください。")
             }
-            // console.log(this.apiError)
-            // console.log(this.logInformation)
         }
-
-
     }
 </script>
 
