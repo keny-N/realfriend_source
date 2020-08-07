@@ -4,11 +4,11 @@
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
     <Log class="Log"></Log>
-    <News></News>
-<!--    <button v-on:click="aIncre">{{aCount}}</button>-->
-<!--    <button v-on:click="bIncre">{{bCount}}</button>-->
-<!--    <button v-on:click="cIncre">{{cCount}}</button>-->
-<!--    <button v-on:click="dIncre">{{dCount}}</button>-->
+    <button v-on:click="userProfileDisplay">変更ページ</button>
+    <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
+    <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
+    <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
+    <!--    <button v-on:click="dIncre">{{dCount}}</button>-->
   </div>
 </template>
 
@@ -35,7 +35,11 @@
             //     dCount: state => state.counter.dCount,
             // })
         },
-        methods: {
+
+      methods: {
+            userProfileDisplay() {
+                this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
+            },
             //カウンターテスト用
             // aIncre() {
             //     this.$store.dispatch("counter/increment", "a")
