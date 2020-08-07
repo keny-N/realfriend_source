@@ -162,9 +162,9 @@
                                 return samples
                             }
 
-                            let dataview = encodeWAV(mergeBuffers(this.audioData), this.audio_sample_rate)
-                            let audioBlob = new Blob([dataview], {type: 'audio/wav'})
-                            console.log(dataview)
+                            let dataView = encodeWAV(mergeBuffers(this.audioData), this.audio_sample_rate)
+                            let audioBlob = new Blob([dataView], {type: 'audio/wav'})
+                            console.log(dataView)
                             console.log(audioBlob)
                             let reader = new FileReader()
                             reader.readAsDataURL(audioBlob)
