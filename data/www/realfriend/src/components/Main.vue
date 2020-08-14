@@ -1,15 +1,16 @@
 <template>
   <div class="main" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
+    <ReturnMenu/>
+
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
-    <Log class="Log"></Log>
     <News></News>
+  </div>
 <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
 <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
 <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
 <!--    <button v-on:click="dIncre">{{dCount}}</button>-->
-  </div>
 </template>
 
 <script>
@@ -17,11 +18,12 @@
     import Log from "@/components/LogDisplayTransition"
     import FriendList from "@/components/FriendList"
     import FriendInsert from "@/components/FriendInsert"
+    import ReturnMenu from "@/components/ReturnMenu"
     import {mapState} from "vuex"
 
     export default {
         name: "Main",
-        components: {GameHeader, Log, FriendList, FriendInsert},
+        components: {GameHeader, Log, FriendList, FriendInsert,ReturnMenu},
         data() {
             return {
                 backgroundImageSrc: require("@/assets/main_back.jpg")
@@ -62,7 +64,9 @@
   }
 
   .list-position {
-    margin: 50vh auto 0;
-    transform: translateY(-50%);
+    /*追加が入らなかったのでマージをいじりました。リストがないので形がわからないです。  */
+    margin-top: auto ;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>

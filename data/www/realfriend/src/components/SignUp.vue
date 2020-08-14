@@ -1,9 +1,9 @@
 <template>
   <div class="example-modal-window">
     <!-- コンポーネント MyModal -->
-    <SignUpModal @close="closeSignUpModal" v-if="modal">
+    <SignUpModal @close="closeSignUpModal" v-if="modal" class="sign-font-size">
       <!-- default スロットコンテンツ -->
-      <div v-if="success == false">
+      <div v-if="success == false" class="text-position">
         <form>
           <p>
             <msg1>ユーザー名を入力してください</msg1>
@@ -29,7 +29,7 @@
           <button v-on:click="dataDelete">取り消し</button>
 
         </form>
-        <h1>{{message}}</h1>
+        <div class="message-font-size">{{message}}</div>
       </div>
       <div v-if="success">
         <p>登録が完了しました！再度ログインしてください</p>
@@ -167,5 +167,15 @@
   .link {
     color: blue;
     text-decoration: underline
+  }
+  .sign-font-size{
+    font-size: 3vmin;
+    box-sizing: content-box;
+  }
+  .message-font-size{
+    font-size: 4vmin;
+  }
+  .text-position{
+    margin: auto;
   }
 </style>

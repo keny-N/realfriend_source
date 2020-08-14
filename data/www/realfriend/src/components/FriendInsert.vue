@@ -6,7 +6,8 @@
         <h4>フレンド登録</h4>
         <div class="card-body">
           <div class="trim" >
-            <img v-bind:src="imageData" v-if="imageData">
+            <!-- idはテスト用のid-->
+            <img id="imgtest" v-bind:src="imageData" v-if="imageData">
           </div>
           <h4 class="card-title">画像を選んでください。</h4>
           <input type="file" accept="image/*" @change="onImgRegister($event)">
@@ -14,6 +15,7 @@
         <div>フレンド名前：<input v-model="friendName"></div>
         <button class="float-left" v-on:click="registerFriend">登録</button>
         <button class="float-right" v-on:click="closeModal">取り消し</button>
+        {{imgPath}}
       </div>
     </div>
   </div>
@@ -29,6 +31,8 @@
         imageData: '',//画像
         friendName: '',//フレンドの名前
         postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one',//フレンド登録URL
+        imgPath:'/',
+        imgDataAll:'',
       }
     },
     methods: {
@@ -46,6 +50,8 @@
           const reader = new FileReader()
           reader.onload = (e) => {
             this.imageData = e.target.result
+            this.imgPath=this.imgPath+file.name
+            this.imgDataAll=file
           }
           reader.readAsDataURL(file)
         }
@@ -57,18 +63,31 @@
 
         let name = this.friendName
         let me = this
+        let img=this.imageData
+        let test=this.imgPath
+        let all=this.imgDataAll
 
-        console.log('put送信します')
+        console.log(img)
+        console.log(test)
+        console.log(all)
+
+
+
+        //追加
+
         this.axios.post(this.postUrl, {
           user_id: 1,
           friend_name: name,
           //現在はパスが確定していないためパスっぽい文字を入れているだけです。
-          friend_img:'matuo/apex'
+          friend_img:test,
         }).then(function (response) {
           if (response.data.isSuccess) {
             console.log(response)
-            me.showContent = false
-            me.$router.go({path: me.$router.currentRoute.path, force: true})
+            console.log(img)
+            console.log(test)
+
+            //me.showContent = false
+            //me.$router.go({path: me.$router.currentRoute.path, force: true})
           }
         }).catch(function (error) {
           console.log(error)

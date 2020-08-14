@@ -1,16 +1,18 @@
 <template>
-  <div class="news-body">
-    <InformationList :data-list="updateInformation"></InformationList>
+  <div class="news-body" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
+    <ReturnMenu class="return-position"></ReturnMenu>
+    <InformationList :data-list="updateInformation" class="update-position"></InformationList>
     <InformationList :data-list="logInformation"></InformationList>
   </div>
 </template>
 
 <script>
   import InformationList from "@/components/LogDisplayList"
+  import ReturnMenu from "@/components/ReturnMenu"
 
   export default {
     name: "LogDisplayBody",
-    components: {InformationList},
+    components: {InformationList,ReturnMenu},
     data() {
       return {
         updateInformation: {
@@ -21,7 +23,8 @@
         },
         USER_ID: "1",
         BASE_URL: "https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend",
-        apiError: false
+        apiError: false,
+        backgroundImageSrc: require("@/assets/log.png")
       }
     },
 
@@ -60,8 +63,15 @@
 
 <style scoped>
   .news-body {
-    width: 70vh;
-    height: 100%;
+    height: 100vh;
     margin: 0 auto;
+    animation: bgiLoop 5s linear infinite;
   }
+  @keyframes bgiLoop {
+    0% { background-position: 0 0;}
+    100% { background-position: -5000px 5000px;}
+  }
+  .update-position{
+  }
+
 </style>

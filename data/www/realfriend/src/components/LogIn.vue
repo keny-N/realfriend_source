@@ -1,16 +1,17 @@
 <template>
-  <div>
+  <div class="login" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     {{message}}
     <!-- アカウント登録の時-->
     <SignUp ref="signup"></SignUp>
     <!-- ログインの時　-->
+    <div class="input-text1">
     <h1>{{changmsg}}</h1> <!-- 成功メッセージ　-->
     <form>
       <p>
         <msg1>ユーザーIDを入力してください</msg1>
         <msg2>※必須</msg2>
         <br>
-        <input type="text" ref="userThisId" placeholder="ユーザID" required="required"></p>
+        <input  type="text" ref="userThisId" placeholder="ユーザID" required="required"></p>
       <h2>{{resultid}}</h2>
       <p>
         <msg1>パスワードを入力してください</msg1>
@@ -19,11 +20,11 @@
         <input type="password" ref="userThisPass" placeholder="パスワード" required="required"></p>
       <h2>{{resultpass}}</h2>
 
-      <button v-on:click="dataCheck">サインイン</button>
+      <msg3 class="sign-button" v-on:click="dataCheck">sign in</msg3>
     </form>
     <br>
-    <button v-on:click="addAccountPage">アカウント新規登録</button>
-
+    <msg3 class="account-button" v-on:click="addAccountPage">sign up</msg3>
+    </div>
   </div>
 
 
@@ -45,6 +46,7 @@
         userpass: null,     /*ユーザパス受け取り用*/
         message:'',
         apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
+        backgroundImageSrc: require("@/assets/op.png"),
       }
     },
     methods: {
@@ -112,11 +114,40 @@
 
 <style scoped>
   h2 {
-    color: red
+    color: red;
+    font-size:2.5vmin;
   }
 
   msg2 {
-    color: red
+    color: red;
+    line-height: 7;
+    margin-top: 7px;
+    margin-bottom: 5px;
   }
+  msg1{
+    line-height: 7;
+    margin-top: 7px;
+    margin-bottom: 5px;
+  }
+  msg3{
+    line-height: 3;
+    margin-top: 7px;
+    margin-bottom: 5px;
+  }
+  .login{
+    background: no-repeat center;
+    background-size: cover;
+    /*mainのサイズをちょうど画面と同じにする。*/
+    height: 100vh;
+  }
+  .input-text1{
+    box-sizing: content-box;
+    position: absolute;
+    right:5%;
+    /*小さくした場合にはみ出すので現在は大きい画面の対しての配置をイメージしている*/
+    top:15%;
+    font-size:2.5vmin;
+  }
+
 </style>
 
