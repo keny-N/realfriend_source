@@ -2,15 +2,15 @@
   <div class="main" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <GameHeader></GameHeader>
     <ReturnMenu/>
-
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
-    <News></News>
+    <Log class="Log"></Log>
+    <button v-on:click="userProfileDisplay">変更ページ</button>
+    <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
+    <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
+    <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
+    <!--    <button v-on:click="dIncre">{{dCount}}</button>-->
   </div>
-<!--    <button v-on:click="aIncre">{{aCount}}</button>-->
-<!--    <button v-on:click="bIncre">{{bCount}}</button>-->
-<!--    <button v-on:click="cIncre">{{cCount}}</button>-->
-<!--    <button v-on:click="dIncre">{{dCount}}</button>-->
 </template>
 
 <script>
@@ -37,7 +37,11 @@
             //     dCount: state => state.counter.dCount,
             // })
         },
-        methods: {
+
+      methods: {
+            userProfileDisplay() {
+                this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
+            },
             //カウンターテスト用
             // aIncre() {
             //     this.$store.dispatch("counter/increment", "a")

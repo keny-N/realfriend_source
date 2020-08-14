@@ -8,6 +8,7 @@
 
 <script>
   import InformationList from "@/components/LogDisplayList"
+  import http from "../../static/axios/axios"
   import ReturnMenu from "@/components/ReturnMenu"
 
   export default {
@@ -30,7 +31,13 @@
 
     methods: {
       apiGet: async function (url, data) {
-        await this.axios.get(url)
+        const token = this.$store.getters['token/tokenGet']
+        http.interceptors.request.use((config) => {
+          config.headers.Authorization = token
+          return config
+        })
+        // console.log(token)
+        await http.get(url)
           .then(response =>
             response.data.logs.forEach(tmpData=> {
               data.body.push({title:tmpData[1], body:tmpData[0]})
@@ -40,25 +47,24 @@
             this.apiError = true
             // console.log(error.response.status)
           })
+
       },
 
       dataGet: async function () {
-        const LOG_URL = this.BASE_URL + "/users/" + this.USER_ID + "/log"
+        const LOG_URL = this.BASE_URL + "/users/log"
         // await Promis.all([this.updateGet,this.logGet])
         // await Promis.all([this.logGet()])
         await this.apiGet(LOG_URL, this.logInformation)
       },
     },
 
-    async mounted() {
-      await this.dataGet()
-      if (this.apiError === true) {
-        alert("エラーが発生しました。再度実行してください。")
-      }
-      // console.log(this.apiError)
-      // console.log(this.logInformation)
+        async mounted() {
+            await this.dataGet()
+            if (this.apiError === true) {
+                alert("エラーが発生しました。再度実行してください。")
+            }
+        }
     }
-  }
 </script>
 
 <style scoped>
