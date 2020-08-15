@@ -1,10 +1,8 @@
 <template>
   <div class="main" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
-    <GameHeader></GameHeader>
-    <ReturnMenu/>
+    <ReturnMenu></ReturnMenu>
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
-    <Log class="Log"></Log>
     <button v-on:click="userProfileDisplay">変更ページ</button>
     <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
     <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
@@ -14,7 +12,6 @@
 </template>
 
 <script>
-    import GameHeader from '@/components/GameHeader'
     import Log from "@/components/LogDisplayTransition"
     import FriendList from "@/components/FriendList"
     import FriendInsert from "@/components/FriendInsert"

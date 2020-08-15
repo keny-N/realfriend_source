@@ -1,6 +1,6 @@
 <template>
   <transition name="modal" appear>
-    <div class="modal-overlay" @click.self="closeSignUpModal" v-if="modal" class="sign-font-size">
+    <div @click.self="closeSignUpModal" v-if="modal" class="sign-font-size modal-overlay">
       <div class="modal-window">
         <div class="modal-content">
           <slot/>
@@ -163,8 +163,7 @@
     color: blue;
     text-decoration: underline
   }
-
-  .modal-overlay {
+  .modal-overlay{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -179,6 +178,7 @@
 
   .modal-content {
     padding: 10px 20px;
+
   }
 
   .modal-window {
@@ -208,6 +208,7 @@
     font-size: 4vmin;
   }
   .text-position{
+    margin-top: ;
     margin: auto;
   }
 </style>

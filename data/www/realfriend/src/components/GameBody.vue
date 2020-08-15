@@ -3,7 +3,6 @@
       文字などでなく画像のためfavogaugeのulが高さを認識しない。
       そのためコンポーネントとして呼び出しているGameBody内で画像を設定している。-->
   <div class="gamebody" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
-    <GameHeader></GameHeader>
     <p>{{fromFaceapiMsg}}</p>
     <camera @updateMsg="updateFaceapiMsg"></camera>
     <StatusMsg ref="statusMsg" :receiveMsg="fromFaceapiMsg" class="statusposition"></StatusMsg>

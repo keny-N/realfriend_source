@@ -17,6 +17,10 @@
         return {
           backgroundImageSrc: require("@/assets/op.png")
         }
+        methods: {
+          userProfileDisplay() {
+            this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
+          },
       },
     }
 </script>

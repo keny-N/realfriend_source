@@ -18,7 +18,7 @@
       <input type="password" ref="userThisPass" placeholder="パスワード"></p>
     <h2>{{ resultPass }}</h2>
 
-    <button class="sign-button" v-on:click="dataCheck">サインイン</button>
+    <msg3 class="sign-button" v-on:click="dataCheck">sign in</msg3>
 
     <br>
     <msg3 class="account-button" v-on:click="addAccountPage">sign up</msg3>
@@ -117,7 +117,8 @@ export default {
       logInSuccess()
       {
         this.$store.dispatch("token/setFirstFlag", false)
-        this.$router.push('/main/')
+        //遷移先変えました。
+        this.$router.push('/menu')
       }
     ,
       /*SignUpのモーダルを開く*/
@@ -150,7 +151,7 @@ export default {
     margin-bottom: 5px;
   }
   msg3{
-    line-height: 3;
+    line-height: 5;
     margin-top: 7px;
     margin-bottom: 5px;
   }

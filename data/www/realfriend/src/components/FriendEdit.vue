@@ -1,6 +1,6 @@
 <template>
   <div class="friend-edit">
-    <button v-on:click="openModal">フレンド変更</button>
+    <button v-on:click="openModal">編集</button>
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド編集</h4>

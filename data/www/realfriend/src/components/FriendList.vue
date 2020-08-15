@@ -3,19 +3,16 @@
     <ul>
       <!--itemsの件数文回している-->
       <li v-for="friend in friends" class="rounded border border-dark">
-        <img class="friend-img rounded" :src=friend[3]>
-        <div>
-          {{ friend[2]}}
-          <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}">
-            <button type="button" class="btn btn-primary btn-sm c-button">攻略</button>
+        <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
+        <img class="friend-img rounded" :src=friend[2]>
+          {{ friend[1]}}
+        </router-link>
+          <FriendDelete class="float-right" v-bind:friend-id=friend[0] v-bind:friend-img=friend[2] v-bind:friend-name=friend[1]></FriendDelete>
+        <div class="position">
+          <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
+          好感度：{{friend[3]}}
           </router-link>
-        </div>
-        <div>
-          好感度：{{friend[4]}}
-          <!--ボタンが押された時にfriendIdを送っている。きっと消える-->
-          <FriendDelete v-bind:friend-id=friend[0] v-bind:friend-img=friend[3]
-                        v-bind:friend-name=friend[2]></FriendDelete>
-          <FriendEdit v-bind:friend-id=friend[0] v-bind:image-data=friend[3] v-bind:friend-name=friend[2]></FriendEdit>
+          <FriendEdit class="float-right" v-bind:friend-id=friend[0] v-bind:image-data=friend[2] v-bind:friend-name=friend[1]></FriendEdit>
         </div>
       </li>
     </ul>
@@ -99,6 +96,7 @@
     margin-bottom: 20px;
     width: 70%;
     max-width: 600px;
+    height: 80px;
   }
 
   .friend-img {
@@ -109,14 +107,15 @@
     width: 30%;
     object-fit: cover;
   }
-
-  .c-button {
-    float: right;
+  .rink{
+    text-decoration: none;
   }
-
   .friend-list {
     overflow: scroll;
     height: 80vh;
+  }
+  .position{
+    margin-top:10px;
   }
 
 </style>
