@@ -3,9 +3,10 @@
       文字などでなく画像のためfavogaugeのulが高さを認識しない。
       そのためコンポーネントとして呼び出しているGameBody内で画像を設定している。-->
   <div class="gamebody" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
+
     <p>{{fromFaceapiMsg}}</p>
     <camera @updateMsg="updateFaceapiMsg"></camera>
-    <StatusMsg ref="statusMsg" :receiveMsg="fromFaceapiMsg" class="statusposition"></StatusMsg>
+    <StatusMsg ref="statusMsg" :receiveMsg="fromFaceapiMsg" class="status-position"></StatusMsg>
     <!-- input v-modelで宣言した値を入れている-->
     <GameFooter :favo-gauge-data="favoGaugeData" :agesage-data="fromFaceapiMsg"></GameFooter>
   </div>
@@ -51,8 +52,8 @@
     background-size: cover;
     position: relative;
   }
-  .statusposition{
-    position: absolute; top:350px; left:0px;width: 100%;
+  .status-position{
+    position: absolute; top:36vh; left:0px;width: 100%;
   }
 
 </style>

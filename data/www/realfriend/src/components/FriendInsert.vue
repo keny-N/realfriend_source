@@ -113,6 +113,7 @@
     width: 50%;
     padding: 1em;
     background: #fff;
+    border-radius:30px;
   }
   .trim{
     height: 150px;  /* トリミングしたい高さ */

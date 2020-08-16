@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/menu">
+  <router-link v-bind:to="{name:'Menu',params:{userId:this.userId}}">
     <!--本来ならcssでFontsizeを変更すべきところだがとりあえず-->
     <input type="image" src="/static/return.png" class="image-size purupuru">
   </router-link>

@@ -114,6 +114,9 @@
     overflow: scroll;
     height: 80vh;
   }
+  .friend-list::-webkit-scrollbar {  /* スクロールのやつが表示されるので非表示にしてます。 */
+    display:none;
+  }
   .position{
     margin-top:10px;
   }

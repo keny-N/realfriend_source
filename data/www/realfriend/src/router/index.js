@@ -22,7 +22,7 @@ const router = new Router({
       component: GameBody
     },
     {
-      path: '/main/',
+      path: '/main',
       name: 'Main',
       component: Main,
     },

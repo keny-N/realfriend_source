@@ -1,19 +1,19 @@
 <template>
   <div class="profile" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <LogOut ref="logOut"></LogOut>
-    <div>
-      <p>
+    <divc>
+      <p class="userId-position">
         <msg1>ユーザーID：</msg1>
         {{userId}}
         <br>
       </p>
       <br>
 
-      <UserChangeName></UserChangeName>
-      <UserChangePass></UserChangePass>
+      <UserChangeName class="name-position"></UserChangeName>
+      <UserChangePass class="pass-position"></UserChangePass>
 
-      <button v-on:click="backMainVue">戻る</button>
-      <button v-on:click="logOutOpen">ログアウト</button>
+      <button v-on:click="backMainVue" class="return-position">戻る</button>
+      <button v-on:click="logOutOpen" class="logout-position">ログアウト</button>
       <!--      <button v-on:click="deleteUser">アカウントを削除する</button>-->
     </div>
   </div>
@@ -86,6 +86,21 @@
   @keyframes bgiLoop {
     0% { background-position: 0 0;}
     100% { background-position: -15% 15%;}
+  }
+  .return-position{
+    position:fixed;
+  }
+  .logout-position{
+    position: fixed;
+  }
+  .name-position{
+    font-size: 5vh;
+  }
+  .pass-position{
+    font-size: 5vh;
+  }
+  .userId-position{
+    font-size: 5vh;
   }
 
 </style>

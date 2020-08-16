@@ -326,6 +326,7 @@
 
   .camera-size {
     width: 100%;
+    height: 73vh;
   }
 
 </style>

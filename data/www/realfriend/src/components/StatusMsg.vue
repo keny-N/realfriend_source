@@ -74,6 +74,9 @@
     width: 100%;
     background-size: 100% 100%;;
   }
+  #statusmsg::-webkit-scrollbar {  /* スクロールのやつが表示されるので非表示にしてます。 */
+    display:none;
+  }
 
   #textmsg {
     /*文字の下の下線です*/

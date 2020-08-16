@@ -3,7 +3,6 @@
     <ReturnMenu></ReturnMenu>
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
-    <button v-on:click="userProfileDisplay">変更ページ</button>
     <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
     <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
     <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
@@ -36,9 +35,6 @@
         },
 
       methods: {
-            userProfileDisplay() {
-                this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
-            },
             //カウンターテスト用
             // aIncre() {
             //     this.$store.dispatch("counter/increment", "a")
@@ -65,9 +61,8 @@
   }
 
   .list-position {
-    /*追加が入らなかったのでマージをいじりました。リストがないので形がわからないです。  */
-    margin-top: auto ;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
+    top: 10%;
   }
 </style>
+
