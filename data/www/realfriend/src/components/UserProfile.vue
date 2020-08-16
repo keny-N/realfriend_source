@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="profile" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <LogOut ref="logOut"></LogOut>
     <div>
       <p>
@@ -36,6 +36,7 @@
       return {
         userId: this.$route.params.userId,       /*ユーザID受け取り用*/
         successFlg: this.$route.params.successFlg,
+        backgroundImageSrc: require("@/assets/test1.png")
       }
     },
     methods: {
@@ -77,5 +78,14 @@
 </script>
 
 <style scoped>
+  .profile{
+    height: 100vh;
+    background-size: 5%;
+    animation: bgiLoop 8s linear infinite;
+  }
+  @keyframes bgiLoop {
+    0% { background-position: 0 0;}
+    100% { background-position: -15% 15%;}
+  }
 
 </style>

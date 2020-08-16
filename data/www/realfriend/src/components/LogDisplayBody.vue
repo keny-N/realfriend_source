@@ -25,7 +25,7 @@
         USER_ID: "1",
         BASE_URL: "https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend",
         apiError: false,
-        backgroundImageSrc: require("@/assets/log.png")
+        backgroundImageSrc: require("@/assets/test1.png")
       }
     },
 
@@ -71,11 +71,12 @@
   .news-body {
     height: 100vh;
     margin: 0 auto;
-    animation: bgiLoop 5s linear infinite;
+    background-size: 5%;
+    animation: bgiLoop 8s linear infinite;
   }
   @keyframes bgiLoop {
     0% { background-position: 0 0;}
-    100% { background-position: -5000px 5000px;}
+    100% { background-position: -15% 15%;}
   }
   .update-position{
   }

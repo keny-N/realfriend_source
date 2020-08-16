@@ -1,6 +1,6 @@
 <template>
   <div class="friend-insert">
-    <button v-on:click="openModal">フレンド登録</button>
+    <input type="image" src="/static/friendinset.png" class="image-size" v-on:click="openModal">
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド登録</h4>
@@ -130,6 +130,12 @@
     max-height: 100%;
     width: auto;
     height: auto;
+  }
+  .image-size{
+    width: 7vmin;
+    position: fixed;
+    right: 10%;
+    bottom: 15%;
   }
 </style>
 

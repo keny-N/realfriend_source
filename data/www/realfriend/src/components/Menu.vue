@@ -4,10 +4,6 @@
     <Log class="log"></Log>
     <MainTransition class="main"></MainTransition>
     <ChangeSuccessTransition class="profile"></ChangeSuccessTransition>
-    <router-link v-bind:to="{name:'ChangeSuccess',params:{userId:this.userId}}">
-      userPro
-    </router-link>
-    <div v-on:click="userProfileDisplay">UserProfile</div>
   </div>
 </template>
 
@@ -24,11 +20,6 @@
           backgroundImageSrc: require("@/assets/op.png")
         }
       },
-      methods: {
-        userProfileDisplay() {
-          this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
-        },
-      }
     }
 </script>
 
@@ -44,17 +35,20 @@
     bottom: 20%;
     right: 10%;
     font-size: 6vmin;
+    text-decoration: none;
   }
   .main{
     position: absolute;
     bottom: 32%;
     right: 10%;
     font-size: 6vmin;
+    text-decoration: none;
   }
   .profile{
     position: absolute;
     bottom: 8%;
     right: 10%;
     font-size: 6vmin;
+    text-decoration: none;
   }
 </style>
