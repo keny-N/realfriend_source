@@ -20,7 +20,7 @@
 
     export default {
         name: "Main",
-        components: {GameHeader, Log, FriendList, FriendInsert,ReturnMenu},
+        components: {Log, FriendList, FriendInsert,ReturnMenu},
         data() {
             return {
                 backgroundImageSrc: require("@/assets/main_back.jpg")

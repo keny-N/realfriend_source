@@ -7,12 +7,12 @@
         <img class="friend-img rounded" :src=friend[2]>
           {{ friend[1]}}
         </router-link>
-          <FriendDelete class="float-right" v-bind:friend-id=friend[0] v-bind:friend-img=friend[2] v-bind:friend-name=friend[1]></FriendDelete>
+          <FriendDelete class="float-right yureru-j" v-bind:friend-id=friend[0] v-bind:friend-img=friend[2] v-bind:friend-name=friend[1]></FriendDelete>
         <div class="position">
           <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
           好感度：{{friend[3]}}
           </router-link>
-          <FriendEdit class="float-right" v-bind:friend-id=friend[0] v-bind:image-data=friend[2] v-bind:friend-name=friend[1]></FriendEdit>
+          <FriendEdit class="float-right yureru-j" v-bind:friend-id=friend[0] v-bind:image-data=friend[2] v-bind:friend-name=friend[1]></FriendEdit>
         </div>
       </li>
     </ul>
@@ -116,6 +116,32 @@
   }
   .position{
     margin-top:10px;
+  }
+  .yureru-j {
+    animation: yureru-j 2s infinite;
+  }
+  @keyframes yureru-j {
+    0% {
+      transform: translate(0px, 2px);
+    }
+    5% {
+      transform: translate(0px, -2px);
+    }
+    10% {
+      transform: translate(0px, 2px);
+    }
+    15% {
+      transform: translate(0px, -2px);
+    }
+    20% {
+      transform: translate(0px, 2px);
+    }
+    25% {
+      transform: translate(0px, -2px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
   }
 
 </style>

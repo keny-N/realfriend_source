@@ -118,7 +118,7 @@ export default {
       {
         this.$store.dispatch("token/setFirstFlag", false)
         //遷移先変えました。
-        this.$router.push('/menu')
+        this.$router.push({name: 'Menu', params: {userId: this.userId}})
       }
     ,
       /*SignUpのモーダルを開く*/

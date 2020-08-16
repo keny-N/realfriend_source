@@ -32,7 +32,7 @@ const router = new Router({
       component: UserProfile
     },
     {
-      path: '/changesuccess/:userId',
+      path: '/change-success/:userId',
       name: 'ChangeSuccess',
       component: UserChangeSuccess
     },
@@ -47,7 +47,7 @@ const router = new Router({
       component: Log
     },
     {
-      path:'/menu',
+      path:'/menu/:userId',
       name:'Menu',
       component: Menu
     },
