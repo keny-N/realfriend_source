@@ -106,7 +106,7 @@ export default {
           me.$store.dispatch('token/localStorageSave')
           me.logInSuccess()
         }).catch(function (error) {
-          if (error.response.status === 403) {
+          if (error.response.status === 401) {
             me.message('パスワード、またはIDが間違っています')
           }
           console.log(error)
