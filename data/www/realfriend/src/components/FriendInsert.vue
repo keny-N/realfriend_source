@@ -5,7 +5,7 @@
       <div class="content">
         <h4>フレンド登録</h4>
         <div class="card-body">
-          <div class="trim">
+          <div class="trim" >
             <img v-bind:src="imageData" v-if="imageData">
           </div>
           <h4 class="card-title">画像を選んでください。</h4>
@@ -20,51 +20,50 @@
 </template>
 
 <script>
-    import http from "../../static/axios/axios"
+  import http from "../../static/axios/axios"
+  export default {
+    name: "FriendInsert",
+    data() {
+      return {
+        showContent: false, //モーダルを非表示している
+        imageData: '',//画像
+        friendName: '',//フレンドの名前
+        postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one',//フレンド登録URL
+      }
+    },
+    methods: {
+      openModal: function () {
+        this.showContent = true
+      },
+      closeModal: function () {
+        this.showContent = false
+      },
+      onImgRegister(e) {
+        const files = e.target.files
 
-    export default {
-        name: "FriendInsert",
-        data() {
-            return {
-                showContent: false, //モーダルを非表示している
-                imageData: '',//画像
-                friendName: '',//フレンドの名前
-                postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one',//フレンド登録URL
-            }
-        },
-        methods: {
-            openModal: function () {
-                this.showContent = true
-            },
-            closeModal: function () {
-                this.showContent = false
-            },
-            onImgRegister(e) {
-                const files = e.target.files
+        if (files.length > 0) {
+          const file = files[0]
+          const reader = new FileReader()
+          reader.onload = (e) => {
+            this.imageData = e.target.result
+          }
+          reader.readAsDataURL(file)
+        }
+      },
+      registerFriend() {
+        //   ２０文字以内かつ一文字以上でない時に実行される。画像用の条件式も書かないと行けない
+        // if (this.friendName.length > 20 || this.friendName.length < 1) {
+        // }
 
-                if (files.length > 0) {
-                    const file = files[0]
-                    const reader = new FileReader()
-                    reader.onload = (e) => {
-                        this.imageData = e.target.result
-                    }
-                    reader.readAsDataURL(file)
-                }
-            },
-            registerFriend() {
-                //   ２０文字以内かつ一文字以上でない時に実行される。画像用の条件式も書かないと行けない
-                // if (this.friendName.length > 20 || this.friendName.length < 1) {
-                // }
+        let name = this.friendName
+        let me = this
 
-                let name = this.friendName
-                let me = this
+        console.log('post送信します')
 
-                console.log('post送信します')
-
-                http.interceptors.request.use(request => {
-                    request.headers.Authorization = this.$store.getters['token/tokenGet']
-                    return request
-                })
+        http.interceptors.request.use(request => {
+          request.headers.Authorization = this.$store.getters['token/tokenGet']
+          return request
+        })
 
                 http.post(this.postUrl, {
                     friend_name: name,
@@ -113,13 +112,11 @@
     padding: 1em;
     background: #fff;
   }
-
-  .trim {
-    height: 150px; /* トリミングしたい高さ */
+  .trim{
+    height: 150px;  /* トリミングしたい高さ */
     overflow: hidden;
     position: relative;
   }
-
   .trim img {
     position: absolute;
     top: 50%;

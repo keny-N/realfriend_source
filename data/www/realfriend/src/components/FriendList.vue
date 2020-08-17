@@ -5,13 +5,13 @@
       <li v-for="friend in friends" class="rounded border border-dark">
         <img class="friend-img rounded" :src=friend[3]>
         <div>
-          {{ friend[1]}}
+          {{ friend[2]}}
           <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}">
             <button type="button" class="btn btn-primary btn-sm c-button">攻略</button>
           </router-link>
         </div>
         <div>
-          好感度：{{friend[3]}}
+          好感度：{{friend[4]}}
           <!--ボタンが押された時にfriendIdを送っている。きっと消える-->
           <FriendDelete v-bind:friend-id=friend[0] v-bind:friend-img=friend[3]
                         v-bind:friend-name=friend[2]></FriendDelete>
@@ -28,9 +28,9 @@
 </template>
 
 <script>
-    import FriendEdit from "@/components/FriendEdit"
-    import FriendDelete from "@/components/FriendDelete"
-    import http from "../../static/axios/axios"
+  import FriendEdit from "@/components/FriendEdit"
+  import FriendDelete from "@/components/FriendDelete"
+  import http from "../../static/axios/axios"
 
     export default {
         name: "FriendList",
@@ -57,7 +57,6 @@
         watch: {
             friendFlag(val, old) {
                 this.showFriend()
-                console.log('watch中', val, 'と', old)
             }
         },
         methods: {

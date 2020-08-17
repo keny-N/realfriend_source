@@ -5,10 +5,10 @@
     <FriendInsert></FriendInsert>
     <Log class="Log"></Log>
     <button v-on:click="userProfileDisplay">変更ページ</button>
-    <!--    <button>{{aCount}}</button>-->
-    <!--    <button>{{bCount}}</button>-->
-    <!--    <button>{{cCount}}</button>-->
-    <!--    <button>{{dCount}}</button>-->
+    <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
+    <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
+    <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
+    <!--    <button v-on:click="dIncre">{{dCount}}</button>-->
   </div>
 </template>
 
@@ -29,14 +29,14 @@
         },
         computed: {
             // ...mapState({
-            //     aCount: state => state.counter.loginCount,
-            //     bCount: state => state.counter.autoLoginCount,
-            //     cCount: state => state.counter.cameraCount,
-            //     dCount: state => state.counter.newsCount,
+            //     aCount: state => state.counter.aCount,
+            //     bCount: state => state.counter.bCount,
+            //     cCount: state => state.counter.cCount,
+            //     dCount: state => state.counter.dCount,
             // })
         },
 
-        methods: {
+      methods: {
             userProfileDisplay() {
                 this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
             },
