@@ -1,10 +1,10 @@
 <template>
   <div class="agesage">
     <!--lamdba側から送られてくる好感判定で判断する。 -->
-    <!--ここに張っている画像はテスト用 -->
-    <img v-show="agesageData<=1 && agesageData>0" src="../assets/smile.png">
+    <!--数値に変更があったので反映してます -->
+    <img v-show="agesageData<=10 && agesageData>0" src="../assets/smile.png">
     <img v-show="agesageData==0" src="../assets/normal.png">
-    <img v-show="agesageData>=-1 && agesageData<0" src="../assets/shock.png">
+    <img v-show="agesageData>=-10 && agesageData<0" src="../assets/shock.png">
   </div>
 </template>
 

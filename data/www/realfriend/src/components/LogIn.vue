@@ -169,6 +169,35 @@ export default {
     top:15%;
     font-size:2.5vmin;
   }
+  .sign-button:hover{
+    animation: shake 2s infinite;
+  }
+  .account-button:hover{
+    animation: shake 2s infinite;
+  }
+  @keyframes shake {
+    0% {
+      transform: translate(2px, 0px);
+    }
+    5% {
+      transform: translate(-2px, 0px);
+    }
+    10% {
+      transform: translate(2px, 0px);
+    }
+    15% {
+      transform: translate(-2px, 0px);
+    }
+    20% {
+      transform: translate(2px, 0px);
+    }
+    25% {
+      transform: translate(-2px, 0px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
+  }
 
 </style>
 
