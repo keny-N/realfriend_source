@@ -52,10 +52,10 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
 
   if (store.getters["token/loginGet"] === true) {
-    this.$store.dispatch('counter/increment', "autoLogin")
+    store.dispatch('counter/increment', "autoLogin")
     next()
   } else if (store.getters["token/tokenGet"] !== '0' && store.getters["token/firstFlagGet"] === false) {
-    this.$store.dispatch('counter/increment', "autoLogin")
+    store.dispatch('counter/increment', "autoLogin")
     next()
   } else {
     store.dispatch("token/setLogin", true)
