@@ -6,10 +6,10 @@
         <h4>本当に削除しますか？</h4>
         <div class="card-body">
           <div>
-            <img v-on:src="friendNameDelete">
+            <img v-on:src="friendImg">
           </div>
         </div>
-        <div>フレンド名前：{{friendNameDelete}}</div>
+        <div>フレンド名前：{{friendName}}</div>
         <button class="float-left" v-on:click="deleteFriend">削除</button>
         <button class="float-right" v-on:click="closeModal">取り消し</button>
       </div>
@@ -19,58 +19,55 @@
 
 <script>
 
-  import http from "../../static/axios/axios"
+    import http from "../../static/axios/axios"
 
-  export default {
-    name: "FriendDelete",
-    props: ['friendId', 'friendImg', 'friendName'],
-    data() {
-      return {
-        showContent: false, //モーダルを非表示している
-        imageDataDelete: this.friendImg,//画像
-        friendNameDelete: this.friendName,//フレンドの名前
-        friendIdDelete: this.friendId,
-        deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド削除URL
-      }
-    },
-    methods: {
-      openModal: function () {
-        this.showContent = true
-      },
-      closeModal: function () {
-        this.showContent = false
-      },
-      deleteFriend() {
-        //   ２０文字以内かつ一文字以上でない時に実行される。画像用の条件式も書かないと行けない
-        // if (this.friendName.length > 20 || this.friendName.length < 1) {
-        // }
-        //画像は何も送られてこないためコメントアウトしています。
-        // let imgpath=this.friendImg
-        let friendId = Number(this.friendIdDelete)
-        let me = this
+    export default {
+        name: "FriendDelete",
+        props: ['friendId', 'friendImg', 'friendName'],
+        data() {
+            return {
+                showContent: false, //モーダルを非表示している
+                deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド削除URL
+            }
+        },
+        methods: {
+            openModal: function () {
+                this.showContent = true
+            },
+            closeModal: function () {
+                this.showContent = false
+            },
+            deleteFriend() {
+                //   ２０文字以内かつ一文字以上でない時に実行される。画像用の条件式も書かないと行けない
+                // if (this.friendName.length > 20 || this.friendName.length < 1) {
+                // }
+                //画像は何も送られてこないためコメントアウトしています。
+                // let imgpath=this.friendImg
+                let friendId = Number(this.friendId)
+                let me = this
 
 
-        console.log('delete送信します')
+                console.log('delete送信します')
 
-        http.interceptors.request.use(request => {
-          request.headers.Authorization = this.$store.getters['token/tokenGet']
-          return request
-        })
-        console.log(friendId)
-       http.delete(this.deleteUrl + friendId, {data:{'friend_name':this.friendName}})
-         .then(function (response) {
-            console.log(response)
-            me.showContent = false
-             me.$store.dispatch('friend/flagSwitch')
-         }).catch(function (error) {
-          console.log(error)
-          me.showContent = true
-        })
-        //メイン画面を更新する処理
-        console.log('以下')
-      }
-    },
-  }
+                http.interceptors.request.use(request => {
+                    request.headers.Authorization = this.$store.getters['token/tokenGet']
+                    return request
+                })
+                console.log(friendId)
+                http.delete(this.deleteUrl + friendId, {data: {'friend_name': this.friendName}})
+                    .then(function (response) {
+                        console.log(response)
+                        me.showContent = false
+                        me.$store.dispatch('friend/flagSwitch')
+                    }).catch(function (error) {
+                    console.log(error)
+                    me.showContent = true
+                })
+                //メイン画面を更新する処理
+                console.log('以下')
+            }
+        },
+    }
 </script>
 
 <style scoped>
