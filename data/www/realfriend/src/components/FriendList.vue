@@ -60,9 +60,6 @@
             }
         },
         methods: {
-            test() {
-                this.$store.dispatch('friend/flagSwitch')
-            },
             //フレンド削除のやつきっと消える
             deleteFriend(value) {
                 http.interceptors.request.use(config => {
