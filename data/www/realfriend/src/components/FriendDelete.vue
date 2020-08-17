@@ -18,52 +18,54 @@
 </template>
 
 <script>
-  export default {
-    name: "FriendDelete",
-    props: ['friendId', 'friendImg', 'friendName'],
-    data() {
-      return {
-        showContent: false, //モーダルを非表示している
-        imageDataDelete: this.friendImg,//画像
-        friendNameDelete: this.friendName,//フレンドの名前
-        friendIdDelete: this.friendId,
-        deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド削除URL
-      }
-    },
-    methods: {
-      openModal: function () {
-        this.showContent = true
-      },
-      closeModal: function () {
-        this.showContent = false
-      },
-      deleteFriend() {
-        //   ２０文字以内かつ一文字以上でない時に実行される。画像用の条件式も書かないと行けない
-        // if (this.friendName.length > 20 || this.friendName.length < 1) {
-        // }
-        //画像は何も送られてこないためコメントアウトしています。
-        // let imgpath=this.friendImg
-        let friendId = Number(this.friendIdDelete)
-        let me = this
+    export default {
+        name: "FriendDelete",
+        props: ['friendId', 'friendImg', 'friendName'],
+        data() {
+            return {
+                showContent: false, //モーダルを非表示している
+                imageDataDelete: this.friendImg,//画像
+                friendNameDelete: this.friendName,//フレンドの名前
+                friendIdDelete: this.friendId,
+                deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/'//フレンド削除URL
+            }
+        },
+        methods: {
+            openModal: function () {
+                this.showContent = true
+            },
+            closeModal: function () {
+                this.showContent = false
+            },
+            deleteFriend() {
+                //   ２０文字以内かつ一文字以上でない時に実行される。画像用の条件式も書かないと行けない
+                // if (this.friendName.length > 20 || this.friendName.length < 1) {
+                // }
+                //画像は何も送られてこないためコメントアウトしています。
+                // let imgpath=this.friendImg
+                let friendId = Number(this.friendIdDelete)
+                let me = this
 
 
-        console.log('delete送信します')
-        this.axios.delete(this.deleteUrl + friendId
-        ).then(function (response) {
-          if (response.data.isSuccess) {
-            console.log(response)
-            me.showContent = false
-            me.$router.go({path: me.$router.currentRoute.path, force: true})
-          }
-        }).catch(function (error) {
-          console.log(error)
-          me.showContent = true
-        })
-        //メイン画面を更新する処理
-        console.log('以下')
-      }
-    },
-  }
+                console.log('delete送信します')
+                this.axios.delete(this.deleteUrl + friendId
+                ).then(function (response) {
+                    if (response.data.isSuccess) {
+                        console.log(response)
+                        me.showContent = false
+                        //フレンド表示更新
+                        me.$store.dispatch('friend/flagSwitch')
+                        // me.$router.go({path: me.$router.currentRoute.path, force: true})
+                    }
+                }).catch(function (error) {
+                    console.log(error)
+                    me.showContent = true
+                })
+                //メイン画面を更新する処理
+                console.log('以下')
+            }
+        },
+    }
 </script>
 
 <style scoped>
