@@ -1,21 +1,28 @@
 export default {
   namespaced: true,  //モジュールを名前空間に分ける
   state: {
-    insertFlag:false
+    friendFlag: false
   },
-  getters:{
-    insertFlagGet:(state) => {
-      return state.insertFlag
+  getters: {
+    getFriendFlag: state => {
+      return state.friendFlag
     }
   },
   mutations: {
-    insertFlagSet:(state, flag) => {
-      state.insertFlag = flag
+    flagSwitch(state) {
+      if (state.friendFlag) {
+        state.friendFlag = false
+      } else {
+        state.friendFlag = true
+      }
+      console.log("ミューテションflagSwitch")
     }
   },
   actions: {
-    insertFlagSet:({commit}, flag) => {
-      commit('insertFlagSet', flag)
+    flagSwitch: ({commit}) => {
+      setTimeout(() => {
+        commit('flagSwitch')
+      }, 100)
     }
   }
 }

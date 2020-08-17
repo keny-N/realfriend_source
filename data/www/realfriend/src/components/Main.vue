@@ -24,27 +24,22 @@
         components: {GameHeader, Log, FriendList, FriendInsert},
         data() {
             return {
-                backgroundImageSrc: require("@/assets/main_back.jpg"),
-
+                backgroundImageSrc: require("@/assets/main_back.jpg")
             }
         },
         computed: {
             // ...mapState({
             //     aCount: state => state.counter.aCount,
             //     bCount: state => state.counter.bCount,
-            //     cCtount: state => state.counter.cCount,
+            //     cCount: state => state.counter.cCount,
             //     dCount: state => state.counter.dCount,
             // })
         },
-
 
       methods: {
             userProfileDisplay() {
                 this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
             },
-
-
-        }
             //カウンターテスト用
             // aIncre() {
             //     this.$store.dispatch("counter/increment", "a")
@@ -58,7 +53,7 @@
             // dIncre() {
             //     this.$store.dispatch("counter/increment", "d")
             // }
-
+        }
     }
 </script>
 

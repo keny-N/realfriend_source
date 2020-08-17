@@ -1,29 +1,28 @@
 export default {
   namespaced: true,  //モジュールを名前空間に分ける
   state: {
-    aCount: 0,
-    bCount: 0,
-    cCount: 0,
-    dCount: 0
+    loginCount: 0,
+    autoLoginCount: 0,
+    cameraCount: 0,
+    newsCount: 0
   },
   mutations: {
     increment(state, payload) {
-      if (payload == "a") {
-        state.aCount++
-      } else if (payload == "b") {
-        state.bCount++
-      } else if (payload == "c") {
-        state.cCount++
-      } else if (payload == "d") {
-        state.dCount++
+      if (payload == "login") {
+        state.loginCount++
+      } else if (payload == "autoLogin") {
+        state.autoLoginCount++
+      } else if (payload == "camera") {
+        state.cameraCount++
+      } else if (payload == "news") {
+        state.newsCount++
       }
-      state.aCount++
     },
     resetCounter(state) {
-      state.aCount = 0
-      state.bCount = 0
-      state.cCount = 0
-      state.dCount = 0
+      state.loginCount = 0
+      state.autoLoginCount = 0
+      state.cameraCount = 0
+      state.newsCount = 0
     }
   },
   actions: {

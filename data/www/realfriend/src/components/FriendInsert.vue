@@ -65,25 +65,25 @@
           return request
         })
 
-        http.post(this.postUrl, {
-          friend_name: name,
-          //現在はパスが確定していないためパスっぽい文字を入れているだけです。
-          friend_img:'matuo/apex'
-        }).then(function (response) {
-            console.log(response)
-            me.showContent = false
-            console.log('以下')
-            me.showContent = false
-            me.$store.dispatch('token/insertSetFlag', true)
-          }).catch(function (error) {
-            console.log(error)
-            me.showContent = true
-          })
-        //メイン画面を更新する処理
+                http.post(this.postUrl, {
+                    friend_name: name,
+                    //現在はパスが確定していないためパスっぽい文字を入れているだけです。
+                    friend_img: 'matuo/apex'
+                }).then(function (response) {
+                    console.log(response)
+                    me.showContent = false
+                    //フレンド表示更新
+                    me.$store.dispatch('friend/flagSwitch')
+                }).catch(function (error) {
+                    console.log(error)
+                    me.showContent = true
+                })
+                //メイン画面を更新する処理
+                console.log('以下')
+            },
 
-      },
-    },
-  }
+        },
+    }
 </script>
 
 <style scoped>

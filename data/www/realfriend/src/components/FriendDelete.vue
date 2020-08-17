@@ -61,8 +61,8 @@
          .then(function (response) {
             console.log(response)
             me.showContent = false
-            me.$router.go({path: me.$router.currentRoute.path, force: true})
-       }).catch(function (error) {
+             me.$store.dispatch('friend/flagSwitch')
+         }).catch(function (error) {
           console.log(error)
           me.showContent = true
         })

@@ -59,7 +59,6 @@ export default {
       //認証失敗などで遷移させられた場合
       this.$store.dispatch("token/setError", false)
       this.$store.dispatch("token/setToken", '0')
-
     }
   },
   beforeDestroy() {
