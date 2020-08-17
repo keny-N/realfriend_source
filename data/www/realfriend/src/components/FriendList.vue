@@ -120,31 +120,5 @@
   .position{
     margin-top:10px;
   }
-  .yureru-j {
-    animation: yureru-j 2s infinite;
-  }
-  @keyframes yureru-j {
-    0% {
-      transform: translate(0px, 2px);
-    }
-    5% {
-      transform: translate(0px, -2px);
-    }
-    10% {
-      transform: translate(0px, 2px);
-    }
-    15% {
-      transform: translate(0px, -2px);
-    }
-    20% {
-      transform: translate(0px, 2px);
-    }
-    25% {
-      transform: translate(0px, -2px);
-    }
-    30% {
-      transform: translate(0px, 0px);
-    }
-  }
 
 </style>
