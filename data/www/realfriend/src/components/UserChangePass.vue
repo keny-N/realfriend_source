@@ -3,11 +3,11 @@
     <p>
       <br>
     </p>
-      <input type="password" ref="newThisPass" placeholder="新しいパスワードを入力してください"
+      <input class="old-pass" type="password" ref="newThisPass" placeholder="新しいパスワードを入力してください"
              size="35"><br>
-      <input type="password" ref="checkThisPass" placeholder="もう一度入力してください" size="35"><br>
+      <input class="new-pass" type="password" ref="checkThisPass" placeholder="もう一度入力してください" size="35"><br>
     {{errPassMsg}}
-      <button v-on:click="checkPass">変更</button>
+      <button v-on:click="checkPass" class="edit-position">変更</button>
   </div>
 </template>
 
@@ -68,5 +68,14 @@
 </script>
 
 <style scoped>
+  .old-pass{
+    margin-bottom: 10px;
+  }
+  .new-pass{
+    margin-bottom: 4%;
+  }
+  .edit-position{
+    margin-top: 10px;
+  }
 
 </style>

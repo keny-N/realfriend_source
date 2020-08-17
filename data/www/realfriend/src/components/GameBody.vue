@@ -53,7 +53,7 @@
     position: relative;
   }
   .status-position{
-    position: absolute; top:36vh; left:0px;width: 100%;
+    position: absolute; top:50vh; left:0px;width: 100%;
   }
 
 </style>

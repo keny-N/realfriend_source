@@ -1,7 +1,8 @@
 <template>
   <div class="profile" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <LogOut ref="logOut"></LogOut>
-    <divc>
+    <ReturnMenu></ReturnMenu>
+    <div>
       <p class="userId-position">
         <msg1>ユーザーID：</msg1>
         {{userId}}
@@ -11,8 +12,6 @@
 
       <UserChangeName class="name-position"></UserChangeName>
       <UserChangePass class="pass-position"></UserChangePass>
-
-      <button v-on:click="backMainVue" class="return-position">戻る</button>
       <button v-on:click="logOutOpen" class="logout-position">ログアウト</button>
       <!--      <button v-on:click="deleteUser">アカウントを削除する</button>-->
     </div>
@@ -24,6 +23,7 @@
   import UserChangeName from "@/components/UserChangeName"
   import UserChangePass from "@/components/UserChangePass"
   import LogOut from "@/components/LogOut"
+  import ReturnMenu from "@/components/ReturnMenu"
 
   export default {
     name: "UserProfile",
@@ -31,6 +31,7 @@
       UserChangePass: UserChangePass,
       UserChangeName: UserChangeName,
       LogOut:LogOut,
+      ReturnMenu:ReturnMenu,
     },
     data() {
       return {
@@ -66,7 +67,7 @@
         this.$refs.logOut.openLogOutModal()
       },
       backMainVue() {
-        this.$router.push({name: 'Main', params: {userId: this.userId}})
+        this.$router.push({name: 'Menu', params: {userId: this.userId}})
       },
     }
     ,
@@ -87,20 +88,19 @@
     0% { background-position: 0 0;}
     100% { background-position: -15% 15%;}
   }
-  .return-position{
-    position:fixed;
-  }
   .logout-position{
-    position: fixed;
+    position: absolute;
+    bottom: 10%;
+    right: 20%;
   }
   .name-position{
-    font-size: 5vh;
+    font-size: 4vh;
   }
   .pass-position{
-    font-size: 5vh;
+    font-size: 4vh;
   }
   .userId-position{
-    font-size: 5vh;
+    font-size: 4vh;
   }
 
 </style>

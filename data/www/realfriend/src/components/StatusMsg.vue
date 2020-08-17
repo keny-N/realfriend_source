@@ -65,7 +65,7 @@
   #statusmsg {
     /*場所に関してです*/
     /*スクロールに関してだとおもいます*/
-    height: 190px;
+    height: 30vh;
     overflow: hidden;
     overflow-y: scroll;
     overflow-x: scroll;
