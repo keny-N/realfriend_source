@@ -18,6 +18,9 @@
 </template>
 
 <script>
+
+  import http from "../../static/axios/axios"
+
   export default {
     name: "FriendDelete",
     props: ['friendId', 'friendImg', 'friendName'],
@@ -48,14 +51,18 @@
 
 
         console.log('delete送信します')
-        this.axios.delete(this.deleteUrl + friendId
-        ).then(function (response) {
-          if (response.data.isSuccess) {
+
+        http.interceptors.request.use(request => {
+          request.headers.Authorization = this.$store.getters['token/tokenGet']
+          return request
+        })
+        console.log(friendId)
+       http.delete(this.deleteUrl + friendId, {data:{'friend_name':this.friendName}})
+         .then(function (response) {
             console.log(response)
             me.showContent = false
             me.$router.go({path: me.$router.currentRoute.path, force: true})
-          }
-        }).catch(function (error) {
+       }).catch(function (error) {
           console.log(error)
           me.showContent = true
         })

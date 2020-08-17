@@ -59,6 +59,7 @@ export default {
       //認証失敗などで遷移させられた場合
       this.$store.dispatch("token/setError", false)
       this.$store.dispatch("token/setToken", '0')
+
     }
   },
   beforeDestroy() {
@@ -106,7 +107,7 @@ export default {
           me.$store.dispatch('token/localStorageSave')
           me.logInSuccess()
         }).catch(function (error) {
-          if (error.status === 401) {
+          if (error.response.status === 403) {
             me.message('パスワード、またはIDが間違っています')
           }
           console.log(error)

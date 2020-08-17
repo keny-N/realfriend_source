@@ -42,11 +42,17 @@
         //deleteUrlでは削除したいフレンドのIDを指定することでデータベースから削除されるURL
         deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/',
         friends: [],
+        changeFlag: this.$store.watch('friend/insertFlagGet')
       }
     },
     mounted() {
       this.showFriend()
       // console.log(http.request.headers)
+    },
+    watch() {
+      this.changeFlag(()=>{
+        this.showFriend()
+      })
     },
     methods: {
       //フレンド削除のやつきっと消える

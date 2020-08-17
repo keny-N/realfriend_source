@@ -72,18 +72,16 @@
         }).then(function (response) {
             console.log(response)
             me.showContent = false
-            me.reload()
+            console.log('以下')
+            me.showContent = false
+            me.$store.dispatch('token/insertSetFlag', true)
           }).catch(function (error) {
-          console.log(error)
-          me.showContent = true
-        })
+            console.log(error)
+            me.showContent = true
+          })
         //メイン画面を更新する処理
-        console.log('以下')
+
       },
-      reload(){
-        const me = this
-        me.$router.go('/main/')
-      }
     },
   }
 </script>
