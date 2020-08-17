@@ -1,6 +1,6 @@
 <template>
   <div class="friend-delete">
-    <input type="image" src="/static/消しゴム.png" class="image-size yureru-s" v-on:click="openModal">
+    <input type="image" src="/static/消しゴム.png" class="image-size" v-on:click="openModal">
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>本当に削除しますか？</h4>

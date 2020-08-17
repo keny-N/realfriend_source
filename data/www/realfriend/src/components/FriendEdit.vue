@@ -1,6 +1,6 @@
 <template>
   <div class="friend-edit">
-    <input type="image" src="/static/enpitu.png" class="image-size yureru-s" v-on:click="openModal">
+    <input type="image" src="/static/enpitu.png" class="image-size" v-on:click="openModal">
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド編集</h4>
