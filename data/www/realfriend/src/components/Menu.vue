@@ -51,4 +51,36 @@
     font-size: 6vmin;
     text-decoration: none;
   }
+  .log:hover {
+    animation: shake 2s infinite;
+  }
+  .main:hover{
+    animation: shake 2s infinite;
+  }
+  .profile:hover{
+    animation: shake 2s infinite;
+  }
+  @keyframes shake {
+    0% {
+      transform: translate(2px, 0px);
+    }
+    5% {
+      transform: translate(-2px, 0px);
+    }
+    10% {
+      transform: translate(2px, 0px);
+    }
+    15% {
+      transform: translate(-2px, 0px);
+    }
+    20% {
+      transform: translate(2px, 0px);
+    }
+    25% {
+      transform: translate(-2px, 0px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
+  }
 </style>

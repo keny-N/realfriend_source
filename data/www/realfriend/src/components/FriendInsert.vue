@@ -138,7 +138,7 @@
     right: 10%;
     bottom: 15%;
   }
-  a:hover .yureru-s {
+  .yureru-s {
     animation: yureru-s 2s infinite;
   }
   @keyframes yureru-s {

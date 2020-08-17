@@ -185,6 +185,7 @@
     background: #fff;
     border-radius: 4px;
     overflow: hidden;
+    border-radius:30px;
   }
 
   .modal-window {

@@ -1,6 +1,6 @@
 <template>
   <div class="friend-edit">
-    <input type="image" src="/static/enpitu.png" class="image-size" v-on:click="openModal">
+    <input type="image" src="/static/enpitu.png" class="image-size yureru-s" v-on:click="openModal">
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド編集</h4>
@@ -125,5 +125,31 @@
   }
   .image-size{
     width: 3vmin;
+  }
+  .yureru-s {
+    animation: yureru-s 2s infinite;
+  }
+  @keyframes yureru-s {
+    0% {
+      transform: translate(2px, 0px);
+    }
+    5% {
+      transform: translate(-2px, 0px);
+    }
+    10% {
+      transform: translate(2px, 0px);
+    }
+    15% {
+      transform: translate(-2px, 0px);
+    }
+    20% {
+      transform: translate(2px, 0px);
+    }
+    25% {
+      transform: translate(-2px, 0px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
   }
 </style>
