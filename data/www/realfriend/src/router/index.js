@@ -19,17 +19,17 @@ const router = new Router({
       component: GameBody
     },
     {
-      path: '/main/',
+      path: '/main',
       name: 'Main',
       component: Main,
     },
     {
-      path: '/profile/:userId',
+      path: '/profile/',
       name: 'Profile',
       component: UserProfile
     },
     {
-      path: '/changesuccess/:userId',
+      path: '/changesuccess',
       name: 'ChangeSuccess',
       component: UserChangeSuccess
     },
