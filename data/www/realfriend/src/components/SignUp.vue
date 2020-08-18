@@ -28,8 +28,8 @@
                 <br>
                 <input type="password" ref="userThisPass" value="" placeholder="パスワード"></p>
               <h2>{{resultPass}}</h2>
-              <button v-on:click="dataConfirmation">登録</button>
-              <button v-on:click="dataDelete">取り消し</button>
+              <div class="float-left font-design" v-on:click="dataConfirmation">登録</div>
+              <div class="float-left font-design" v-on:click="dataDelete">取り消し</div>
 
 
             <div class="message-font-size">{{message}}</div>
@@ -182,7 +182,7 @@
   }
 
   .modal-window {
-    background: #fff;
+    background: #fec7d7;
     border-radius: 4px;
     overflow: hidden;
     border-radius:30px;
@@ -209,7 +209,11 @@
     font-size: 4vmin;
   }
   .text-position{
-    margin-top: ;
+    margin-top: auto;
     margin: auto;
+  }
+  .font-design{
+    font-family: Impact;
+    color: white;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="friend-insert">
-    <input type="image" src="/static/friendinset.png" class="image-size yureru-s" v-on:click="openModal">
+    <input type="image" src="/static/friendinset.png" class="image-size" v-on:click="openModal">
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド登録</h4>
@@ -12,8 +12,8 @@
           <input type="file" accept="image/*" @change="onImgRegister($event)">
         </div>
         <div>フレンド名前：<input v-model="friendName"></div>
-        <button class="float-left" v-on:click="registerFriend">登録</button>
-        <button class="float-right" v-on:click="closeModal">取り消し</button>
+        <div class="float-left font-design" v-on:click="registerFriend">REGISTER</div>
+        <div class="float-right font-design" v-on:click="closeModal">CANCEL</div>
       </div>
     </div>
   </div>
@@ -112,7 +112,7 @@
     z-index: 2;
     width: 50%;
     padding: 1em;
-    background: #fff;
+    background: #fec7d7;
     border-radius:30px;
   }
   .trim{
@@ -138,10 +138,10 @@
     right: 10%;
     bottom: 15%;
   }
-  .yureru-s {
-    animation: yureru-s 2s infinite;
+  .image-size:hover {
+    animation: shake 2s infinite;
   }
-  @keyframes yureru-s {
+  @keyframes shake {
     0% {
       transform: translate(2px, 0px);
     }
@@ -163,6 +163,10 @@
     30% {
       transform: translate(0px, 0px);
     }
+  }
+  .font-design{
+    font-family: Impact;
+    color: white;
   }
 </style>
 

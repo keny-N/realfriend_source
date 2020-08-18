@@ -12,8 +12,8 @@
           <input type="file" accept="image/*" @change="onImgRegister($event)" v-model="ImageDataEdit">
         </div>
         <div>フレンド名前：<input v-model="friendNameEdit"></div>
-        <button class="float-left" v-on:click="editFriend">変更</button>
-        <button class="float-right" v-on:click="closeModal">取り消し</button>
+        <div class="float-left font-design" v-on:click="editFriend">CHANGE</div>
+        <div class="float-right font-design" v-on:click="closeModal">CANCEL</div>
       </div>
     </div>
   </div>
@@ -120,10 +120,14 @@
     z-index: 2;
     width: 50%;
     padding: 1em;
-    background: #fff;
+    background: #fec7d7;
     border-radius:30px;
   }
   .image-size{
     width: 3vmin;
+  }
+  .font-design{
+    font-family: Impact;
+    color: white;
   }
 </style>
