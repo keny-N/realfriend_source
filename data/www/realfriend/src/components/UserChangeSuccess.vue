@@ -53,8 +53,7 @@
             user_id: String(this.userId),
             user_pass: String(this.userPass),
           }).then(function (response) {
-
-            me.$store.dispatch('token/setToken',response.data)
+            me.$store.dispatch('token/setToken',response.data.token)
             me.$router.push('/profile')
           }).catch(function (error) {
             me.errMsg = 'IDもしくはパスワードが間違っています'
