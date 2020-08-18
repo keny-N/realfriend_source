@@ -12,6 +12,8 @@
 </template>
 
 <script>
+  import http from "../../static/axios/axios"
+
   export default {
     name: "UserChangePass",
     data() {
@@ -19,7 +21,7 @@
         passUrl: '',
         errPassMsg: '',
         userId: this.$route.params.userId,
-        apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users'
+        apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users/pass'
       }
     },
     props: {
@@ -28,42 +30,29 @@
     methods: {
       updateUserPassApi() {
         let me = this
-        me.userNewPass = this.$refs.newThisPass.value
-        me.passUrl = me.apiUrl + '/pass'
-        this.axios.put(this.passUrl, {
-          user_pass: String(me.userNewPass),
+        http.put(this.apiUrl, {
+          user_pass: String(me.$refs.newThisPass.value),
         }).then(function (response) {
-          if (response.data.isSuccess == true) {
-            me.errPassMsg = '成功'
+           me.errPassMsg = '成功'
             me.$refs.newThisPass.value = ''
             me.$refs.checkThisPass.value = ''
-          } else {
-            console.log(response)
-            me.errPassMsg = '失敗'
-          }
         }).catch(function (error) {
           console.log(error)
         })
-
-
       },
       checkPass() {
-        if(this.$refs.newThisPass.value == '' || this.$refs.checkThisPass.value =='') {
+        if(this.$refs.newThisPass.value === '' || this.$refs.checkThisPass.value ==='') {
           this.errPassMsg = '入力してください'
           console.log('a')
         }else{
-          if (this.$refs.newThisPass.value == this.$refs.checkThisPass.value) {
+          if (this.$refs.newThisPass.value === this.$refs.checkThisPass.value) {
             this.updateUserPassApi()
           } else {
             this.errPassMsg = '確認用と同じものが指定されていません'
           }
         }
       },
-
     },
-    created() {
-      this.apiUrl = this.apiUrl + '/' + this.userId
-    }
   }
 </script>
 
