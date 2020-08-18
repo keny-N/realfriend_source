@@ -38,7 +38,7 @@
 
       methods: {
             userProfileDisplay() {
-                this.$router.push({name: 'ChangeSuccess', params: {userId: this.userId}})
+                this.$router.push('/changesuccess')
             },
             //カウンターテスト用
             // aIncre() {
