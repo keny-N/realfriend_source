@@ -22,7 +22,7 @@
         components: {Log, FriendList, FriendInsert,ReturnMenu},
         data() {
             return {
-                backgroundImageSrc: require("@/assets/main_back.jpg")
+                backgroundImageSrc: require("@/assets/背景候補２.png")
             }
         },
         computed: {
@@ -58,7 +58,12 @@
     background-size: cover;
     /*mainのサイズをちょうど画面と同じにする。*/
     height: 100vh;
+    /*animation: bgiLoop 10s linear infinite;*/
   }
+  /*@keyframes bgiLoop {*/
+  /*  0% { background-position: 0% 0%;}*/
+  /*  100% { background-position: -100% 100%;}*/
+  /*}*/
 
   .list-position {
     position: relative;
