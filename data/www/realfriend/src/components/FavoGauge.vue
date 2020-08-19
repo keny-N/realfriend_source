@@ -1,7 +1,7 @@
 <template>
   <div class="favogauge">
     <!-- nが1から４になるまで繰り返す。-->
-    <ul v-for="n of 4">
+    <ul v-for="n of this.$store.getters['friend/getForCount']">
       <!--favoの値によって表示する画像を判断する -->
       <li v-show="favoGaugeData>=n">
         <img src="../assets/満ハートのマーク.png">
@@ -16,25 +16,27 @@
 
 <script>
     export default {
-      name: "FavoGauge",
-      props: {
-        favoGaugeData: {
-          type:Number
-        }
-      },
+        name: "FavoGauge",
+        props: {
+            favoGaugeData: {
+                type: Number
+            }
+        },
 
     }
 </script>
 
 <style scoped>
-  ul{
+  ul {
     list-style: none;
   }
-li{
-  float: left;
-  width:15%;
-}
-  img{
+
+  li {
+    float: left;
+    width: 15%;
+  }
+
+  img {
     width: 50%;
   }
 </style>

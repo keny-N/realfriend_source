@@ -4,19 +4,21 @@
       <!--itemsの件数文回している-->
       <li v-for="friend in friends" class="rounded border border-dark">
         <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
-          <matuo v-on:click="insertFriendName(friend[1])">
+          <matuo v-on:click="insertFriendName(friend[1],friend[3])">
             <img class="friend-img rounded" :src=friend[2]>
             {{ friend[1]}}
           </matuo>
         </router-link>
-        <FriendDelete class="float-right" v-bind:friend-id=friend[0] v-bind:friend-img=friend[2] v-bind:friend-name=friend[1]></FriendDelete>
+        <FriendDelete class="float-right" v-bind:friend-id=friend[0] v-bind:friend-img=friend[2]
+                      v-bind:friend-name=friend[1]></FriendDelete>
         <div class="position">
           <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
-          <matuo v-on:click="insertFriendName(friend[1])">
-            好感度：{{friend[3]}}
-          </matuo>
+            <matuo v-on:click="insertFriendName(friend[1],friend[3])">
+              好感度：{{friend[3]}}
+            </matuo>
           </router-link>
-          <FriendEdit class="float-right" v-bind:friend-id=friend[0] v-bind:image-data=friend[2] v-bind:friend-name=friend[1]></FriendEdit>
+          <FriendEdit class="float-right" v-bind:friend-id=friend[0] v-bind:image-data=friend[2]
+                      v-bind:friend-name=friend[1]></FriendEdit>
         </div>
       </li>
     </ul>
@@ -61,9 +63,15 @@
             }
         },
         methods: {
-            insertFriendName(friendName) {
-                this.$store.dispatch('friend/insertFriendName', friendName)
+
+            insertFriendName(friendName, Gauge) {
+                this.$store.dispatch('friend/insertFriendName',
+                    {
+                        friendName: friendName,
+                        Gauge: Gauge
+                    })
             },
+
             //フレンド削除のやつきっと消える
             deleteFriend(value) {
                 http.interceptors.request.use(config => {
@@ -125,18 +133,22 @@
     width: 30%;
     object-fit: cover;
   }
-  .rink{
+
+  .rink {
     text-decoration: none;
   }
+
   .friend-list {
     overflow: scroll;
     height: 80vh;
   }
-  .friend-list::-webkit-scrollbar {  /* スクロールのやつが表示されるので非表示にしてます。 */
-    display:none;
+
+  .friend-list::-webkit-scrollbar { /* スクロールのやつが表示されるので非表示にしてます。 */
+    display: none;
   }
-  .position{
-    margin-top:10px;
+
+  .position {
+    margin-top: 10px;
   }
 
 </style>
