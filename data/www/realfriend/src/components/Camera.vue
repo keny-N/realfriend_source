@@ -8,7 +8,6 @@
       <div>
         <button v-bind:disabled="isPush" v-on:click="recStart">Start</button>
         <button ref="stop" v-on:click="recStop">Stop</button>
-        <a>{{$route.params.friendId}}</a>
       </div>
     </div>
   </div>
@@ -329,7 +328,7 @@
 
   .camera-size {
     width: 100%;
-    height: 73vh;
+    height: 68vh;
   }
 
 </style>

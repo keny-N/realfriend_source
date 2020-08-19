@@ -47,7 +47,7 @@ const router = new Router({
       component: Log
     },
     {
-      path:'/menu/:userId',
+      path:'/menu',
       name:'Menu',
       component: Menu
     },

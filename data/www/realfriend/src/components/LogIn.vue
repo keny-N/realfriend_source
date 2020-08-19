@@ -45,7 +45,7 @@
                 userPass: null,     /*ユーザパス受け取り用*/
                 message: '',
                 apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
-              backgroundImageSrc: require("@/assets/op.png"),
+                backgroundImageSrc: require("@/assets/op.png"),
             }
         },
         created() {
@@ -119,7 +119,7 @@
             logInSuccess() {
                 this.$store.dispatch("token/setFirstFlag", false)
               //遷移先変えました。
-              this.$router.push({name: 'Menu', params: {userId: this.userId}})
+              this.$router.push('/menu')
               // this.$router.push('/main/')
             }
             ,

@@ -1,15 +1,15 @@
 <template>
 
-  <div>
-    {{userName}}さん
-    <h1>認証ページです</h1>
+  <div class="user-change-success" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
+    <h2>認証ページ</h2>
+    <div class="user-name-position">{{userName}}さん</div>
       <p>
         <msg1>パスワードを入力してください</msg1>
         <br>
-        <input type="password" ref="userThisPass" placeholder="パスワード" >
+        <input class="pass-position" type="password" ref="userThisPass" placeholder="パスワード" >
       </p>
-      <button v-on:click="changeCheck">ok</button>
-    {{errMsg}}
+      <div class="change-check-position" v-on:click="changeCheck">認証</div>
+    <div class="errMsg-position">{{errMsg}}</div>
   </div>
 
 </template>
@@ -27,6 +27,7 @@
         errMsg: '',
         successUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
         url: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
+        backgroundImageSrc: require("@/assets/test1.png"),
       }
     },
     created() {
@@ -79,4 +80,67 @@
 </script>
 
 <style scoped>
+  h2{
+    position: relative;
+    top: 3vh;
+  }
+  msg1{
+    font-size: 3vmin;
+    position: relative;
+    top: 20vh;
+  }
+  .user-change-success{
+    height: 100vh;
+    margin: 0 auto;
+    background-size: 5%;
+    animation: bgiLoop 8s linear infinite;
+  }
+  @keyframes bgiLoop {
+    0% { background-position: 0 0;}
+    100% { background-position: -15% 15%;}
+  }
+  .pass-position{
+    position: relative;
+    top: 25vh;
+    font-size: 3vmin;
+  }
+  .change-check-position{
+    position: relative;
+    top: 50vh;
+    font-size: 3vmin;
+  }
+  .errMsg-position{
+    position: absolute;
+  }
+  .user-name-position{
+    font-size: 3vmin;
+    position: relative;
+    top: 10vh;
+  }
+  .change-check-position:hover {
+    animation: shake 2s infinite;
+  }
+  @keyframes shake {
+    0% {
+      transform: translate(2px, 0px);
+    }
+    5% {
+      transform: translate(-2px, 0px);
+    }
+    10% {
+      transform: translate(2px, 0px);
+    }
+    15% {
+      transform: translate(-2px, 0px);
+    }
+    20% {
+      transform: translate(2px, 0px);
+    }
+    25% {
+      transform: translate(-2px, 0px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
+  }
 </style>

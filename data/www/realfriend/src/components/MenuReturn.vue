@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/menu">
+  <router-link to="/main">
     <!--本来ならcssでFontsizeを変更すべきところだがとりあえず-->
     <input type="image" src="/static/return.png" class="image-size">
   </router-link>
@@ -7,15 +7,15 @@
 
 <script>
     export default {
-        name: "ReturnMenu"
+        name: "MenuReturn"
     }
 </script>
 
 <style scoped>
   .image-size{
     width: 5%;
-    position:absolute;
-    left: 5%;
+    position:relative;
+    left: -45%;
   }
   .image-size:hover {
     animation: shake 2s infinite;
@@ -43,6 +43,4 @@
       transform: translate(0px, 0px);
     }
   }
-
-
 </style>
