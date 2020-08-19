@@ -17,7 +17,7 @@
       components:{Log,MainTransition,ChangeSuccessTransition},
       data() {
         return {
-          backgroundImageSrc: require("@/assets/op.png")
+          backgroundImageSrc: require("@/assets/op2.png")
         }
       },
     }

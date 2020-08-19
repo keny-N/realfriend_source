@@ -21,18 +21,16 @@
                 <msg2>※必須</msg2>
                 <br>
                 <input type="text" ref="userThisId" value="" placeholder="ユーザID"></p>
-              <h2>{{resultId}}</h2>
+              <h2 v-show="resultId">{{resultId}}</h2>
               <p>
                 <msg1>パスワードを入力してください</msg1>
                 <msg2>※必須</msg2>
                 <br>
                 <input type="password" ref="userThisPass" value="" placeholder="パスワード"></p>
-              <h2>{{resultPass}}</h2>
+              <h2 v-show="resultPass">{{resultPass}}</h2>
+              <div class="message-font-size">{{message}}</div>
               <div class="float-left font-design float-left-position" v-on:click="dataConfirmation">登録</div>
-              <div class="float-left font-design float-left-position" v-on:click="dataDelete">取り消し</div>
-
-
-            <div class="message-font-size">{{message}}</div>
+              <div class="float-right font-design float-right-position" v-on:click="dataDelete">取り消し</div>
           </div>
           <div v-if="success">
             <p>登録が完了しました！再度ログインしてください</p>
@@ -178,7 +176,7 @@
 
   .modal-content {
     padding: 10px 20px;
-
+    background: #fec7d7;
   }
 
   .modal-window {
@@ -223,5 +221,31 @@
   .float-left-position{
     position: relative;
     left: 10%;
+  }
+  .font-design:hover{
+    animation: shake 2s infinite;
+  }
+  @keyframes shake {
+    0% {
+      transform: translate(2px, 0px);
+    }
+    5% {
+      transform: translate(-2px, 0px);
+    }
+    10% {
+      transform: translate(2px, 0px);
+    }
+    15% {
+      transform: translate(-2px, 0px);
+    }
+    20% {
+      transform: translate(2px, 0px);
+    }
+    25% {
+      transform: translate(-2px, 0px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
   }
 </style>

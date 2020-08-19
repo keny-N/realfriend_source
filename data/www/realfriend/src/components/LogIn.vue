@@ -18,10 +18,10 @@
       <input type="password" ref="userThisPass" placeholder="パスワード"></p>
     <h2>{{ resultPass }}</h2>
 
-    <msg3 class="sign-button" v-on:click="dataCheck">sign in</msg3>
+    <div class="sign-button font-design" v-on:click="dataCheck">sign in</div>
 
     <br>
-    <msg3 class="account-button" v-on:click="addAccountPage">sign up</msg3>
+    <div class="account-button font-design" v-on:click="addAccountPage">sign up</div>
     </div>
   </div>
 
@@ -45,7 +45,7 @@
                 userPass: null,     /*ユーザパス受け取り用*/
                 message: '',
                 apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
-                backgroundImageSrc: require("@/assets/op.png"),
+                backgroundImageSrc: require("@/assets/op2.png"),
             }
         },
         created() {
@@ -151,7 +151,7 @@
     margin-top: 7px;
     margin-bottom: 5px;
   }
-  msg3{
+  .font-design{
     line-height: 5;
     margin-top: 7px;
     margin-bottom: 5px;
@@ -167,13 +167,9 @@
     position: absolute;
     right:5%;
     /*小さくした場合にはみ出すので現在は大きい画面の対しての配置をイメージしている*/
-    top:15%;
     font-size:2.5vmin;
   }
-  .sign-button:hover{
-    animation: shake 2s infinite;
-  }
-  .account-button:hover{
+  .font-design:hover{
     animation: shake 2s infinite;
   }
   @keyframes shake {
