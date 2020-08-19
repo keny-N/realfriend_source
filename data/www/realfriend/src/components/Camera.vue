@@ -8,6 +8,7 @@
       <div>
         <button v-bind:disabled="isPush" v-on:click="recStart">Start</button>
         <button ref="stop" v-on:click="recStop">Stop</button>
+        <a>{{$route.params.friendId}}</a>
       </div>
     </div>
   </div>
@@ -57,12 +58,12 @@
                 this.axios.post(this.postUrl, {
                     image: String(this.image),
                     voice: this.wav,
-                    friend_id: 77,
-                    friend_name: "ウンチ"
+                    friend_id: this.$route.params.friendId,
+                    friend_name: this.$store.state.friend.friendName
                 }, {
                     headers: {
                         //トークンをヘッダーに付与する
-                        'Authorization': '9oLgyqAa-vbXbs6zRt4AwP1Q1AOOvUsJSlUaXxZBOf5OYWEYGmiNaUrIjCH-jBSjAknZ4yLQnbjLqjaHkNtH9A'
+                        Authorization: this.$store.getters['token/tokenGet']
                     }
                 }).then(function (response) {
                     console.log(response.status)
