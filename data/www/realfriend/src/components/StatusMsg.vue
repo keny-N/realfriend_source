@@ -72,7 +72,8 @@
     background-origin: content-box;
     background: no-repeat;
     width: 100%;
-    background-size: 100% 100%;;
+    background-size: 100% 100%;
+    opacity: 0.5;
   }
   #statusmsg::-webkit-scrollbar {  /* スクロールのやつが表示されるので非表示にしてます。 */
     display:none;

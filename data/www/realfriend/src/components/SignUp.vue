@@ -28,8 +28,8 @@
                 <br>
                 <input type="password" ref="userThisPass" value="" placeholder="パスワード"></p>
               <h2>{{resultPass}}</h2>
-              <div class="float-left font-design" v-on:click="dataConfirmation">登録</div>
-              <div class="float-left font-design" v-on:click="dataDelete">取り消し</div>
+              <div class="float-left font-design float-left-position" v-on:click="dataConfirmation">登録</div>
+              <div class="float-left font-design float-left-position" v-on:click="dataDelete">取り消し</div>
 
 
             <div class="message-font-size">{{message}}</div>
@@ -215,5 +215,13 @@
   .font-design{
     font-family: Impact;
     color: white;
+  }
+  .float-right-position{
+    position: relative;
+    right: 10%;
+  }
+  .float-left-position{
+    position: relative;
+    left: 10%;
   }
 </style>

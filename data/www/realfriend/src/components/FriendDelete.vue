@@ -10,8 +10,8 @@
           </div>
         </div>
         <div>フレンド名前：{{friendNameDelete}}</div>
-        <div class="float-left font-design" v-on:click="deleteFriend">DELETE</div>
-        <div class="float-right font-design" v-on:click="closeModal">CANCEL</div>
+        <div class="float-left-position font-design float-left" v-on:click="deleteFriend">DELETE</div>
+        <div class="float-right-position font-design float-right" v-on:click="closeModal">CANCEL</div>
       </div>
     </div>
   </div>
@@ -89,7 +89,14 @@
     font-family: Impact;
     color: white;
   }
-
+  .float-right-position{
+    position: relative;
+    right: 10%;
+  }
+  .float-left-position{
+    position: relative;
+    left: 10%;
+  }
   .content {
     z-index: 2;
     width: 50%;

@@ -12,8 +12,8 @@
           <input type="file" accept="image/*" @change="onImgRegister($event)" v-model="ImageDataEdit">
         </div>
         <div>フレンド名前：<input v-model="friendNameEdit"></div>
-        <div class="float-left font-design" v-on:click="editFriend">CHANGE</div>
-        <div class="float-right font-design" v-on:click="closeModal">CANCEL</div>
+        <div class="float-left font-design float-left-position" v-on:click="editFriend">CHANGE</div>
+        <div class="float-right font-design float-right-position" v-on:click="closeModal">CANCEL</div>
       </div>
     </div>
   </div>
@@ -129,5 +129,13 @@
   .font-design{
     font-family: Impact;
     color: white;
+  }
+  .float-right-position{
+    position: relative;
+    right: 10%;
+  }
+  .float-left-position{
+    position: relative;
+    left: 10%;
   }
 </style>
