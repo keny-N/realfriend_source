@@ -3,8 +3,6 @@
     <ReturnMenu></ReturnMenu>
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
-    <Log class="Log"></Log>
-    <button v-on:click="userProfileDisplay">変更ページ</button>
     <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
     <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
     <!--    <button v-on:click="cIncre">{{cCount}}</button>-->

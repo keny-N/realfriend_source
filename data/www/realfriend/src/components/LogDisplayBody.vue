@@ -16,6 +16,7 @@
         components: {InformationList,ReturnMenu},
         data() {
             return {
+              backgroundImageSrc: require("@/assets/test1.png"),
                 updateInformation: {
                     title: "更新情報", body: [{title: "全米が驚愕", body: "あほくさ"}]
                 },
@@ -25,7 +26,6 @@
                 USER_ID: "1",
                 BASE_URL: "https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend",
                 apiError: false,
-              backgroundImageSrc: require("@/assets/test1.png")
             }
         },
 

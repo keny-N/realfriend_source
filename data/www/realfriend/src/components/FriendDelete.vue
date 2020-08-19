@@ -10,8 +10,8 @@
           </div>
         </div>
         <div>フレンド名前：{{friendName}}</div>
-        <button class="float-left float-left-position font-design" v-on:click="deleteFriend">削除</button>
-        <button class="float-right float-right-position font-design" v-on:click="closeModal">取り消し</button>
+        <div class="float-left float-left-position font-design" v-on:click="deleteFriend">削除</div>
+        <div class="float-right float-right-position font-design" v-on:click="closeModal">取り消し</div>
       </div>
     </div>
   </div>
