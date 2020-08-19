@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import http from "../static/axios/axios"
+    import http from "../static/axios/axios"
 
     export default {
         name: 'App',
@@ -25,27 +25,27 @@ import http from "../static/axios/axios"
         methods: {
 
 
-    confirmSave(event) {
-      // this.counterSave()
-      event.returnValue = "編集中のものは保存されませんが、よろしいですか？"
-    },
-    counterSave() {
-      let me = this
-      //ユーザー動向のカウンター値をDBに保存する
-      this.axios.post('https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/counter', {
-        A: this.$store.state.counter.aCount,
-        B: this.$store.state.counter.bCount,
-        C: this.$store.state.counter.cCount,
-        D: this.$store.state.counter.dCount
-      }).then(function (response) {
-        me.$store.dispatch("resetCounter")
-        console.log(response)
-      }).catch(function (error) {
-        console.log(error)
-      })
+            confirmSave(event) {
+                this.counterSave()
+                event.returnValue = "編集中のものは保存されませんが、よろしいですか？"
+            },
+            counterSave() {
+                let me = this
+                //ユーザー動向のカウンター値をDBに保存する
+                this.axios.post('https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/counter', {
+                    login_count: this.$store.state.counter.loginCount,
+                    autoLogin_count: this.$store.state.counter.autoLoginCount,
+                    camera_count: this.$store.state.counter.cameraCount,
+                    news_count: this.$store.state.counter.newsCount
+                }).then(function (response) {
+                    me.$store.dispatch("resetCounter")
+                    console.log(response)
+                }).catch(function (error) {
+                    console.log(error)
+                })
+            }
+        }
     }
-  }
-}
 </script>
 
 <style>

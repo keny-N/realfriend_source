@@ -122,13 +122,13 @@
           user_id: String(this.userId),
           user_pass: String(this.userPass),
         }).then(function (response) {
-          if (response.data.isSuccess) {
-            me.success = true
-          } else {
-            me.msg = response.data.error
-          }
+          me.success = true
         }).catch(function (error) {
-          console.log(error)
+          if (error.response.status === 500){
+            me.resultId = 'ユーザーIDがすでに存在しています。'
+          }else{
+            console.log(error)
+          }
         })
       },
 

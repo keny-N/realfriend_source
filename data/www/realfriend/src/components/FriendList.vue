@@ -7,7 +7,7 @@
         <img class="friend-img rounded" :src=friend[2]>
           {{ friend[1]}}
         </router-link>
-          <FriendDelete class="float-right" v-bind:friend-id=friend[0] v-bind:friend-img=friend[2] v-bind:friend-name=friend[1]></FriendDelete>
+        <FriendDelete class="float-right" v-bind:friend-id=friend[0] v-bind:friend-img=friend[2] v-bind:friend-name=friend[1]></FriendDelete>
         <div class="position">
           <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
           好感度：{{friend[3]}}
@@ -25,59 +25,70 @@
 </template>
 
 <script>
-  import FriendEdit from "@/components/FriendEdit"
-  import FriendDelete from "@/components/FriendDelete"
-  import http from "../../static/axios/axios"
+    import FriendEdit from "@/components/FriendEdit"
+    import FriendDelete from "@/components/FriendDelete"
+    import http from "../../static/axios/axios"
 
-  export default {
-    name: "FriendList",
-    components: {FriendEdit, FriendDelete},
-    data: function () {
-      return {
-        //getUrlでは適当なユーザーのフレンドを一覧として取得するためのURL、ログインとの連携を試していないのでユーザーID１を固定している
-        getUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/all',
-        //deleteUrlでは削除したいフレンドのIDを指定することでデータベースから削除されるURL
-        deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/',
-        friends: [],
-      }
-    },
-    mounted() {
-      this.showFriend()
-      // console.log(http.request.headers)
-    },
-    methods: {
-      //フレンド削除のやつきっと消える
-      deleteFriend(value) {
-        http.interceptors.request.use(config => {
-          config.headers.Authorization = this.$store.getters['token/tokenGet']
-          return config
-        })
-        http.delete(this.deleteUrl + Number(value)
-        ).then(function (response) {
-          console.log(response)
-        }).catch(function (error) {
-          console.log(error)
-        })
-      },
-      showFriend() {
-        let me = this
-        //ログイン画面から遷移する際に動的ルーティングで送られてくる時用
-        // let userId = this.$route.params.userid
-        // console.log('get送信します')
-        // 動的ルーティングで取得した際の書き方
-        // http.get(this.getUrl+Number(userid))
-        http.interceptors.request.use(config => {
-          config.headers.Authorization = this.$store.getters['token/tokenGet']
-          return config
-        })
-        http.get(this.getUrl)
-          .then(function (response) {
-              console.log(response.data)
-              me.friends = response.data.friends
-          })
-      }
+    export default {
+        name: "FriendList",
+        components: {FriendEdit, FriendDelete},
+        data: function () {
+            return {
+                //getUrlでは適当なユーザーのフレンドを一覧として取得するためのURL、ログインとの連携を試していないのでユーザーID１を固定している
+                getUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/all',
+                //deleteUrlでは削除したいフレンドのIDを指定することでデータベースから削除されるURL
+                deleteUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/friends/one/',
+                friends: [],
+            }
+        },
+        mounted() {
+            this.showFriend()
+            // console.log(http.request.headers)
+        },
+
+        computed: {
+            friendFlag() {
+                return this.$store.getters['friend/getFriendFlag']
+            }
+        },
+        watch: {
+            friendFlag(val, old) {
+                this.showFriend()
+            }
+        },
+        methods: {
+            //フレンド削除のやつきっと消える
+            deleteFriend(value) {
+                http.interceptors.request.use(config => {
+                    config.headers.Authorization = this.$store.getters['token/tokenGet']
+                    return config
+                })
+                http.delete(this.deleteUrl + Number(value)
+                ).then(function (response) {
+                    console.log(response)
+                }).catch(function (error) {
+                    console.log(error)
+                })
+            },
+            showFriend() {
+                let me = this
+                //ログイン画面から遷移する際に動的ルーティングで送られてくる時用
+                // let userId = this.$route.params.userid
+                // console.log('get送信します')
+                // 動的ルーティングで取得した際の書き方
+                // http.get(this.getUrl+Number(userid))
+                http.interceptors.request.use(config => {
+                    config.headers.Authorization = this.$store.getters['token/tokenGet']
+                    return config
+                })
+                http.get(this.getUrl)
+                    .then(function (response) {
+                        console.log(response.data)
+                        me.friends = response.data.friends
+                    })
+            }
+        }
     }
-  }
 </script>
 
 <style scoped>

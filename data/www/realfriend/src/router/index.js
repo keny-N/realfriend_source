@@ -27,12 +27,12 @@ const router = new Router({
       component: Main,
     },
     {
-      path: '/profile/:userId',
+      path: '/profile/',
       name: 'Profile',
       component: UserProfile
     },
     {
-      path: '/change-success/:userId',
+      path: '/changesuccess',
       name: 'ChangeSuccess',
       component: UserChangeSuccess
     },
@@ -63,12 +63,11 @@ const router = new Router({
 //アクセスのガードを行う
 router.beforeEach((to, from, next) => {
 
-  //この書き方でstoreのトークンを取得しています。
-  //importしたstoreでstoreフォルダのindex.jsを参照し。stateの中身を見に行っています
-  //modluesに設定したtokenをさらに参照し、Token.jsのstateにあるtokenを呼び出しています
   if (store.getters["token/loginGet"] === true) {
+    store.dispatch('counter/increment', "autoLogin")
     next()
   } else if (store.getters["token/tokenGet"] !== '0' && store.getters["token/firstFlagGet"] === false) {
+    store.dispatch('counter/increment', "autoLogin")
     next()
   } else {
     store.dispatch("token/setLogin", true)

@@ -265,6 +265,8 @@
                 return newData
             },
             recStart() {
+                //カメラを触ったカウント
+                this.$store.dispatch('counter/increment', "camera")
                 //ボタン連打防止用
                 this.isPush = true
                 //カメラマイクをONにし、録音を始める

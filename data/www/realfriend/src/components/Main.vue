@@ -3,6 +3,8 @@
     <ReturnMenu></ReturnMenu>
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
+    <Log class="Log"></Log>
+    <button v-on:click="userProfileDisplay">変更ページ</button>
     <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
     <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
     <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
@@ -35,6 +37,10 @@
         },
 
       methods: {
+          // 画面遷移の場所が変わったので異常があるかも
+          //   userProfileDisplay() {
+          //       this.$router.push('/changesuccess')
+          //   },
             //カウンターテスト用
             // aIncre() {
             //     this.$store.dispatch("counter/increment", "a")
@@ -58,16 +64,10 @@
     background-size: cover;
     /*mainのサイズをちょうど画面と同じにする。*/
     height: 100vh;
-    /*animation: bgiLoop 10s linear infinite;*/
   }
-  /*@keyframes bgiLoop {*/
-  /*  0% { background-position: 0% 0%;}*/
-  /*  100% { background-position: -100% 100%;}*/
-  /*}*/
 
   .list-position {
     position: relative;
     top: 10%;
   }
 </style>
-

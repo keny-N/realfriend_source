@@ -1,6 +1,6 @@
 <template>
   <div class="profile" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
-    <LogOut ref="logOut"></LogOut>
+<!--    <LogOut ref="logOut"></LogOut>-->
     <ReturnMenu></ReturnMenu>
     <div>
       <p class="userId-position">
@@ -24,6 +24,7 @@
   import UserChangePass from "@/components/UserChangePass"
   import LogOut from "@/components/LogOut"
   import ReturnMenu from "@/components/ReturnMenu"
+  import http from "../../static/axios/axios"
 
   export default {
     name: "UserProfile",
@@ -35,10 +36,23 @@
     },
     data() {
       return {
-        userId: this.$route.params.userId,       /*ユーザID受け取り用*/
+        userId: '',       /*ユーザID受け取り用*/
         successFlg: this.$route.params.successFlg,
+        url: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
         backgroundImageSrc: require("@/assets/test1.png")
       }
+    },
+    created() {
+      http.get(this.url, {
+        headers:{
+          Authorization:this.$store.getters['token/tokenGet']
+        }
+      }).then((response) => {
+        console.log(response.data)
+        this.userId = response.data.user[0]
+      }).catch((error) => {
+        console.log(error.response.status)
+      })
     },
     methods: {
 
@@ -67,6 +81,8 @@
         this.$refs.logOut.openLogOutModal()
       },
       backMainVue() {
+        // メイン画面出なくメニュー画面への遷移に変更、異常はないか
+        // this.$router.push('/main')
         this.$router.push({name: 'Menu', params: {userId: this.userId}})
       },
     }
