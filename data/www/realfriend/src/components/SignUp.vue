@@ -82,35 +82,28 @@
         this.userPass = this.$refs.userThisPass.value
 
         /*正規表現パターン*/
-        // let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
-        // let paternpass = new RegExp(/^([a-zA-Z0-9]{1,30})$/)
+        let paternid = new RegExp(/^([a-zA-Z0-9]{1,7})$/)
+        let paternpass = new RegExp(/^([a-zA-Z0-9]{1,30})$/)
 
         /*入力値のチェック*/
-        if (this.userName == '') {
+        if (this.userName === '') {
           this.resultUser = "ユーザ名が不正です"
-          if (this.userId == '' /*false == paternid.test(this.userId)*/) {
-            this.resultId = "ユーザidが不正です"
-            if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
-              this.resultPass = "ユーザpassが不正です"
-            }
-          } else {
-            if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
-              this.resultPass = "ユーザpassが不正です"
-            }
-          }
+          // if (this.userId == '' /*false == paternid.test(this.userId)*/) {
+          //   this.resultId = "ユーザidが不正です"
+          //   if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
+          //     this.resultPass = "ユーザpassが不正です"
+          //   }
+          // } else {
+          //   if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
+          //     this.resultPass = "ユーザpassが不正です"
+          //   }
+          // }
         } else {
-          if (this.userId == '' /*false == paternid.test(this.userId)*/) {
-            this.resultId = "ユーザidが不正です"
-            if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
-              this.resultPass = "ユーザpassが不正です"
-            }
-
+          if (paternid.test(this.userId) && paternpass.test((this.userId))){
+            this.resultId = ""
+            this.userAdd()
           } else {
-            if (this.userPass == '' /*false == paternpass.test(this.userPass)*/) {
-              this.resultPass = "ユーザpassが不正です"
-            } else {
-              this.userAdd()
-            }
+            this.resultId = "パスワードまたはIDが不正です"
           }
         }
       },
