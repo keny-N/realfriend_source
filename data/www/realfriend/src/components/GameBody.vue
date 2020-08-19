@@ -34,14 +34,17 @@
                 favoGaugeData: 0,
                 agesageData: 0,
                 fromFaceapiMsg: 0,
-                backgroundImageSrc: require("@/assets/game_footer.jpg")
+                backgroundImageSrc: require("@/assets/ゲーム背景候補.jpg")
             }
         },
         methods: {
             updateFaceapiMsg(msg) {
                 this.fromFaceapiMsg = msg
                 this.$refs.statusMsg.statusMsgAdd();
-            }
+            },
+            heartCount(sum){
+                this.favoGaugeData=Math.floor(sum/200)
+            },
         }
     };
 </script>
