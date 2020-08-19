@@ -2,7 +2,7 @@
 
   <div class="user-change-success" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
     <ReturnMenu></ReturnMenu>
-    <h2>認証ページ</h2>
+    <msg2>認証ページ</msg2>
     <div class="user-name-position">{{userName}}さん</div>
       <p>
         <msg1>パスワードを入力してください</msg1>
@@ -83,9 +83,10 @@
 </script>
 
 <style scoped>
-  h2{
+  msg2{
     position: relative;
     top: 3vh;
+    font-size: 2rem;
   }
   msg1{
     font-size: 3vmin;
