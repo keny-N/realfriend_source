@@ -7,7 +7,8 @@
         <div>
           {{ friend[1]}}
           <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}">
-            <button type="button" class="btn btn-primary btn-sm c-button">攻略</button>
+            <button type="button" class="btn btn-primary btn-sm c-button" v-on:click="insertFriendName(friend[1])">攻略
+            </button>
           </router-link>
         </div>
         <div>
@@ -60,6 +61,9 @@
             }
         },
         methods: {
+            insertFriendName(friendName) {
+                this.$store.dispatch('friend/insertFriendName', friendName)
+            },
             //フレンド削除のやつきっと消える
             deleteFriend(value) {
                 http.interceptors.request.use(config => {
