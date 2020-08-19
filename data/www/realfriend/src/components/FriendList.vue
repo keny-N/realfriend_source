@@ -5,7 +5,7 @@
       <li v-for="friend in friends" class="rounded border border-dark">
         <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
           <matuo v-on:click="insertFriendName(friend[1])">
-            <img class="friend-img rounded" :src=friend[2]>
+<!--            <img class="friend-img rounded" :src=friend[2]>-->
             {{ friend[1]}}
           </matuo>
         </router-link>

@@ -4,13 +4,13 @@
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド登録</h4>
-        <div class="card-body">
-          <div class="trim">
-            <img v-bind:src="imageData" v-if="imageData">
-          </div>
-          <h4 class="card-title">画像を選んでください。</h4>
-          <input type="file" accept="image/*" @change="onImgRegister($event)">
-        </div>
+<!--        <div class="card-body">-->
+<!--          <div class="trim">-->
+<!--            <img v-bind:src="imageData" v-if="imageData">-->
+<!--          </div>-->
+<!--          <h4 class="card-title">画像を選んでください。</h4>-->
+<!--          <input type="file" accept="image/*" @change="onImgRegister($event)">-->
+<!--        </div>-->
         <div>フレンド名前：<input v-model="friendName"></div>
         <div class="float-left font-design float-left-position" v-on:click="registerFriend">REGISTER</div>
         <div class="float-right font-design float-right-position" v-on:click="closeModal">CANCEL</div>

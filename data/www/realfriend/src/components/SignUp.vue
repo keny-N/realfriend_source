@@ -33,7 +33,7 @@
               <div class="float-right font-design float-right-position" v-on:click="dataDelete">取り消し</div>
           </div>
           <div v-if="success">
-            <p>登録が完了しました！再度ログインしてください</p>
+            <p>登録が完了しました！ログインしてください</p>
             <button v-on:click="closeSignUpModal">閉じる</button>
           </div>
           <!-- /default -->

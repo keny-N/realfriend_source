@@ -30,16 +30,15 @@
                 let min = ("0" + now.getMinutes()).slice(-2);                 /*時刻を表示する処理です*/
                 let time = hour + ":" + min + "       　　　　";              /*時刻を表示する処理です*/
                 /*0.5から-0.5の範囲で帰って来る際に好感度判定をします。*/
-                if (this.receiveMsg > 1 || this.receiveMsg < -1) {
-                    this.storage = time + "エラーです"
-                } else if (this.receiveMsg < 0) {
+              if (Number(this.receiveMsg) < 0) {
                     this.storage = time + "好感度が下がりました"
-                } else if (this.receiveMsg > 0) {
+                } else if (Number(this.receiveMsg) > 0) {
                     this.storage = time + "好感度が上がりました"
                 } else {
                     this.storage = time + "好感度に変化はありませんでした"
+                    console.log(this.receiveMsg)
                 }
-
+                //this.storage=this.receiveMsg
                 this.statusList.push({
                     Msg: this.storage            /*リストの最後に最新の好感度情報を追加する処理です*/
                 })
