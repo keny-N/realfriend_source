@@ -1,6 +1,6 @@
 <template>
   <div class="friend-insert">
-    <button v-on:click="openModal">フレンド登録</button>
+    <input type="image" src="/static/friendinset.png" class="image-size" v-on:click="openModal">
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド登録</h4>
@@ -12,8 +12,8 @@
           <input type="file" accept="image/*" @change="onImgRegister($event)">
         </div>
         <div>フレンド名前：<input v-model="friendName"></div>
-        <button class="float-left" v-on:click="registerFriend">登録</button>
-        <button class="float-right" v-on:click="closeModal">取り消し</button>
+        <div class="float-left font-design float-left-position" v-on:click="registerFriend">REGISTER</div>
+        <div class="float-right font-design float-right-position" v-on:click="closeModal">CANCEL</div>
       </div>
     </div>
   </div>
@@ -107,30 +107,73 @@ export default {
 
 }
 
-.content {
-  z-index: 2;
-  width: 50%;
-  padding: 1em;
-  background: #fff;
-}
-
-.trim {
-  height: 150px; /* トリミングしたい高さ */
-  overflow: hidden;
-  position: relative;
-}
-
-.trim img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-}
+  .content {
+    z-index: 2;
+    width: 50%;
+    padding: 1em;
+    background: #fec7d7;
+    border-radius:30px;
+  }
+  .trim{
+    height: 150px;  /* トリミングしたい高さ */
+    overflow: hidden;
+    position: relative;
+  }
+  .trim img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+  .float-right-position{
+    position: relative;
+    right: 10%;
+  }
+  .float-left-position{
+    position: relative;
+    left: 10%;
+  }
+  .image-size{
+    width: 7vmin;
+    position: fixed;
+    right: 10%;
+    bottom: 15%;
+  }
+  .image-size:hover {
+    animation: shake 2s infinite;
+  }
+  @keyframes shake {
+    0% {
+      transform: translate(2px, 0px);
+    }
+    5% {
+      transform: translate(-2px, 0px);
+    }
+    10% {
+      transform: translate(2px, 0px);
+    }
+    15% {
+      transform: translate(-2px, 0px);
+    }
+    20% {
+      transform: translate(2px, 0px);
+    }
+    25% {
+      transform: translate(-2px, 0px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
+  }
+  .font-design{
+    font-family: Impact;
+    color: white;
+  }
 </style>
 

@@ -8,6 +8,9 @@ import UserProfile from "@/components/UserProfile"
 import UserChangeSuccess from "@/components/UserChangeSuccess"
 import Log from "@/components/LogDisplayBody"
 import store from "@/store"
+import Menu from "@/components/Menu"
+import Opening from "@/components/Opening"
+
 
 Vue.use(Router)
 
@@ -42,9 +45,18 @@ const router = new Router({
       path: '/log',
       name: 'Log',
       component: Log
-    }
-  ],
-
+    },
+    {
+      path:'/menu',
+      name:'Menu',
+      component: Menu
+    },
+    {
+      path:'/opening',
+      name:'Opening',
+      component: Opening
+    },
+  ]
 })
 
 //グローバルにパラメータのバリデーションを行う

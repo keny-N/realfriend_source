@@ -1,9 +1,10 @@
 <template>
-  <div>
-    {{ message }}
+  <div class="login" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
+    {{message}}
     <!-- アカウント登録の時-->
     <SignUp ref="signUp"></SignUp>
     <!-- ログインの時　-->
+    <div class="input-text1">
     <p>
       <msg1>ユーザーIDを入力してください</msg1>
       <msg2>※必須</msg2>
@@ -17,11 +18,11 @@
       <input type="password" ref="userThisPass" placeholder="パスワード"></p>
     <h2>{{ resultPass }}</h2>
 
-    <button v-on:click="dataCheck">サインイン</button>
+    <div class="sign-button font-design" v-on:click="dataCheck">sign in</div>
 
     <br>
-    <button v-on:click="addAccountPage">アカウント新規登録</button>
-
+    <div class="account-button font-design" v-on:click="addAccountPage">sign up</div>
+    </div>
   </div>
 
 
@@ -44,6 +45,7 @@
                 userPass: null,     /*ユーザパス受け取り用*/
                 message: '',
                 apiUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/login',
+                backgroundImageSrc: require("@/assets/op2.png"),
             }
         },
         created() {
@@ -116,7 +118,9 @@
             },
             logInSuccess() {
                 this.$store.dispatch("token/setFirstFlag", false)
-                this.$router.push('/main/')
+              //遷移先変えました。
+              this.$router.push('/menu')
+              // this.$router.push('/main/')
             }
             ,
             /*SignUpのモーダルを開く*/
@@ -132,11 +136,65 @@
 
 <style scoped>
   h2 {
-    color: red
+    color: red;
+    font-size:2.5vmin;
   }
 
   msg2 {
-    color: red
+    color: red;
+    line-height: 7;
+    margin-top: 7px;
+    margin-bottom: 5px;
   }
+  msg1{
+    line-height: 7;
+    margin-top: 7px;
+    margin-bottom: 5px;
+  }
+  .font-design{
+    line-height: 5;
+    margin-top: 7px;
+    margin-bottom: 5px;
+  }
+  .login{
+    background: no-repeat center;
+    background-size: cover;
+    /*mainのサイズをちょうど画面と同じにする。*/
+    height: 100vh;
+  }
+  .input-text1{
+    box-sizing: content-box;
+    position: absolute;
+    right:5%;
+    /*小さくした場合にはみ出すので現在は大きい画面の対しての配置をイメージしている*/
+    font-size:2.5vmin;
+  }
+  .font-design:hover{
+    animation: shake 2s infinite;
+  }
+  @keyframes shake {
+    0% {
+      transform: translate(2px, 0px);
+    }
+    5% {
+      transform: translate(-2px, 0px);
+    }
+    10% {
+      transform: translate(2px, 0px);
+    }
+    15% {
+      transform: translate(-2px, 0px);
+    }
+    20% {
+      transform: translate(2px, 0px);
+    }
+    25% {
+      transform: translate(-2px, 0px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
+  }
+
 </style>
 

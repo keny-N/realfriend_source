@@ -3,20 +3,20 @@
     <ul>
       <!--itemsの件数文回している-->
       <li v-for="friend in friends" class="rounded border border-dark">
-        <img class="friend-img rounded" :src=friend[2]>
-        <div>
-          {{ friend[1]}}
-          <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}">
-            <button type="button" class="btn btn-primary btn-sm c-button" v-on:click="insertFriendName(friend[1])">攻略
-            </button>
+        <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
+          <matuo v-on:click="insertFriendName(friend[1])">
+            <img class="friend-img rounded" :src=friend[2]>
+            {{ friend[1]}}
+          </matuo>
+        </router-link>
+        <FriendDelete class="float-right" v-bind:friend-id=friend[0] v-bind:friend-img=friend[2] v-bind:friend-name=friend[1]></FriendDelete>
+        <div class="position">
+          <router-link v-bind:to="{name:'GameBody',params:{friendId:friend[0]}}" class="rink">
+          <matuo v-on:click="insertFriendName(friend[1])">
+            好感度：{{friend[3]}}
+          </matuo>
           </router-link>
-        </div>
-        <div>
-          好感度：{{friend[3]}}
-          <!--ボタンが押された時にfriendIdを送っている。きっと消える-->
-          <FriendDelete v-bind:friend-id=friend[0] v-bind:friend-img=friend[2]
-                        v-bind:friend-name=friend[1]></FriendDelete>
-          <FriendEdit v-bind:friend-id=friend[0] v-bind:image-data=friend[2] v-bind:friend-name=friend[1]></FriendEdit>
+          <FriendEdit class="float-right" v-bind:friend-id=friend[0] v-bind:image-data=friend[2] v-bind:friend-name=friend[1]></FriendEdit>
         </div>
       </li>
     </ul>
@@ -114,6 +114,7 @@
     margin-bottom: 20px;
     width: 70%;
     max-width: 600px;
+    height: 80px;
   }
 
   .friend-img {
@@ -124,14 +125,18 @@
     width: 30%;
     object-fit: cover;
   }
-
-  .c-button {
-    float: right;
+  .rink{
+    text-decoration: none;
   }
-
   .friend-list {
     overflow: scroll;
     height: 80vh;
+  }
+  .friend-list::-webkit-scrollbar {  /* スクロールのやつが表示されるので非表示にしてます。 */
+    display:none;
+  }
+  .position{
+    margin-top:10px;
   }
 
 </style>

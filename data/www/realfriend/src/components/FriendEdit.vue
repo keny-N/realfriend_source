@@ -1,6 +1,6 @@
 <template>
   <div class="friend-edit">
-    <button v-on:click="openModal">フレンド変更</button>
+    <input type="image" src="/static/enpitu.png" class="image-size" v-on:click="openModal">
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>フレンド編集</h4>
@@ -12,8 +12,8 @@
           <input type="file" accept="image/*" @change="onImgRegister($event)" v-model="ImageDataEdit">
         </div>
         <div>フレンド名前：<input v-model="friendNameEdit"></div>
-        <button class="float-left" v-on:click="editFriend">変更</button>
-        <button class="float-right" v-on:click="closeModal">取り消し</button>
+        <div class="float-left font-design float-left-position" v-on:click="editFriend">CHANGE</div>
+        <div class="float-right font-design float-right-position" v-on:click="closeModal">CANCEL</div>
       </div>
     </div>
   </div>
@@ -117,10 +117,26 @@ export default {
 
 }
 
-.content {
-  z-index: 2;
-  width: 50%;
-  padding: 1em;
-  background: #fff;
-}
+  .content {
+    z-index: 2;
+    width: 50%;
+    padding: 1em;
+    background: #fec7d7;
+    border-radius:30px;
+  }
+  .image-size{
+    width: 3vmin;
+  }
+  .font-design{
+    font-family: Impact;
+    color: white;
+  }
+  .float-right-position{
+    position: relative;
+    right: 10%;
+  }
+  .float-left-position{
+    position: relative;
+    left: 10%;
+  }
 </style>

@@ -1,10 +1,8 @@
 <template>
   <div class="main" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
-    <GameHeader></GameHeader>
+    <ReturnMenu></ReturnMenu>
     <FriendList class="list-position"></FriendList>
     <FriendInsert></FriendInsert>
-    <Log class="Log"></Log>
-    <button v-on:click="userProfileDisplay">変更ページ</button>
     <!--    <button v-on:click="aIncre">{{aCount}}</button>-->
     <!--    <button v-on:click="bIncre">{{bCount}}</button>-->
     <!--    <button v-on:click="cIncre">{{cCount}}</button>-->
@@ -13,18 +11,18 @@
 </template>
 
 <script>
-    import GameHeader from '@/components/GameHeader'
     import Log from "@/components/LogDisplayTransition"
     import FriendList from "@/components/FriendList"
     import FriendInsert from "@/components/FriendInsert"
+    import ReturnMenu from "@/components/ReturnMenu"
     import {mapState} from "vuex"
 
     export default {
         name: "Main",
-        components: {GameHeader, Log, FriendList, FriendInsert},
+        components: {Log, FriendList, FriendInsert,ReturnMenu},
         data() {
             return {
-                backgroundImageSrc: require("@/assets/main_back.jpg")
+                backgroundImageSrc: require("@/assets/背景候補２.png")
             }
         },
         computed: {
@@ -37,9 +35,10 @@
         },
 
       methods: {
-            userProfileDisplay() {
-                this.$router.push('/changesuccess')
-            },
+          // 画面遷移の場所が変わったので異常があるかも
+          //   userProfileDisplay() {
+          //       this.$router.push('/changesuccess')
+          //   },
             //カウンターテスト用
             // aIncre() {
             //     this.$store.dispatch("counter/increment", "a")
@@ -66,7 +65,7 @@
   }
 
   .list-position {
-    margin: 50vh auto 0;
-    transform: translateY(-50%);
+    position: relative;
+    top: 10%;
   }
 </style>

@@ -25,16 +25,21 @@
   li {
     list-style: none;
     margin-left: -20px;
+    font-size: 3vmin;
   }
   div:first-child{
     height: 30vh;
     margin-bottom: 5vh;
   }
   h1{
-    height: 5vh;
+    height: 5vmin;
+    font-size: 5vmin;
   }
   .news-list{
     border: #1b1e21 solid 1px;
     height: 25vh;
+    width: 50%;
+    position: center;
+    margin: auto;
   }
 </style>

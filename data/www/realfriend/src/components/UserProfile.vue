@@ -1,19 +1,18 @@
 <template>
-  <div>
+  <div class="profile" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
 <!--    <LogOut ref="logOut"></LogOut>-->
+    <ReturnMenu></ReturnMenu>
     <div>
-      <p>
+      <p class="userId-position">
         <msg1>ユーザーID：</msg1>
         {{userId}}
         <br>
       </p>
       <br>
 
-      <UserChangeName></UserChangeName>
-      <UserChangePass></UserChangePass>
-
-      <button v-on:click="backMainVue">戻る</button>
-      <button v-on:click="logOutOpen">ログアウト</button>
+      <UserChangeName class="name-position"></UserChangeName>
+      <UserChangePass class="pass-position"></UserChangePass>
+      <button v-on:click="logOutOpen" class="logout-position">ログアウト</button>
       <!--      <button v-on:click="deleteUser">アカウントを削除する</button>-->
     </div>
   </div>
@@ -24,6 +23,7 @@
   import UserChangeName from "@/components/UserChangeName"
   import UserChangePass from "@/components/UserChangePass"
   import LogOut from "@/components/LogOut"
+  import ReturnMenu from "@/components/ReturnMenu"
   import http from "../../static/axios/axios"
 
   export default {
@@ -32,12 +32,14 @@
       UserChangePass: UserChangePass,
       UserChangeName: UserChangeName,
       LogOut:LogOut,
+      ReturnMenu:ReturnMenu,
     },
     data() {
       return {
         userId: '',       /*ユーザID受け取り用*/
         successFlg: this.$route.params.successFlg,
-        url: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users'
+        url: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/users',
+        backgroundImageSrc: require("@/assets/test1.png")
       }
     },
     created() {
@@ -79,7 +81,9 @@
         this.$refs.logOut.openLogOutModal()
       },
       backMainVue() {
-        this.$router.push('/main')
+        // メイン画面出なくメニュー画面への遷移に変更、異常はないか
+        // this.$router.push('/main')
+        this.$router.push({name: 'Menu', params: {userId: this.userId}})
       },
     }
     ,
@@ -91,5 +95,28 @@
 </script>
 
 <style scoped>
+  .profile{
+    height: 100vh;
+    background-size: 5%;
+    animation: bgiLoop 8s linear infinite;
+  }
+  @keyframes bgiLoop {
+    0% { background-position: 0 0;}
+    100% { background-position: -15% 15%;}
+  }
+  .logout-position{
+    position: absolute;
+    bottom: 10%;
+    right: 20%;
+  }
+  .name-position{
+    font-size: 4vh;
+  }
+  .pass-position{
+    font-size: 4vh;
+  }
+  .userId-position{
+    font-size: 4vh;
+  }
 
 </style>

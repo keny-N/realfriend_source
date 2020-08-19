@@ -1,6 +1,6 @@
 <template>
   <div class="friend-delete">
-    <button v-on:click="openModal">削除</button>
+    <input type="image" src="/static/消しゴム.png" class="image-size" v-on:click="openModal">
     <div class="overlay" v-show="showContent">
       <div class="content">
         <h4>本当に削除しますか？</h4>
@@ -10,8 +10,8 @@
           </div>
         </div>
         <div>フレンド名前：{{friendName}}</div>
-        <button class="float-left" v-on:click="deleteFriend">削除</button>
-        <button class="float-right" v-on:click="closeModal">取り消し</button>
+        <div class="float-left float-left-position font-design" v-on:click="deleteFriend">削除</div>
+        <div class="float-right float-right-position font-design" v-on:click="closeModal">取り消し</div>
       </div>
     </div>
   </div>
@@ -89,11 +89,52 @@
     justify-content: center;
 
   }
-
+  .font-design{
+    font-family: Impact;
+    color: white;
+  }
+  .float-right-position{
+    position: relative;
+    right: 10%;
+  }
+  .float-left-position{
+    position: relative;
+    left: 10%;
+  }
   .content {
     z-index: 2;
     width: 50%;
     padding: 1em;
-    background: #fff;
+    background: #fec7d7;
+    border-radius:30px;
+  }
+  .image-size{
+    width: 3vmin;
+  }
+  .font-design:hover {
+    animation: shake 2s infinite;
+  }
+  @keyframes shake {
+    0% {
+      transform: translate(2px, 0px);
+    }
+    5% {
+      transform: translate(-2px, 0px);
+    }
+    10% {
+      transform: translate(2px, 0px);
+    }
+    15% {
+      transform: translate(-2px, 0px);
+    }
+    20% {
+      transform: translate(2px, 0px);
+    }
+    25% {
+      transform: translate(-2px, 0px);
+    }
+    30% {
+      transform: translate(0px, 0px);
+    }
   }
 </style>

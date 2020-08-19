@@ -1,19 +1,22 @@
 <template>
-  <div class="news-body">
-    <InformationList :data-list="updateInformation"></InformationList>
+  <div class="news-body" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
+    <ReturnMenu class="return-position"></ReturnMenu>
+    <InformationList :data-list="updateInformation" class="update-position"></InformationList>
     <InformationList :data-list="logInformation"></InformationList>
   </div>
 </template>
 
 <script>
-    import InformationList from "@/components/LogDisplayList"
-    import http from "../../static/axios/axios"
+  import InformationList from "@/components/LogDisplayList"
+  import http from "../../static/axios/axios"
+  import ReturnMenu from "@/components/ReturnMenu"
 
     export default {
         name: "LogDisplayBody",
-        components: {InformationList},
+        components: {InformationList,ReturnMenu},
         data() {
             return {
+              backgroundImageSrc: require("@/assets/test1.png"),
                 updateInformation: {
                     title: "更新情報", body: [{title: "全米が驚愕", body: "あほくさ"}]
                 },
@@ -22,7 +25,7 @@
                 },
                 USER_ID: "1",
                 BASE_URL: "https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend",
-                apiError: false
+                apiError: false,
             }
         },
 
@@ -67,8 +70,16 @@
 
 <style scoped>
   .news-body {
-    width: 70vh;
-    height: 100%;
+    height: 100vh;
     margin: 0 auto;
+    background-size: 5%;
+    animation: bgiLoop 8s linear infinite;
   }
+  @keyframes bgiLoop {
+    0% { background-position: 0 0;}
+    100% { background-position: -15% 15%;}
+  }
+  .update-position{
+  }
+
 </style>
