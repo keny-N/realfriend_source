@@ -1,6 +1,7 @@
 <template>
 
   <div class="user-change-success" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
+    <ReturnMenu></ReturnMenu>
     <h2>認証ページ</h2>
     <div class="user-name-position">{{userName}}さん</div>
       <p>
@@ -16,9 +17,11 @@
 
 <script>
   import http from "../../static/axios/axios"
+  import ReturnMenu from "@/components/ReturnMenu"
 
   export default {
     name: "UserChangeSuccess",
+    components: {ReturnMenu},
     data() {
       return {
         userId: '',

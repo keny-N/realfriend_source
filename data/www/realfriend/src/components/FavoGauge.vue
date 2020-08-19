@@ -1,7 +1,7 @@
 <template>
-  <div class="favogauge">
+  <div >
     <!-- nが1から４になるまで繰り返す。-->
-    <ul v-for="n of 4">
+    <ul v-for="n of 5">
       <!--favoの値によって表示する画像を判断する -->
       <li v-show="favoGaugeData>=n">
         <img src="../assets/満ハートのマーク.png">
@@ -11,7 +11,6 @@
       </li>
     </ul>
   </div>
-
 </template>
 
 <script>
@@ -35,6 +34,6 @@ li{
   width:15%;
 }
   img{
-    width: 50%;
+    width: 10vh;
   }
 </style>
