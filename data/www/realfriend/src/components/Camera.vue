@@ -36,7 +36,8 @@
                 bufferSize: 1024,
                 wav: null,
                 postUrl: 'https://abwp9ub4n8.execute-api.ap-northeast-1.amazonaws.com/realfriend/emotionjudgement',
-                isPush: false
+                isPush: false,
+                result: 0
             }
         },
         mounted() {
@@ -68,6 +69,7 @@
                     console.log(response.status)
                     if (response.status == 200) {
                         console.log(response)
+                        me.result = response.data.result
                         me.$emit('updateMsg', response.data.result)
                     } else {
                         // me.msg = response.data.result
@@ -82,23 +84,29 @@
                 const EXECUTE = async () => {
                     const onAudioProcess = () => {
                         return new Promise((((resolve, reject) => {
-                            this.scriptProcessor.onaudioprocess = this.onAudioProcess
-                            console.log("audioprocess開始")
-                            resolve()
+                            setTimeout(() => {
+                                this.scriptProcessor.onaudioprocess = this.onAudioProcess
+                                console.log("audioprocess開始")
+                                resolve()
+                            }, 100)
+
                         })))
                     }
 
                     const createImage = () => {
                         return new Promise(((resolve, reject) => {
-                            //カメラが写っている範囲を指定し、その領域を画像として切り取る
-                            this.canvas = this.$refs.canvas
-                            this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480)
+                            setTimeout(() => {
+                                //カメラが写っている範囲を指定し、その領域を画像として切り取る
+                                this.canvas = this.$refs.canvas
+                                this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480)
 
-                            //画像データをbase64にエンコード
-                            this.image = this.canvas.toDataURL("image/jpeg")
-                            this.image = this.image.substr(23)
-                            console.log("画像生成開始")
-                            resolve()
+                                //画像データをbase64にエンコード
+                                this.image = this.canvas.toDataURL("image/jpeg")
+                                this.image = this.image.substr(23)
+                                console.log("画像生成開始")
+                                resolve()
+                            }, 100)
+
                         }))
                     }
 
@@ -186,27 +194,48 @@
                     const runApi = () => {
                         return new Promise(((resolve, reject) => {
                             //感情測定APIを実行[empath|faceapi]
-                            this.emotionJudgement()
-                            console.log("APIに送信開始")
-                            resolve()
+                            setTimeout(() => {
+                                this.emotionJudgement()
+                                console.log("APIに送信開始")
+                                resolve()
+                            }, 100)
+
                         }))
                     }
 
                     const scriptProcessor = () => {
                         return new Promise((((resolve, reject) => {
-                            this.scriptProcessor.connect(this.audioContext.destination)
-                            console.log("scriptProcessor開始")
-                            resolve()
+                            setTimeout(() => {
+                                this.scriptProcessor.connect(this.audioContext.destination)
+                                console.log("scriptProcessor開始")
+                                resolve()
+                            }, 100)
+
                         })))
                     }
 
                     const updateMsg = () => {
                         return new Promise((((resolve, reject) => {
-                            //親コンポーネント(GameBodyのupdateMSGを実行する)
-                            this.$emit('updateMsg', this.msg)
-                            console.log("メッセージこうしん開始")
-                            resolve()
+                            setTimeout(() => {
+                                //親コンポーネント(GameBodyのupdateMSGを実行する)
+                                this.$emit('updateMsg', this.msg)
+                                console.log("メッセージこうしん開始")
+                                resolve()
+                            }, 100)
+
                         })))
+                    }
+
+                    const updateForCount = () => {
+
+                        return new Promise(((((resolve, reject) => {
+                            setTimeout(() => {
+                                console.log("count開始")
+                                this.$store.dispatch('friend/updateFriendGauge', this.result)
+                                this.$store.dispatch('friend/insertForCount')
+                                resolve()
+                            }, 150)
+                        }))))
                     }
 
                     await onAudioProcess()
@@ -221,10 +250,15 @@
                     console.log("scriptProcessor完了")
                     await runApi()
                     console.log("APIに送信完了")
+                    await updateForCount()
+                    console.log("カウント完了")
                     await updateMsg()
                     console.log("メッセージの更新完了")
+
+
                 }
                 EXECUTE()
+
             },
             // saveAudio() {
             //     // this.$refs.download.href =
