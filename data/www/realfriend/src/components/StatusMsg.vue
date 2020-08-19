@@ -31,7 +31,7 @@
                 let min = ("0" + now.getMinutes()).slice(-2);                 /*時刻を表示する処理です*/
                 let time = hour + ":" + min + "       　　　　";              /*時刻を表示する処理です*/
                 /*0.5から-0.5の範囲で帰って来る際に好感度判定をします。*/
-                if (this.receiveMsg > 0.5 || this.receiveMsg < -0.5) {
+                if (this.receiveMsg > 1 || this.receiveMsg < -1) {
                     this.storage = time + "エラーです"
                 } else if (this.receiveMsg < 0) {
                     this.storage = time + "好感度が下がりました"
