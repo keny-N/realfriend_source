@@ -16,27 +16,25 @@
 
 <script>
     export default {
-        name: "FavoGauge",
-        props: {
-            favoGaugeData: {
-                type: Number
-            }
-        },
+      name: "FavoGauge",
+      props: {
+        favoGaugeData: {
+          type:Number
+        }
+      },
 
     }
 </script>
 
 <style scoped>
-  ul {
+  ul{
     list-style: none;
   }
-
-  li {
-    float: left;
-    width: 15%;
-  }
-
-  img {
+li{
+  float: left;
+  width:15%;
+}
+  img{
     width: 50%;
   }
 </style>

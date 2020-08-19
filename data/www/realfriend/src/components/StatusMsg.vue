@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div id="statusmsg" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
       <ul v-for=" list in statusList">
         <div id=textmsg>
@@ -7,7 +6,7 @@
         </div>
       </ul>
     </div>
-  </div>
+
 
 </template>
 
@@ -70,9 +69,9 @@
     overflow-y: scroll;
     overflow-x: scroll;
     background-origin: content-box;
-    background: no-repeat;
+    background: center;
     width: 100%;
-    background-size: 100% 100%;
+    background-size: 100% 109%;
     opacity: 0.5;
   }
   #statusmsg::-webkit-scrollbar {  /* スクロールのやつが表示されるので非表示にしてます。 */

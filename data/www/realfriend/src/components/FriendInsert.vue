@@ -145,7 +145,7 @@ export default {
     right: 10%;
     bottom: 15%;
   }
-  .image-size:hover {
+  .font-design:hover {
     animation: shake 2s infinite;
   }
   @keyframes shake {
