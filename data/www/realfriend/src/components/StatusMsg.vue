@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div id="statusmsg" :style="{ 'background-image': 'url(' + backgroundImageSrc + ')' }">
       <ul v-for=" list in statusList">
         <div id=textmsg>
@@ -7,7 +6,7 @@
         </div>
       </ul>
     </div>
-  </div>
+
 
 </template>
 
@@ -31,7 +30,7 @@
                 let min = ("0" + now.getMinutes()).slice(-2);                 /*時刻を表示する処理です*/
                 let time = hour + ":" + min + "       　　　　";              /*時刻を表示する処理です*/
                 /*0.5から-0.5の範囲で帰って来る際に好感度判定をします。*/
-                if (this.receiveMsg > 0.5 || this.receiveMsg < -0.5) {
+                if (this.receiveMsg > 1 || this.receiveMsg < -1) {
                     this.storage = time + "エラーです"
                 } else if (this.receiveMsg < 0) {
                     this.storage = time + "好感度が下がりました"
@@ -65,14 +64,18 @@
   #statusmsg {
     /*場所に関してです*/
     /*スクロールに関してだとおもいます*/
-    height: 190px;
+    height: 30vh;
     overflow: hidden;
     overflow-y: scroll;
     overflow-x: scroll;
     background-origin: content-box;
-    background: no-repeat;
+    background: center;
     width: 100%;
-    background-size: 100% 100%;;
+    background-size: 100% 109%;
+    opacity: 0.5;
+  }
+  #statusmsg::-webkit-scrollbar {  /* スクロールのやつが表示されるので非表示にしてます。 */
+    display:none;
   }
 
   #textmsg {

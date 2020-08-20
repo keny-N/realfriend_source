@@ -1,10 +1,10 @@
 <template>
   <div class="agesage">
     <!--lamdba側から送られてくる好感判定で判断する。 -->
-    <!--ここに張っている画像はテスト用 -->
-    <img v-show="agesageData<=1 && agesageData>0" src="../assets/1.png">
-    <img v-show="agesageData==0" src="../assets/zero.png">
-    <img v-show="agesageData>=-1 && agesageData<0" src="../assets/-1.png">
+    <!--数値に変更があったので反映してます -->
+    <img v-show="agesageData>0" src="../assets/smile.png">
+    <img v-show="agesageData==0" src="../assets/normal.png">
+    <img v-show="agesageData<0" src="../assets/shock.png">
   </div>
 </template>
 
@@ -21,8 +21,9 @@
 
 <style scoped>
 .agesage{
-  float: left;
-  width:35%;
+  position: absolute;
+  right: 5vh;
+  width: 25%;
 }
   img{
     width: 30%;

@@ -13,9 +13,9 @@ use realfriend;
 
 CREATE TABLE `friend` (
   `friend_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
   `friend_name` varchar(100) NOT NULL,
-  `friend_img` blob,
+  `friend_img` varchar(900),
   `friend_favorable` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -34,9 +34,9 @@ INSERT INTO `friend` (`friend_id`, `user_id`, `friend_name`, `friend_img`, `frie
 --
 
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
   `user_name` varchar(100) NOT NULL,
-  `user_pass` varchar(30) NOT NULL
+  `user_pass` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
